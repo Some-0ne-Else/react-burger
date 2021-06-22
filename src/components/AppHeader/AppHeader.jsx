@@ -9,16 +9,26 @@ import {
 import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
+  const handleConstructor = () =>{
+    console.log('constructor');
+  }
+  const handleList = () =>{
+    console.log('List order');
+  }
+  const handlePersonalArea = () =>{
+    console.log('Personal Area');
+  }
+  
   return (
     <header className={`${styles.header} ml-10 mr-10 mt-10 mb-10`}>
       <div className={styles.content}>
         <ul className={styles.navigation}>
-        <NavigationElement children={BurgerIcon} type='primary' text='Конструктор'/>
-        <NavigationElement children={ListIcon} type='primary' text='Лента заказов'/>
+        <NavigationElement children={BurgerIcon} type='primary' text='Конструктор' onClick={handleConstructor}/>
+        <NavigationElement children={ListIcon} type='primary' text='Лента заказов' onClick={handleList}/>
         </ul>
         <Logo />
         <ul className={styles.navigation}>
-        <NavigationElement children={ProfileIcon} type='primary' text='Личный кабинет'/>
+        <NavigationElement children={ProfileIcon} type='primary' text='Личный кабинет' onClick={handlePersonalArea}/>
         </ul>
         
       </div>
