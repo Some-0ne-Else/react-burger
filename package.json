@@ -32,7 +32,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write './**/*.{js,css}' && git add ."
+      "pre-commit": "prettier --write './**/*.{js,jsx,tsx,css}' && git add ."
     }
   },
   "browserslist": {
