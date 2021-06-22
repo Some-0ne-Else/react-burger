@@ -11,6 +11,7 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.5.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -29,6 +30,11 @@
       "react-app/jest"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write './**/*.{js,css}' && git add ."
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -40,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "prettier": "^2.3.1"
   }
 }
