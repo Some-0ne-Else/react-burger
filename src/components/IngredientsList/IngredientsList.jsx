@@ -1,9 +1,11 @@
 import React from "react";
 import styles from './IngredientsList.module.css';
 import Ingredient from "../Ingredient/Ingredient";
-import data from '../../utils/data.json';
+import BurgerDataContext from '../../contexts/BurgerContext';
+
 
 function IngredientsList() {
+  const data = React.useContext(BurgerDataContext);
   const filterByType = (type) => {
     return data.filter((e) => e.type === type).map((el) => (
       <Ingredient
