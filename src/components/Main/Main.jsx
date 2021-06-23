@@ -1,9 +1,10 @@
 import React from 'react';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import styles from './Main.module.css';
 
 function Main(){
     return(
-        <main>
+        <main className={styles.main}>
         <BurgerIngredients/>
         </main>
         )

@@ -22,15 +22,18 @@ function AppHeader() {
   return (
     <header className={`${styles.header} ml-10 mr-10 mt-10 mb-10`}>
       <div className={styles.content}>
-        <ul className={styles.navigation}>
+      <nav className={styles.navigaton}>
+        <ul className={styles.navigation__list}>
         <NavigationElement children={BurgerIcon} type='primary' text='Конструктор' onClick={handleConstructor}/>
         <NavigationElement children={ListIcon} type='primary' text='Лента заказов' onClick={handleList}/>
         </ul>
+        </nav>
         <Logo />
+        <nav className={styles.navigaton}>
         <ul className={styles.navigation}>
         <NavigationElement children={ProfileIcon} type='primary' text='Личный кабинет' onClick={handlePersonalArea}/>
         </ul>
-        
+        </nav>
       </div>
       
     </header>
