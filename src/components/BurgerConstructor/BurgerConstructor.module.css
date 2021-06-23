@@ -1,0 +1,22 @@
+.constructor {
+    width: 600px;
+    height: 912px;
+    border: 2px solid #4C4CFF;
+}
+
+.constructor__wrapper {
+    display:block;
+}
+
+.constructor__item {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 32px 536px;
+}
+.constructor__item_top {
+    margin-bottom: 16px;
+}
+
+.constructor__item_bottom {
+    margin-top: 16px;
+}

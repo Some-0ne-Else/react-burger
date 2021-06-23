@@ -6,7 +6,6 @@ import data from '../../utils/data.json';
 import BurgerDataContext from '../../contexts/BurgerContext';
 
 function App() {
-  console.log(data)
   return (
     <BurgerDataContext.Provider value={data}>
     <div className="App">

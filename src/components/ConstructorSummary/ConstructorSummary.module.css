@@ -1,0 +1,11 @@
+.summary{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.total{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 33px;
+    column-gap: 10px;
+}
