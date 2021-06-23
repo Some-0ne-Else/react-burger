@@ -9,6 +9,10 @@ import BurgerDataContext from '../../contexts/BurgerContext';
 
 function BurgerConstructor() {
   const data = React.useContext(BurgerDataContext);
+  const total = data.reduce((acc, el) => { return el.price + acc }, 0)
+  const handleOrder = () => {
+    console.log("Order handeled");
+  }
   return (
     <section className={styles.constructor}>
       <div className={`${styles.constructor__wrapper} mt-25 mb-10`}>
@@ -32,7 +36,7 @@ function BurgerConstructor() {
           />
         </div>
       </div>
-      <ConstructorSummary />
+      <ConstructorSummary total={total} onClick={handleOrder} />
     </section>
   );
 }
