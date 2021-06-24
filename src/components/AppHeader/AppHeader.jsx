@@ -24,14 +24,14 @@ function AppHeader() {
       <div className={styles.content}>
       <nav className={styles.navigaton}>
         <ul className={styles.navigation__list}>
-        <NavigationElement children={BurgerIcon} type='primary' text='Конструктор' onClick={handleConstructor}/>
-        <NavigationElement children={ListIcon} type='primary' text='Лента заказов' onClick={handleList}/>
+        <NavigationElement component={BurgerIcon} type='primary' text='Конструктор' onClick={handleConstructor}/>
+        <NavigationElement component={ListIcon} type='primary' text='Лента заказов' onClick={handleList}/>
         </ul>
         </nav>
         <Logo />
         <nav className={styles.navigaton}>
         <ul className={styles.navigation}>
-        <NavigationElement children={ProfileIcon} type='primary' text='Личный кабинет' onClick={handlePersonalArea}/>
+        <NavigationElement component={ProfileIcon} type='primary' text='Личный кабинет' onClick={handlePersonalArea}/>
         </ul>
         </nav>
       </div>

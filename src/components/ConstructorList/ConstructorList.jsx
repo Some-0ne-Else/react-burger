@@ -29,5 +29,5 @@ ConstructorList.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-  }))
+  })).isRequired
 }

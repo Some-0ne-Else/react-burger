@@ -9,3 +9,8 @@
     grid-template-columns: 1fr 33px;
     column-gap: 10px;
 }
+
+.total > svg {
+    width: 33px;
+    height: 33px;
+}
