@@ -14,7 +14,7 @@ function NavigationElement({ component: Component, type, text, onClick }) {
 export default NavigationElement;
 
 NavigationElement.propTypes = {
-    children: PropTypes.func.isRequired,
+    component: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
