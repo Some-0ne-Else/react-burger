@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById("modal-root");
-function Modal({ title, isOpen, onClose }) {
+function Modal({ title, isOpen, onClose, children }) {
 
     return ReactDOM.createPortal((
 
@@ -15,6 +15,7 @@ function Modal({ title, isOpen, onClose }) {
             <p className={`${styles.modal__title} text text_type_main-large`}>{title}</p>
             <button type="button" onClick={(e)=> onClose(e)} className={`${styles.modal__button}`}><CloseIcon type="primary" /></button>
             </div>
+            {children}
         </div>
 
     ), modalRoot)

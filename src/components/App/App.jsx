@@ -10,15 +10,13 @@ function App() {
   React.useEffect(() => {
     fetch(ingredientsUrl)
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json();
         }
         throw new Error(`Error ${res.status}`)
       })
       .then((res) => {
-        if(res.success) 
-        {setIngredients(res.data)}
+        if (res.success) { setIngredients(res.data) }
         else throw new Error("Error in response")
       })
       .catch((err) => console.log(err));

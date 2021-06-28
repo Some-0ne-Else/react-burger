@@ -5,13 +5,27 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import ConstructorList from '../ConstructorList/ConstructorList';
 import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
+import OrderDetails from '../OrderDetails/OrderDetails';
+import Modal from '../Modal/Modal';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import BurgerDataContext from '../../contexts/BurgerContext';
 
 function BurgerConstructor() {
   const data = React.useContext(BurgerDataContext);
   const total = data.reduce((acc, el) => { return el.price + acc }, 0)
-  const handleOrder = () => {
-    console.log("Order handeled");
+  const [isModalOpened, setModalOpened] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(0);
+
+  const closeModal = (e) => {
+    if (e.code !== "Escape" && e.type === "keydown") { return }
+    setModalOpened(false);
+    document.removeEventListener('keydown', closeModal);
+  }
+
+  const openModal = (id) => {
+    setOrderId(id)
+    setModalOpened(true)
+    document.addEventListener('keydown', closeModal);
   }
   return (
     <section className={styles.constructor}>
@@ -36,7 +50,11 @@ function BurgerConstructor() {
           />
         </div>
       </div>
-      <ConstructorSummary total={total} onClick={handleOrder} />
+      <ConstructorSummary total={total} openModal={openModal} />
+      <Modal isOpen={isModalOpened} onClose={closeModal}>
+        <OrderDetails orderId={orderId} />
+      </Modal>
+      {isModalOpened && <ModalOverlay onClose={closeModal} />}
     </section>
   );
 }
