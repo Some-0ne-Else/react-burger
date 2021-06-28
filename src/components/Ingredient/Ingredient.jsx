@@ -6,11 +6,11 @@ import {
     CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Ingredient({image,price, name}) {
+function Ingredient({id, image,price, name, openModal}) {
     const [counter, setCounter] = React.useState(1);
     return (
         <div className={`${styles.ingredient} mb-10`}>
-            <img src={image} alt={name} className={`${styles.image} ml-4 mr-4 mb-1`} onClick={() => setCounter(counter + 1) }  />
+            <img src={image} alt={name} className={`${styles.image} ml-4 mr-4 mb-1`} onClick={() => openModal(id)  }  />
             {counter ? <Counter count={counter} size="default" /> : null}
             <div className={`${styles.price} mb-1`}>
             <p className={` ${styles.price__digits} text text_type_digits-default`}>{price}</p>

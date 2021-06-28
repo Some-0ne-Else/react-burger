@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsList from '../IngredientsList/IngredientsList';
 
-function BurgerIngredients() {
+function BurgerIngredients({ openModal }) {
   const [current, setCurrent] = React.useState('one')
   return (
     <section className={`${styles.burger__block} mr-10`}>
@@ -21,7 +21,7 @@ function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
- <IngredientsList/>
+ <IngredientsList openModal={openModal}/>
 
     </section>
   )
