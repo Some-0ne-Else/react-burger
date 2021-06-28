@@ -1,0 +1,15 @@
+.burger__block {
+    width: 600px;
+    height: 912px;
+    background: #131316;
+    border: 2px solid #4C4CFF;
+    overflow: hidden;
+}
+
+.burger__title {
+    text-align: left;
+}
+
+.burger__switch {
+    display: flex;
+}
