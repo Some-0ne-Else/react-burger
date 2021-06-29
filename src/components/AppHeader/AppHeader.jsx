@@ -10,7 +10,7 @@ import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
   const handleConstructor = () =>{
-    console.log('constructor');
+    console.log('Constructor');
   }
   const handleList = () =>{
     console.log('List order');
@@ -20,7 +20,7 @@ function AppHeader() {
   }
   
   return (
-    <header className={`${styles.header} ml-10 mr-10 mt-10 mb-10`}>
+    <header className={`${styles.header} `}>
       <div className={styles.content}>
       <nav className={styles.navigaton}>
         <ul className={styles.navigation__list}>
@@ -28,7 +28,9 @@ function AppHeader() {
         <NavigationElement component={ListIcon} type='primary' text='Лента заказов' onClick={handleList}/>
         </ul>
         </nav>
+        <div className={styles.logo}>
         <Logo />
+        </div>
         <nav className={styles.navigaton}>
         <ul className={styles.navigation}>
         <NavigationElement component={ProfileIcon} type='primary' text='Личный кабинет' onClick={handlePersonalArea}/>

@@ -1,7 +1,7 @@
 .constructor__list {
     display: grid;
     row-gap: 16px;
-    overflow: auto;
+    overflow: scroll;
     height: 464px;
 }
 .constructor__list::-webkit-scrollbar {

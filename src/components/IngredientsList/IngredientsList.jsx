@@ -6,8 +6,19 @@ import BurgerDataContext from '../../contexts/BurgerContext';
 
 function IngredientsList({ openModal }) {
   const data = React.useContext(BurgerDataContext);
-  const filterByType = (type) => {
-    return data.filter((e) => e.type === type).map((el) => (
+  const filterByType = React.useCallback( (type) => {
+    return data.filter((e) => e.type === type)
+  },[data])
+  const buns = React.useMemo(() => filterByType('buns'), [filterByType]);
+  const sauce = React.useMemo(() => filterByType('sauce'), [filterByType]);
+  const main = React.useMemo(() => filterByType('main'), [filterByType]);
+  return (
+    <div className={`${styles.ingredients} pt-6 pl-4 pr-4`}>
+      <p id="buns" className={`${styles.type} text text_type_main-medium`}>
+       Булки
+      </p>
+      <div className={styles.ingredients__container}>
+      {buns.map((el) => (
       <Ingredient
         key={el._id}
         id={el._id}
@@ -16,27 +27,37 @@ function IngredientsList({ openModal }) {
         name={el.name}
         openModal={openModal}
       />
-    ))
-  }
-  return (
-    <div className={`${styles.ingredients} pt-6 pl-4 pr-4`}>
-      <p className={`${styles.type} text text_type_main-medium`}>
-        Булки
-      </p>
-      <div className={styles.ingredients__container}>
-      {filterByType("bun")}
+    ))}
       </div>
-      <p className={`${styles.type} text text_type_main-medium`}>
-        Соусы
+      <p id="sauces" className={`${styles.type} text text_type_main-medium`}>
+      Соусы
       </p>
       <div className={styles.ingredients__container}>
-        {filterByType("sauce")}
+      {sauce.map((el) => (
+      <Ingredient
+        key={el._id}
+        id={el._id}
+        image={el.image}
+        price={el.price}
+        name={el.name}
+        openModal={openModal}
+      />
+    ))}
       </div>
-      <p className={`${styles.type} text text_type_main-medium`}>
-        Начинки
+      <p id="mains" className={`${styles.type} text text_type_main-medium`}>
+       Начинки
       </p>
       <div className={styles.ingredients__container}>
-        {filterByType("main")}
+      {main.map((el) => (
+      <Ingredient
+        key={el._id}
+        id={el._id}
+        image={el.image}
+        price={el.price}
+        name={el.name}
+        openModal={openModal}
+      />
+    ))}
       </div>
     </div>
   )
