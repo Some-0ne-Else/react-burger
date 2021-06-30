@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "./App.module.css";
-import AppHeader from "../AppHeader/AppHeader";
-import Main from "../Main/Main";
-import { getIngredients } from "../../utils/burger-api";
-import BurgerDataContext from "../../contexts/BurgerContext";
+import React from 'react';
+import styles from './App.module.css';
+import AppHeader from '../AppHeader/AppHeader';
+import Main from '../Main/Main';
+import { getIngredients } from '../../utils/burger-api';
+import BurgerDataContext from '../../contexts/BurgerContext';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -12,7 +12,7 @@ function App() {
       .then((res) => {
         if (res.success) {
           setIngredients(res.data);
-        } else throw new Error("Error in response");
+        } else throw new Error('Error in response');
       })
       .catch((err) => console.log(err));
   }, []);

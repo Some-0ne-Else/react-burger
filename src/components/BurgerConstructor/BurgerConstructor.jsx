@@ -1,17 +1,17 @@
-import React from "react";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./BurgerConstructor.module.css";
-import ConstructorList from "../ConstructorList/ConstructorList";
-import ConstructorSummary from "../ConstructorSummary/ConstructorSummary";
-import OrderDetails from "../OrderDetails/OrderDetails";
-import Modal from "../Modal/Modal";
-import BurgerDataContext from "../../contexts/BurgerContext";
+import React from 'react';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './BurgerConstructor.module.css';
+import ConstructorList from '../ConstructorList/ConstructorList';
+import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
+import OrderDetails from '../OrderDetails/OrderDetails';
+import Modal from '../Modal/Modal';
+import BurgerDataContext from '../../contexts/BurgerContext';
 
 function BurgerConstructor() {
   const data = React.useContext(BurgerDataContext);
   const total = React.useMemo(
     () => data.reduce((acc, el) => el.price + acc, 0),
-    [data]
+    [data],
   );
   const [isModalOpened, setModalOpened] = React.useState(false);
   const [orderId, setOrderId] = React.useState(0);

@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
   Logo,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./AppHeader.module.css";
-import NavigationElement from "../NavigationElement/NavigationElement";
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './AppHeader.module.css';
+import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
   const handleConstructor = () => {
-    console.log("Constructor");
+    console.log('Constructor');
   };
   const handleList = () => {
-    console.log("List order");
+    console.log('List order');
   };
   const handlePersonalArea = () => {
-    console.log("Personal Area");
+    console.log('Personal Area');
   };
 
   return (
