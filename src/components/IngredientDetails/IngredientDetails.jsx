@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./IngredientDetails.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './IngredientDetails.module.css';
 
 function IngredientDetails({
   name,
@@ -78,8 +78,8 @@ IngredientDetails.propTypes = {
   carbohydrates: PropTypes.number,
 };
 IngredientDetails.defaultProps = {
-  name: "",
-  image: "",
+  name: '',
+  image: '',
   calories: 0,
   proteins: 0,
   fat: 0,

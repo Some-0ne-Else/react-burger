@@ -1,21 +1,21 @@
-import React from "react";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./BurgerIngredients.module.css";
-import IngredientsList from "../IngredientsList/IngredientsList";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import Modal from "../Modal/Modal";
-import BurgerDataContext from "../../contexts/BurgerContext";
+import React from 'react';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './BurgerIngredients.module.css';
+import IngredientsList from '../IngredientsList/IngredientsList';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
+import BurgerDataContext from '../../contexts/BurgerContext';
 
 function BurgerIngredients() {
   const data = React.useContext(BurgerDataContext);
-  const [current, setCurrent] = React.useState("buns");
+  const [current, setCurrent] = React.useState('buns');
   const [isModalOpened, setModalOpened] = React.useState(false);
   const [currentIngredient, setCurrentIngredient] = React.useState({});
 
   const setTab = (tab) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   const closeModal = () => {
@@ -35,13 +35,13 @@ function BurgerIngredients() {
         Соберите бургер
       </p>
       <div className={`${styles.burger__switch} mb-10`}>
-        <Tab value="buns" active={current === "buns"} onClick={setTab}>
+        <Tab value="buns" active={current === 'buns'} onClick={setTab}>
           Булки
         </Tab>
-        <Tab value="sauces" active={current === "sauces"} onClick={setTab}>
+        <Tab value="sauces" active={current === 'sauces'} onClick={setTab}>
           Соусы
         </Tab>
-        <Tab value="mains" active={current === "mains"} onClick={setTab}>
+        <Tab value="mains" active={current === 'mains'} onClick={setTab}>
           Начинки
         </Tab>
       </div>

@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   CurrencyIcon,
   Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./ConstructorSummary.module.css";
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './ConstructorSummary.module.css';
 
 function ConstructorSummary({ total, openModal }) {
   const orderId = 34536;

@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./NavigationElement.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './NavigationElement.module.css';
 
-function NavigationElement({ component: Component, type, text, onClick }) {
+function NavigationElement({
+  component: Component, type, text, onClick,
+}) {
   return (
     <li
       className={`${styles.navigation__element} pl-5 pt-2 pb-2 pr-5`}

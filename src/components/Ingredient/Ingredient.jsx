@@ -1,12 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./Ingredient.module.css";
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import styles from './Ingredient.module.css';
 
-function Ingredient({ id, image, price, name, openModal }) {
+function Ingredient({
+  id, image, price, name, openModal,
+}) {
   const [counter, setCounter] = React.useState(0);
   if (counter === 0) setCounter(1); // eslint warning walkaround
   return (

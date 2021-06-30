@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./OrderDetails.module.css";
-import doneImg from "../../images/done.svg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './OrderDetails.module.css';
+import doneImg from '../../images/done.svg';
 
 function OrderDetails({ orderId }) {
   return (
