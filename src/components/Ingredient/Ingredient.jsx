@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Ingredient.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./Ingredient.module.css";
 
 function Ingredient({ id, image, price, name, openModal }) {
   const [counter, setCounter] = React.useState(0);
@@ -32,7 +32,9 @@ function Ingredient({ id, image, price, name, openModal }) {
 export default Ingredient;
 
 Ingredient.propTypes = {
+  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  openModal: PropTypes.func.isRequired,
 };

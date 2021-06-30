@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./ConstructorItem.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./ConstructorItem.module.css";
 
 function ConstructorItem({ name, price, image }) {
   return (

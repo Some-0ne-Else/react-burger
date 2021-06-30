@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./BurgerIngredients.module.css";
 import IngredientsList from "../IngredientsList/IngredientsList";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import Modal from "../Modal/Modal";
@@ -48,7 +48,7 @@ function BurgerIngredients() {
       <IngredientsList openModal={openModal} />
 
       {isModalOpened && (
-        <Modal title={"Детали ингредиента"} onClose={closeModal}>
+        <Modal title="Детали ингредиента" onClose={closeModal}>
           <IngredientDetails
             name={currentIngredient.name}
             image={currentIngredient.image_large}

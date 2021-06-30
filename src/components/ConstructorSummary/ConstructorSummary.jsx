@@ -1,9 +1,10 @@
 import React from "react";
-import styles from "./ConstructorSummary.module.css";
+import PropTypes from "prop-types";
 import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./ConstructorSummary.module.css";
 
 function ConstructorSummary({ total, openModal }) {
   const orderId = 34536;
@@ -22,3 +23,8 @@ function ConstructorSummary({ total, openModal }) {
 }
 
 export default ConstructorSummary;
+
+ConstructorSummary.propTypes = {
+  total: PropTypes.number.isRequired,
+  openModal: PropTypes.func.isRequired,
+};

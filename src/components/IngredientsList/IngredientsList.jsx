@@ -7,12 +7,10 @@ import BurgerDataContext from "../../contexts/BurgerContext";
 function IngredientsList({ openModal }) {
   const data = React.useContext(BurgerDataContext);
   const filterByType = React.useCallback(
-    (type) => {
-      return data.filter((e) => e.type === type);
-    },
+    (type) => data.filter((e) => e.type === type),
     [data]
   );
-  const buns = React.useMemo(() => filterByType("buns"), [filterByType]);
+  const buns = React.useMemo(() => filterByType("bun"), [filterByType]);
   const sauce = React.useMemo(() => filterByType("sauce"), [filterByType]);
   const main = React.useMemo(() => filterByType("main"), [filterByType]);
   return (
