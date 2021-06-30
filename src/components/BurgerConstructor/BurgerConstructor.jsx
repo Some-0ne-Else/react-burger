@@ -1,28 +1,32 @@
-import React from 'react';
-import styles from './BurgerConstructor.module.css'
-import {
-  ConstructorElement,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import ConstructorList from '../ConstructorList/ConstructorList';
-import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
-import OrderDetails from '../OrderDetails/OrderDetails';
-import Modal from '../Modal/Modal';
-import BurgerDataContext from '../../contexts/BurgerContext';
+import React from "react";
+import styles from "./BurgerConstructor.module.css";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import ConstructorList from "../ConstructorList/ConstructorList";
+import ConstructorSummary from "../ConstructorSummary/ConstructorSummary";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import Modal from "../Modal/Modal";
+import BurgerDataContext from "../../contexts/BurgerContext";
 
 function BurgerConstructor() {
   const data = React.useContext(BurgerDataContext);
-  const total = React.useMemo(() => data.reduce((acc, el) => { return el.price + acc }, 0), [data]);
+  const total = React.useMemo(
+    () =>
+      data.reduce((acc, el) => {
+        return el.price + acc;
+      }, 0),
+    [data]
+  );
   const [isModalOpened, setModalOpened] = React.useState(false);
   const [orderId, setOrderId] = React.useState(0);
 
   const closeModal = () => {
     setModalOpened(false);
-  }
+  };
 
   const openModal = (id) => {
-    setOrderId(id)
-    setModalOpened(true)
-  }
+    setOrderId(id);
+    setModalOpened(true);
+  };
   return (
     <section className={styles.constructor}>
       <div className={`${styles.constructor__wrapper} mt-25 mb-10`}>
@@ -47,10 +51,11 @@ function BurgerConstructor() {
         </div>
       </div>
       <ConstructorSummary total={total} openModal={openModal} />
-      {isModalOpened && 
-      (<Modal onClose={closeModal}>
-        <OrderDetails orderId={orderId} />
-      </Modal>)}
+      {isModalOpened && (
+        <Modal onClose={closeModal}>
+          <OrderDetails orderId={orderId} />
+        </Modal>
+      )}
     </section>
   );
 }

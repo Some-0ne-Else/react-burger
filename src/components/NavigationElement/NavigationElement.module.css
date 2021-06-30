@@ -1,7 +1,6 @@
-.navigation__element{
-    list-style-type: none;
-    display:flex;
-    cursor: pointer;
-    align-items: center;
-    
+.navigation__element {
+  list-style-type: none;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
 }
