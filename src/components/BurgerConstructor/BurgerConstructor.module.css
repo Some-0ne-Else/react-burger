@@ -1,24 +1,23 @@
 .constructor {
-    width: 600px;
-    height: 912px;
-    border: 2px solid #4C4CFF;
+  width: 600px;
+  height: 912px;
 }
 
 .constructor__wrapper {
-    display:block;
+  display: block;
 }
 
 .constructor__item {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 32px 536px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 32px 536px;
 }
 .constructor__item_top {
-    margin-bottom: 16px;
-    margin-left: 32px;
+  margin-bottom: 16px;
+  margin-left: 32px;
 }
 
 .constructor__item_bottom {
-    margin-top: 16px;
-    margin-left: 32px;
+  margin-top: 16px;
+  margin-left: 32px;
 }

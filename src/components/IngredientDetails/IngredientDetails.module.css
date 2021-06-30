@@ -1,0 +1,22 @@
+.ingredientdetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredientdetails__image {
+  width: 480px;
+  height: 240px;
+}
+
+.ingredientdetails__details {
+  display: flex;
+}
+
+.ingredientdetails__desc {
+  display: flex;
+  flex-direction: column;
+}
+.ingredientdetails__value {
+  text-align: center;
+}

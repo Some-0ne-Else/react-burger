@@ -1,5 +1,5 @@
 .item {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 32px 536px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 32px 536px;
 }

@@ -1,43 +1,71 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './IngredientsList.module.css';
-import Ingredient from "../Ingredient/Ingredient";
+import Ingredient from '../Ingredient/Ingredient';
 import BurgerDataContext from '../../contexts/BurgerContext';
 
-
-function IngredientsList() {
+function IngredientsList({ openModal }) {
   const data = React.useContext(BurgerDataContext);
-  const filterByType = (type) => {
-    return data.filter((e) => e.type === type).map((el) => (
-      <Ingredient
-        key={el._id}
-        image={el.image}
-        price={el.price}
-        name={el.name}
-      />
-    ))
-  }
+  const filterByType = React.useCallback(
+    (type) => data.filter((e) => e.type === type),
+    [data],
+  );
+  const buns = React.useMemo(() => filterByType('bun'), [filterByType]);
+  const sauce = React.useMemo(() => filterByType('sauce'), [filterByType]);
+  const main = React.useMemo(() => filterByType('main'), [filterByType]);
   return (
     <div className={`${styles.ingredients} pt-6 pl-4 pr-4`}>
-      <p className={`${styles.type} text text_type_main-medium`}>
+      <p id="buns" className={`${styles.type} text text_type_main-medium`}>
         Булки
       </p>
       <div className={styles.ingredients__container}>
-      {filterByType("bun")}
+        {buns.map((el) => (
+          <Ingredient
+            key={el._id}
+            id={el._id}
+            image={el.image}
+            price={el.price}
+            name={el.name}
+            openModal={openModal}
+          />
+        ))}
       </div>
-      <p className={`${styles.type} text text_type_main-medium`}>
+      <p id="sauces" className={`${styles.type} text text_type_main-medium`}>
         Соусы
       </p>
       <div className={styles.ingredients__container}>
-        {filterByType("sauce")}
+        {sauce.map((el) => (
+          <Ingredient
+            key={el._id}
+            id={el._id}
+            image={el.image}
+            price={el.price}
+            name={el.name}
+            openModal={openModal}
+          />
+        ))}
       </div>
-      <p className={`${styles.type} text text_type_main-medium`}>
+      <p id="mains" className={`${styles.type} text text_type_main-medium`}>
         Начинки
       </p>
       <div className={styles.ingredients__container}>
-        {filterByType("main")}
+        {main.map((el) => (
+          <Ingredient
+            key={el._id}
+            id={el._id}
+            image={el.image}
+            price={el.price}
+            name={el.name}
+            openModal={openModal}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default IngredientsList;
+
+IngredientsList.propTypes = {
+  openModal: PropTypes.func.isRequired,
+};

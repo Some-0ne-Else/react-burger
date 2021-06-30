@@ -1,0 +1,7 @@
+.orderdetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.orderdetails__image {
+}

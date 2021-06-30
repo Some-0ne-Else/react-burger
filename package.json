@@ -30,11 +30,6 @@
       "react-app/jest"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "prettier --write './**/*.{js,jsx,tsx,css}' && git add ."
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,7 +43,14 @@
     ]
   },
   "devDependencies": {
-    "husky": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.3.1"
   }
 }
