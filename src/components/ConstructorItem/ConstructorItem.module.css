@@ -3,3 +3,8 @@
   align-items: center;
   grid-template-columns: 32px 536px;
 }
+
+
+.item img + span {
+  flex-grow: 1;
+}
