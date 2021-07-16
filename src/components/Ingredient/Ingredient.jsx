@@ -1,18 +1,30 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './Ingredient.module.css';
+import { addConstructorIngredient } from '../../services/actions';
 
 function Ingredient({
   id, image, price, name, openModal,
 }) {
-  const [counter, setCounter] = React.useState(0);
-  if (counter === 0) setCounter(1); // eslint warning walkaround
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { id },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+  const { counter } = useSelector(
+    (store) => ({ counter: store.constructorIngredients.filter((el) => el._id === id).length }),
+  );
+  const dispatch = useDispatch();
   return (
-    <div className={`${styles.ingredient} mb-10`}>
+    <div ref={dragRef} className={`${styles.ingredient} mb-10 ${isDrag && styles.ingredient_dragging}`}>
       <img
         src={image}
         alt={name}
@@ -21,7 +33,7 @@ function Ingredient({
       />
       {counter ? <Counter count={counter} size="default" /> : null}
       <div className={`${styles.price} mb-1`}>
-        <p className={` ${styles.price__digits} text text_type_digits-default`}>
+        <p onClick={() => dispatch(addConstructorIngredient(id))} className={` ${styles.price__digits} text text_type_digits-default`}>
           {price}
         </p>
         <CurrencyIcon type="primary" />

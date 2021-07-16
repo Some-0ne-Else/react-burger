@@ -1,24 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { postOrder } from '../../utils/burger-api';
+import { placeOrder } from '../../services/actions';
 import styles from './ConstructorSummary.module.css';
 
 function ConstructorSummary({ data, openModal }) {
+  const dispatch = useDispatch();
+  const { orderRequest, orderFailed } = useSelector((store) => ({
+    orderRequest: store.order.orderRequest,
+    orderFailed: store.order.orderFailed,
+  }));
+
   const total = React.useMemo(
     () => data.reduce((acc, el) => el.price + acc, 0),
     [data],
   );
   const handleOrder = () => {
     const idList = data.map((el) => el._id);
-    postOrder(idList)
-      .then((res) => {
-        if (res.success) { openModal(res.order.number); } else { throw new Error(res.message); }
-      })
-      .catch((err) => console.log(err));
+    dispatch(placeOrder(idList));
+    // eslint-disable-next-line no-unused-expressions
+    !orderRequest && !orderFailed ? openModal() : console.log('error');
   };
   return (
     <div className={`${styles.summary} mr-4`}>
