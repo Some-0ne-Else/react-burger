@@ -9,13 +9,13 @@ import BurgerDataContext from '../../contexts/BurgerContext';
 
 function BurgerConstructor() {
   const data = React.useContext(BurgerDataContext);
-  const total = React.useMemo(
-    () => data.reduce((acc, el) => el.price + acc, 0),
-    [data],
-  );
+  const someBun = data.find((b) => (b.type === 'bun'));
   const [isModalOpened, setModalOpened] = React.useState(false);
   const [orderId, setOrderId] = React.useState(0);
 
+  // const checkBuns = (arr) => {
+  //   if (arr.filter((b) => (b.type === 'bun')) > 1) { arr.find(); }
+  // };
   const closeModal = () => {
     setModalOpened(false);
   };
@@ -31,9 +31,9 @@ function BurgerConstructor() {
           <ConstructorElement
             type="top"
             isLocked
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
+            text={someBun?.name}
+            price={someBun?.price}
+            thumbnail={someBun?.image}
           />
         </div>
         <ConstructorList data={data} />
@@ -41,13 +41,13 @@ function BurgerConstructor() {
           <ConstructorElement
             type="bottom"
             isLocked
-            text="Краторная булка N-200i (низ)"
-            price={200}
-            thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
+            text={someBun?.name}
+            price={someBun?.price}
+            thumbnail={someBun?.image}
           />
         </div>
       </div>
-      <ConstructorSummary total={total} openModal={openModal} />
+      <ConstructorSummary data={data} openModal={openModal} />
       {isModalOpened && (
         <Modal onClose={closeModal}>
           <OrderDetails orderId={orderId} />

@@ -4,18 +4,29 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { postOrder } from '../../utils/burger-api';
 import styles from './ConstructorSummary.module.css';
 
-function ConstructorSummary({ total, openModal }) {
-  const orderId = 34536;
-
+function ConstructorSummary({ data, openModal }) {
+  const total = React.useMemo(
+    () => data.reduce((acc, el) => el.price + acc, 0),
+    [data],
+  );
+  const handleOrder = () => {
+    const idList = data.map((el) => el._id);
+    postOrder(idList)
+      .then((res) => {
+        if (res.success) { openModal(res.order.number); } else { throw new Error(res.message); }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className={`${styles.summary} mr-4`}>
       <div className={`${styles.total} mr-10`}>
         <p className="text text_type_digits-medium">{total}</p>
         <CurrencyIcon type="primary" />
       </div>
-      <Button type="primary" size="large" onClick={() => openModal(orderId)}>
+      <Button type="primary" size="large" onClick={handleOrder}>
         Оформить заказ
       </Button>
     </div>
@@ -25,6 +36,13 @@ function ConstructorSummary({ total, openModal }) {
 export default ConstructorSummary;
 
 ConstructorSummary.propTypes = {
-  total: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   openModal: PropTypes.func.isRequired,
 };
