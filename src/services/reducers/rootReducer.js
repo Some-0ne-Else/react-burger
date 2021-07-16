@@ -9,6 +9,8 @@ import {
   PLACE_ORDER_REQUEST,
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
+  UPDATE_CONSTRUCTOR_LIST,
+
 } from '../actions/index';
 
 const initialState = {
@@ -16,7 +18,7 @@ const initialState = {
   constructorIngredients: [],
   currentIngredient: {},
   order: {
-    orderNumber: 2,
+    orderNumber: 0,
     orderRequest: false,
     orderFailed: false,
   },
@@ -51,7 +53,7 @@ const rootReducer = (state = initialState, action) => {
     case ADD_CONSTRUCTOR_INGREDIENT: {
       const ingredient = state.ingredients.find((el) => el._id === action.payload);
       const newIngredient = { ...ingredient };
-      newIngredient.uid = Math.ceil(Math.random() * 100000); // not best practice
+      newIngredient.uid = Math.ceil(Math.random() * 1000000); // not best practice
       if (ingredient.type === 'bun') {
         return {
           ...state,
@@ -93,8 +95,26 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         order: {
-          ...state.order, orderFailed: true, orderRequest: false,
+          ...state.order, orderFailed: true, orderRequest: false, orderNumber: 0,
         },
+      };
+    }
+    case UPDATE_CONSTRUCTOR_LIST: {
+      const arrayMove = (arr, fromIndex, toIndex) => {
+        const element = arr[fromIndex];
+        arr.splice(fromIndex, 1);
+        arr.splice(toIndex, 0, element);
+      };
+      const destanationIndex = state.constructorIngredients
+        .findIndex((el) => el.uid === action.payload.uid);
+      const originalIndex = state.constructorIngredients
+        .findIndex((el) => el.uid === action.payload.draggedId);
+      const newArr = [...state.constructorIngredients];
+      arrayMove(newArr, originalIndex, destanationIndex);
+
+      return {
+        ...state,
+        constructorIngredients: newArr,
       };
     }
     default: {

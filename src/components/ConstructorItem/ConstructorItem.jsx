@@ -1,13 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ConstructorItem.module.css';
-import { removeConstructorIngredient } from '../../services/actions';
+import { removeConstructorIngredient, updateConstructorList } from '../../services/actions';
 
 function ConstructorItem({
   uid, name, price, image,
@@ -19,12 +19,23 @@ function ConstructorItem({
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
+
+  });
+
+  const [, dropTarget] = useDrop({
+    accept: 'item',
+    canDrop: () => false,
+    hover({ uid: draggedId }) {
+      if (draggedId !== uid) {
+        dispatch(updateConstructorList(draggedId, uid));
+      }
+    },
   });
   const handleRemove = () => {
     dispatch(removeConstructorIngredient(uid));
   };
   return (
-    <div ref={dragRef} className={`${styles.item} ${isDrag && styles.item_dragging}`}>
+    <div ref={(node) => dragRef(dropTarget(node))} className={`${styles.item} ${isDrag && styles.item_dragging}`}>
       <DragIcon type="primary" />
       <ConstructorElement
         text={name}

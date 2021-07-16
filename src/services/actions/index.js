@@ -12,6 +12,7 @@ export const PLACE_ORDER = 'PLACE_ORDER';
 export const PLACE_ORDER_REQUEST = 'PLACE_ORDER_REQUEST';
 export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
 export const PLACE_ORDER_FAILED = 'PLACE_ORDER_FAILED';
+export const UPDATE_CONSTRUCTOR_LIST = 'UPDATE_CONSTRUCTOR_LIST';
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
@@ -78,3 +79,8 @@ export const placeOrder = (idList) => (dispatch) => {
       }); console.log(err);
     });
 };
+
+export const updateConstructorList = (draggedId, uid) => ({
+  type: UPDATE_CONSTRUCTOR_LIST,
+  payload: { draggedId, uid },
+});

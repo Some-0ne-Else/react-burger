@@ -1,24 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 import styles from './ConstructorList.module.css';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 
 function ConstructorList({ data }) {
-  const dispatch = useDispatch();
-  const [{ isHover }, dropTarget] = useDrop({
-    accept: 'item',
-    drop(itemId) {
-      console.log(dispatch, itemId);
-    //  dispatch(addConstructorIngredient(itemId.id));
-    },
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
-  });
   return (
-    <div ref={dropTarget} className={`${styles.constructor__list} ${isHover && styles.constructor__list_hint}`}>
+    <div className={`${styles.constructor__list} `}>
       {data
         .filter((i) => i.type !== 'bun')
         .map((el) => (

@@ -33,6 +33,7 @@ function BurgerConstructor() {
   return (
     <section className={styles.constructor}>
       <div ref={dropTarget} className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}>
+        {bun && (
         <div className={styles.constructor__item_top}>
           <ConstructorElement
             type="top"
@@ -42,7 +43,9 @@ function BurgerConstructor() {
             thumbnail={bun?.image}
           />
         </div>
+        )}
         <ConstructorList data={data} />
+        {bun && (
         <div className={styles.constructor__item_bottom}>
           <ConstructorElement
             type="bottom"
@@ -51,7 +54,9 @@ function BurgerConstructor() {
             price={bun?.price}
             thumbnail={bun?.image}
           />
+
         </div>
+        )}
       </div>
       <ConstructorSummary data={data} openModal={openModal} />
       {isModalOpened && (
