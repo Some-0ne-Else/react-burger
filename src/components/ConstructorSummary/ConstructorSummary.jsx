@@ -20,10 +20,13 @@ function ConstructorSummary({ data, openModal }) {
     [data],
   );
   const handleOrder = () => {
-    const idList = data.map((el) => el._id);
-    dispatch(placeOrder(idList));
-    // eslint-disable-next-line no-unused-expressions
-    !orderRequest && !orderFailed ? openModal() : console.log('error');
+    console.log((data.findIndex((el) => el.type === 'bun')));
+    if ((data.findIndex((el) => el.type === 'bun')) !== -1 && data.length > 1) {
+      const idList = data.map((el) => el._id);
+      dispatch(placeOrder(idList));
+      // eslint-disable-next-line no-unused-expressions
+      !orderRequest && !orderFailed ? openModal() : console.log('error');
+    } else { console.log('No buns or empty ingredients'); } // there should be popup with error
   };
   return (
     <div className={`${styles.summary} mr-4`}>
