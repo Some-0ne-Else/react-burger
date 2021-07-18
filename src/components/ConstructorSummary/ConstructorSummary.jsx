@@ -20,7 +20,6 @@ function ConstructorSummary({ data, openModal }) {
     [data],
   );
   const handleOrder = () => {
-    console.log((data.findIndex((el) => el.type === 'bun')));
     if ((data.findIndex((el) => el.type === 'bun')) !== -1 && data.length < 1) {
       const idList = data.map((el) => el._id);
       dispatch(placeOrder(idList));
