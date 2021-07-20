@@ -55,9 +55,11 @@ const rootReducer = (state = initialState, action) => {
       const newIngredient = { ...ingredient };
       newIngredient.uid = Math.ceil(Math.random() * 1000000); // not best practice
       if (ingredient.type === 'bun') {
+        const secondBun = { ...ingredient };
+        secondBun.uid = Math.ceil(Math.random() * 1000000);
         return {
           ...state,
-          constructorIngredients: [...state.constructorIngredients.filter((el) => el.type !== 'bun'), newIngredient],
+          constructorIngredients: [...state.constructorIngredients.filter((el) => el.type !== 'bun'), newIngredient, secondBun],
         };
       }
       return {
