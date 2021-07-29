@@ -3,6 +3,12 @@
   row-gap: 16px;
   overflow: auto;
   height: 464px;
+  grid-template-rows: repeat(auto-fill, 80px);
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+.constructor__list_hint{
+  border: 1px solid lightgreen;
 }
 .constructor__list::-webkit-scrollbar {
   width: 8px;

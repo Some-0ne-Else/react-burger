@@ -1,4 +1,4 @@
 const INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients';
+const ORDERS_URL = 'https://norma.nomoreparties.space/api/orders';
 
-// eslint-disable-next-line import/prefer-default-export
-export { INGREDIENTS_URL };
+export { INGREDIENTS_URL, ORDERS_URL };

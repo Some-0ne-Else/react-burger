@@ -5,12 +5,13 @@ import ConstructorItem from '../ConstructorItem/ConstructorItem';
 
 function ConstructorList({ data }) {
   return (
-    <div className={styles.constructor__list}>
+    <div className={`${styles.constructor__list} `}>
       {data
         .filter((i) => i.type !== 'bun')
         .map((el) => (
           <ConstructorItem
-            key={el._id}
+            key={el.uid}
+            uid={el.uid}
             name={el.name}
             price={el.price}
             image={el.image}

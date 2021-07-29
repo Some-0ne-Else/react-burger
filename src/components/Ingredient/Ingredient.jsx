@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import {
   Counter,
@@ -9,10 +11,18 @@ import styles from './Ingredient.module.css';
 function Ingredient({
   id, image, price, name, openModal,
 }) {
-  const [counter, setCounter] = React.useState(0);
-  if (counter === 0) setCounter(1); // eslint warning walkaround
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'ingredient',
+    item: { id },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+  const { counter } = useSelector(
+    (store) => ({ counter: store.constructorIngredients.filter((el) => el._id === id).length }),
+  );
   return (
-    <div className={`${styles.ingredient} mb-10`}>
+    <div ref={dragRef} className={`${styles.ingredient} mb-10 ${isDrag && styles.ingredient_dragging}`}>
       <img
         src={image}
         alt={name}

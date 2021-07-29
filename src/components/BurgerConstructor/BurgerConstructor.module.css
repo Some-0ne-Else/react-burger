@@ -5,8 +5,12 @@
 
 .constructor__wrapper {
   display: block;
+  box-sizing: border-box;
+  border: 1px solid #131316;
 }
-
+.constructor__wrapper_hint{
+  border: 1px solid lightgray;
+}
 .constructor__item {
   display: grid;
   align-items: center;
@@ -15,9 +19,18 @@
 .constructor__item_top {
   margin-bottom: 16px;
   margin-left: 32px;
+  display: flex;
 }
+.constructor__item_top div{
+  flex-grow: 1;
+} 
 
 .constructor__item_bottom {
   margin-top: 16px;
   margin-left: 32px;
+  display: flex;
 }
+
+.constructor__item_bottom div{
+  flex-grow: 1;
+} 
