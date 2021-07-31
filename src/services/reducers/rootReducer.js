@@ -11,7 +11,11 @@ import {
   PLACE_ORDER_FAILED,
   UPDATE_CONSTRUCTOR_LIST,
   FORGOT_PASSWORD_FORM_SET_VALUE,
-
+  FORGOT_PASSWORD_FORM_SUCCESS,
+  FORGOT_PASSWORD_FORM_REQUEST,
+  FORGOT_PASSWORD_FORM_FAILED,
+  FORGOT_PASSWORD_FORM_SET_ERROR,
+  LOGIN,
 } from '../actions/index';
 
 const initialState = {
@@ -30,6 +34,10 @@ const initialState = {
     request: false,
     failed: false,
     errorText: '',
+  },
+  user: {
+    email: '',
+    name: '',
   },
 };
 
@@ -128,7 +136,59 @@ const rootReducer = (state = initialState, action) => {
     case FORGOT_PASSWORD_FORM_SET_VALUE: {
       return {
         ...state,
-        forgotPasswordForm: { [action.field]: action.value },
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          [action.field]: action.value,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SUCCESS: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: false,
+          failed: false,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_REQUEST: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: true,
+          failed: false,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_FAILED: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: false,
+          failed: true,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SET_ERROR: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          errorText: action.payload,
+        },
+      };
+    }
+    case LOGIN: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email,
+          name: action.payload.name,
+        },
       };
     }
     default: {

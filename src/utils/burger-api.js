@@ -1,5 +1,9 @@
 import {
-  INGREDIENTS_URL, ORDERS_URL, PASSWORD_RESET_REQUEST_URL, PASSWORD_RESET_URL,
+  INGREDIENTS_URL,
+  ORDERS_URL,
+  PASSWORD_RESET_REQUEST_URL,
+  PASSWORD_RESET_URL,
+  LOGIN_URL,
 } from './constants';
 
 export const getIngredients = () => fetch(INGREDIENTS_URL).then((res) => {
@@ -33,4 +37,11 @@ export const resetPassword = ({ password, token }) => fetch(PASSWORD_RESET_URL, 
     'content-type': 'application/json',
   },
   body: JSON.stringify({ password, token }),
+});
+export const login = ({ email, password }) => fetch(LOGIN_URL, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ email, password }),
 });

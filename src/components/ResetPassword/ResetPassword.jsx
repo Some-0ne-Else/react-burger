@@ -33,19 +33,22 @@ function ResetPassword() {
           type="password"
           placeholder="Введите новый пароль"
           ref={passwordRef}
-          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onChange={(e) => { setPassword(e.target.value); setError(false); }}
         />
       </div>
       <div className={`${styles.input_wrapper} mb-6`}>
         <Input
           placeholder="Введите код из письма"
-          onChange={(e) => setToken(e.target.value)}
+          value={password}
+          name="password"
+          onChange={(e) => { setToken(e.target.value); setError(false); }}
           error={error}
           errorText={errorText}
         />
       </div>
       <Button type="primary" size="large" onClick={(e) => handleReset(e)}>
-        Восстановить
+        Сохранить
       </Button>
       <div className={`${styles.signup_wrapper} mt-20`}>
         <p className="text text_type_main-default text_color_inactive">

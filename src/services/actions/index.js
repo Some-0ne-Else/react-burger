@@ -1,5 +1,6 @@
-import { useHistory } from 'react-router-dom';
-import { getIngredients, postOrder, restorePassword } from '../../utils/burger-api';
+import {
+  getIngredients, postOrder, restorePassword, login,
+} from '../../utils/burger-api';
 
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
@@ -18,7 +19,7 @@ export const FORGOT_PASSWORD_FORM_SUCCESS = 'FORGOT_PASSWORD_FORM_SUCCESS';
 export const FORGOT_PASSWORD_FORM_REQUEST = 'FORGOT_PASSWORD_FORM_REQUEST';
 export const FORGOT_PASSWORD_FORM_FAILED = 'FORGOT_PASSWORD_FORM_FAILED';
 export const FORGOT_PASSWORD_FORM_SET_ERROR = 'FORGOT_PASSWORD_FORM_SET_ERROR';
-
+export const LOGIN = 'LOGIN';
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   getIngredients()
@@ -101,11 +102,20 @@ export const postForgotPasswordForm = (email) => (dispatch) => {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        const history = useHistory();
-        history.replace({ pathname: '/reset-password' });
+        dispatch({ type: FORGOT_PASSWORD_FORM_SUCCESS });
       } else {
         dispatch({ type: FORGOT_PASSWORD_FORM_FAILED });
-        dispatch({ type: FORGOT_PASSWORD_FORM_SET_ERROR });
+        dispatch({ type: FORGOT_PASSWORD_FORM_SET_ERROR, payload: res.message });
       }
+    });
+};
+
+export const postLoginForm = ({ email, password }) => (dispatch) => {
+  login({ email, password })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      localStorage.setItem('refreshToken', res.refreshToken);
+      dispatch({ type: LOGIN, payload: res.user });
     });
 };
