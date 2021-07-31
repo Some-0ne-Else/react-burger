@@ -10,6 +10,7 @@ import {
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
   UPDATE_CONSTRUCTOR_LIST,
+  FORGOT_PASSWORD_FORM_SET_VALUE,
 
 } from '../actions/index';
 
@@ -24,7 +25,12 @@ const initialState = {
   },
   ingredientsRequest: false,
   ingredientsFailed: false,
-
+  forgotPasswordForm: {
+    email: '',
+    request: false,
+    failed: false,
+    errorText: '',
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -117,6 +123,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         constructorIngredients: newArr,
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SET_VALUE: {
+      return {
+        ...state,
+        forgotPasswordForm: { [action.field]: action.value },
       };
     }
     default: {

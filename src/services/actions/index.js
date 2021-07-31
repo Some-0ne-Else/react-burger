@@ -1,5 +1,5 @@
-/* eslint-disable no-debugger */
-import { getIngredients, postOrder } from '../../utils/burger-api';
+import { useHistory } from 'react-router-dom';
+import { getIngredients, postOrder, restorePassword } from '../../utils/burger-api';
 
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
@@ -13,6 +13,11 @@ export const PLACE_ORDER_REQUEST = 'PLACE_ORDER_REQUEST';
 export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
 export const PLACE_ORDER_FAILED = 'PLACE_ORDER_FAILED';
 export const UPDATE_CONSTRUCTOR_LIST = 'UPDATE_CONSTRUCTOR_LIST';
+export const FORGOT_PASSWORD_FORM_SET_VALUE = 'FORGOT_PASSWORD_FORM_SET_VALUE';
+export const FORGOT_PASSWORD_FORM_SUCCESS = 'FORGOT_PASSWORD_FORM_SUCCESS';
+export const FORGOT_PASSWORD_FORM_REQUEST = 'FORGOT_PASSWORD_FORM_REQUEST';
+export const FORGOT_PASSWORD_FORM_FAILED = 'FORGOT_PASSWORD_FORM_FAILED';
+export const FORGOT_PASSWORD_FORM_SET_ERROR = 'FORGOT_PASSWORD_FORM_SET_ERROR';
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
@@ -61,7 +66,6 @@ export const placeOrder = (idList) => (dispatch) => {
   postOrder(idList)
     .then((res) => {
       if (res.success) {
-        console.log(res);
         dispatch({
           type: PLACE_ORDER_SUCCESS,
           payload: res,
@@ -84,3 +88,24 @@ export const updateConstructorList = (draggedId, uid) => ({
   type: UPDATE_CONSTRUCTOR_LIST,
   payload: { draggedId, uid },
 });
+
+export const setForgotPasswordFormValue = (field, value) => ({
+  type: FORGOT_PASSWORD_FORM_SET_VALUE,
+  field,
+  value,
+});
+
+export const postForgotPasswordForm = (email) => (dispatch) => {
+  dispatch({ type: FORGOT_PASSWORD_FORM_REQUEST });
+  restorePassword({ email })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.success) {
+        const history = useHistory();
+        history.replace({ pathname: '/reset-password' });
+      } else {
+        dispatch({ type: FORGOT_PASSWORD_FORM_FAILED });
+        dispatch({ type: FORGOT_PASSWORD_FORM_SET_ERROR });
+      }
+    });
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -9,14 +10,15 @@ import styles from './AppHeader.module.css';
 import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
+  const history = useHistory();
   const handleConstructor = () => {
-    console.log('Constructor');
+    history.push({ pathname: '/' });
   };
   const handleList = () => {
     console.log('List order');
   };
   const handlePersonalArea = () => {
-    console.log('Personal Area');
+    history.push({ pathname: '/profile' });
   };
 
   return (

@@ -1,13 +1,15 @@
-import { INGREDIENTS_URL, ORDERS_URL } from './constants';
+import {
+  INGREDIENTS_URL, ORDERS_URL, PASSWORD_RESET_REQUEST_URL, PASSWORD_RESET_URL,
+} from './constants';
 
-const getIngredients = () => fetch(INGREDIENTS_URL).then((res) => {
+export const getIngredients = () => fetch(INGREDIENTS_URL).then((res) => {
   if (res.ok) {
     return res.json();
   }
   throw new Error(`Error ${res.status}`);
 });
 
-const postOrder = (idList) => fetch(ORDERS_URL, {
+export const postOrder = (idList) => fetch(ORDERS_URL, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -17,4 +19,18 @@ const postOrder = (idList) => fetch(ORDERS_URL, {
   .then((res) => res.json())
   .catch((err) => console.log('err', err));
 
-export { getIngredients, postOrder };
+export const restorePassword = ({ email }) => fetch(PASSWORD_RESET_REQUEST_URL, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ email }),
+});
+
+export const resetPassword = ({ password, token }) => fetch(PASSWORD_RESET_URL, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ password, token }),
+});
