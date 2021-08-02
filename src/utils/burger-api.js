@@ -1,19 +1,13 @@
-import {
-  INGREDIENTS_URL,
-  ORDERS_URL,
-  PASSWORD_RESET_REQUEST_URL,
-  PASSWORD_RESET_URL,
-  LOGIN_URL,
-} from './constants';
+import { BASE_URL } from './constants';
 
-export const getIngredients = () => fetch(INGREDIENTS_URL).then((res) => {
+export const getIngredients = () => fetch(`${BASE_URL}/ingredients`).then((res) => {
   if (res.ok) {
     return res.json();
   }
   throw new Error(`Error ${res.status}`);
 });
 
-export const postOrder = (idList) => fetch(ORDERS_URL, {
+export const postOrder = (idList) => fetch(`${BASE_URL}/orders`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -23,7 +17,7 @@ export const postOrder = (idList) => fetch(ORDERS_URL, {
   .then((res) => res.json())
   .catch((err) => console.log('err', err));
 
-export const restorePassword = ({ email }) => fetch(PASSWORD_RESET_REQUEST_URL, {
+export const restorePassword = ({ email }) => fetch(`${BASE_URL}/password-reset`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -31,17 +25,25 @@ export const restorePassword = ({ email }) => fetch(PASSWORD_RESET_REQUEST_URL, 
   body: JSON.stringify({ email }),
 });
 
-export const resetPassword = ({ password, token }) => fetch(PASSWORD_RESET_URL, {
+export const resetPassword = ({ password, token }) => fetch(`${BASE_URL}/password-reset/reset`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
   },
   body: JSON.stringify({ password, token }),
 });
-export const login = ({ email, password }) => fetch(LOGIN_URL, {
+export const login = async ({ email, password }) => fetch(`${BASE_URL}/auth/login`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
   },
   body: JSON.stringify({ email, password }),
+});
+
+export const signup = ({ email, password, name }) => fetch(`${BASE_URL}/auth/register`, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ email, password, name }),
 });

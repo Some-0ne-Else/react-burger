@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Input,
   PasswordInput,
@@ -11,12 +11,20 @@ import { postLoginForm } from '../../services/actions';
 
 function Signin() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(postLoginForm({ email, password }));
+    console.log('cookies before', document.cookie);
+    dispatch(postLoginForm({ email, password }))
+      .then((res) => {
+        if (res.success) {
+          history.replace({ pathname: '/' });
+          console.log('cookies after', document.cookie);
+        } else { console.log(res.message); }
+      });
   };
   return (
     <form className={styles.form}>

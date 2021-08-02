@@ -1,6 +1,8 @@
 import {
   getIngredients, postOrder, restorePassword, login,
 } from '../../utils/burger-api';
+import { setCookie } from '../../utils/utils';
+import { ACCESS_TOKEN_TTL } from '../../utils/constants';
 
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
@@ -19,7 +21,10 @@ export const FORGOT_PASSWORD_FORM_SUCCESS = 'FORGOT_PASSWORD_FORM_SUCCESS';
 export const FORGOT_PASSWORD_FORM_REQUEST = 'FORGOT_PASSWORD_FORM_REQUEST';
 export const FORGOT_PASSWORD_FORM_FAILED = 'FORGOT_PASSWORD_FORM_FAILED';
 export const FORGOT_PASSWORD_FORM_SET_ERROR = 'FORGOT_PASSWORD_FORM_SET_ERROR';
-export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
+
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   getIngredients()
@@ -98,24 +103,38 @@ export const setForgotPasswordFormValue = (field, value) => ({
 
 export const postForgotPasswordForm = (email) => (dispatch) => {
   dispatch({ type: FORGOT_PASSWORD_FORM_REQUEST });
-  restorePassword({ email })
+  return restorePassword({ email })
     .then((res) => res.json())
+    // eslint-disable-next-line consistent-return
     .then((res) => {
       if (res.success) {
         dispatch({ type: FORGOT_PASSWORD_FORM_SUCCESS });
-      } else {
-        dispatch({ type: FORGOT_PASSWORD_FORM_FAILED });
-        dispatch({ type: FORGOT_PASSWORD_FORM_SET_ERROR, payload: res.message });
+        return res;
       }
+      dispatch({ type: FORGOT_PASSWORD_FORM_FAILED });
+      dispatch({ type: FORGOT_PASSWORD_FORM_SET_ERROR, payload: res.message });
+    })
+    .catch((err) => {
+      dispatch({ type: FORGOT_PASSWORD_FORM_FAILED }); console.log(err);
     });
 };
 
 export const postLoginForm = ({ email, password }) => (dispatch) => {
-  login({ email, password })
+  dispatch({ type: LOGIN_REQUEST });
+  return login({ email, password })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      localStorage.setItem('refreshToken', res.refreshToken);
-      dispatch({ type: LOGIN, payload: res.user });
+      if (res.success) {
+        dispatch({ type: LOGIN_SUCCESS, payload: res.user });
+        setCookie('accessToken', res.accessToken, { expires: ACCESS_TOKEN_TTL });
+        localStorage.setItem('refreshToken', res.refreshToken);
+        return res;
+      }
+      dispatch({ type: LOGIN_FAILED });
+      return res;
+    })
+    .catch((err) => {
+      dispatch({ type: LOGIN_FAILED });
+      console.log(err);
     });
 };

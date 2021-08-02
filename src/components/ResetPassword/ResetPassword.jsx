@@ -40,7 +40,7 @@ function ResetPassword() {
       <div className={`${styles.input_wrapper} mb-6`}>
         <Input
           placeholder="Введите код из письма"
-          value={password}
+          value={token}
           name="password"
           onChange={(e) => { setToken(e.target.value); setError(false); }}
           error={error}

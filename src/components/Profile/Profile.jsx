@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   Input,
@@ -6,13 +7,10 @@ import {
 import styles from './Profile.module.css';
 
 function Profile() {
+  const { email, name } = useSelector((store) => store.user);
   const [disabled, setDisabled] = React.useState(true);
-  const [placeholder, setPlaceholder] = React.useState('Имя');
   const handleClick = () => {
     setDisabled(!disabled);
-  };
-  const handleFocus = () => {
-    setPlaceholder('');
   };
 
   const handleLogout = () => {
@@ -50,10 +48,20 @@ function Profile() {
       </div>
       <form className={styles.form}>
         <div className={`${styles.input_wrapper} mb-6`}>
-          <Input placeholder={placeholder} icon="EditIcon" disabled={disabled} onIconClick={handleClick} onFocus={handleFocus} />
+          <Input
+            placeholder="Имя"
+            icon="EditIcon"
+            value={name}
+            disabled={disabled}
+            onIconClick={handleClick}
+          />
         </div>
         <div className={`${styles.input_wrapper} mb-6`}>
-          <Input placeholder="Логин" icon="EditIcon" />
+          <Input
+            placeholder="Логин"
+            icon="EditIcon"
+            value={email}
+          />
         </div>
         <div className={`${styles.input_wrapper} mb-6`}>
           <Input placeholder="Пароль" icon="EditIcon" />

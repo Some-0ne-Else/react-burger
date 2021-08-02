@@ -19,8 +19,8 @@ function ForgotPassword() {
   };
   const handleRestore = (e) => {
     e.preventDefault();
-    dispatch(postForgotPasswordForm(email));
-    if (!failed) { history.replace({ pathname: '/reset-password' }); }
+    dispatch(postForgotPasswordForm(email))
+      .then((res) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
   };
   React.useEffect(() => inputRef.current.focus(), []);
   return (
@@ -31,6 +31,7 @@ function ForgotPassword() {
           placeholder="Укажите e-mail"
           type="email"
           name="email"
+          value={email}
           ref={inputRef}
           error={failed}
           errorText={errorText}
