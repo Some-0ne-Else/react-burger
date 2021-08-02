@@ -1,6 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Link, useHistory, Redirect, useLocation,
+} from 'react-router-dom';
 import {
   Input,
   PasswordInput,
@@ -9,23 +11,31 @@ import {
 import styles from './Signin.module.css';
 import { postLoginForm } from '../../services/actions';
 
+// eslint-disable-next-line react/prop-types
 function Signin() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const history = useHistory();
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('cookies before', document.cookie);
     dispatch(postLoginForm({ email, password }))
       .then((res) => {
         if (res.success) {
           history.replace({ pathname: '/' });
-          console.log('cookies after', document.cookie);
         } else { console.log(res.message); }
       });
   };
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        to={{ pathname: location.state?.from?.pathname || '/' }}
+      />
+    );
+  }
   return (
     <form className={styles.form}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Вход</p>

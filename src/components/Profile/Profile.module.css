@@ -3,9 +3,11 @@
     width: 1280px;
     display: flex;
 }
-.menu{
+
+.menu {
     width: 320px;
 }
+
 .links {
     padding: 0 0 0 20px;
 }
@@ -54,4 +56,10 @@
 
 .signup_wrapper {
     display: flex;
+}
+
+.button_container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }

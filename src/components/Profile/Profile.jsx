@@ -1,21 +1,46 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
 import {
-  Input,
+  Input, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { updateUserData, logoutUser } from '../../services/actions';
 import styles from './Profile.module.css';
 
 function Profile() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { email, name } = useSelector((store) => store.user);
-  const [disabled, setDisabled] = React.useState(true);
-  const handleClick = () => {
-    setDisabled(!disabled);
+  const [fieldsDisabled, setFieldsDisabled] = React.useState(true);
+  const [nameValue, setNameValue] = React.useState(name);
+  const [emailValue, setEmailValue] = React.useState(email);
+  const [passwordValue, setPasswordValue] = React.useState('');
+
+  const toggleFieldsDisabled = () => {
+    setFieldsDisabled(!fieldsDisabled);
+    setEmailValue(email);
+    setNameValue(name);
   };
 
   const handleLogout = () => {
-    console.log('Logout');
+    dispatch(logoutUser())
+      .then((res) => (res.success ? history.replace({ pathname: '/login' }) : console.log(res.message)));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUserData({ name: nameValue, email: emailValue, password: passwordValue }))
+      .then((res) => {
+        if (res.success) {
+          setFieldsDisabled(true);
+        } else { console.log(res.message); }
+      });
+  };
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setFieldsDisabled(true);
+  };
+
   return (
     <div className={styles.profile}>
       <div className={`${styles.menu} mr-15`}>
@@ -51,21 +76,42 @@ function Profile() {
           <Input
             placeholder="Имя"
             icon="EditIcon"
-            value={name}
-            disabled={disabled}
-            onIconClick={handleClick}
+            name="name"
+            value={fieldsDisabled ? name : nameValue}
+            onChange={(e) => setNameValue(e.target.value)}
+            disabled={fieldsDisabled}
+            onIconClick={toggleFieldsDisabled}
           />
         </div>
         <div className={`${styles.input_wrapper} mb-6`}>
           <Input
             placeholder="Логин"
             icon="EditIcon"
-            value={email}
+            name="email"
+            value={fieldsDisabled ? email : emailValue}
+            onChange={(e) => setEmailValue(e.target.value)}
+            disabled={fieldsDisabled}
+            onIconClick={toggleFieldsDisabled}
           />
         </div>
         <div className={`${styles.input_wrapper} mb-6`}>
-          <Input placeholder="Пароль" icon="EditIcon" />
+          <Input
+            placeholder="Пароль"
+            icon="EditIcon"
+            name="password"
+            type="password"
+            value={passwordValue}
+            onChange={(e) => setPasswordValue(e.target.value)}
+            disabled={fieldsDisabled}
+            onIconClick={toggleFieldsDisabled}
+          />
         </div>
+        {!fieldsDisabled && (
+        <div className={styles.button_container}>
+          <Button type="secondary" size="large" onClick={(e) => handleCancel(e)}>Отмена</Button>
+          <Button type="primary" size="large" onClick={(e) => handleSubmit(e)}>Сохранить</Button>
+        </div>
+        )}
       </form>
     </div>
   );

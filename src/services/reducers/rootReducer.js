@@ -15,9 +15,11 @@ import {
   FORGOT_PASSWORD_FORM_REQUEST,
   FORGOT_PASSWORD_FORM_FAILED,
   FORGOT_PASSWORD_FORM_SET_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_REQUEST,
-  LOGIN_FAILED,
+  USER_SUCCESS,
+  USER_REQUEST,
+  USER_FAILED,
+  LOGOUT_USER,
+
 } from '../actions/index';
 
 const initialState = {
@@ -186,7 +188,7 @@ const rootReducer = (state = initialState, action) => {
         },
       };
     }
-    case LOGIN_SUCCESS: {
+    case USER_SUCCESS: {
       return {
         ...state,
         user: {
@@ -199,7 +201,7 @@ const rootReducer = (state = initialState, action) => {
         },
       };
     }
-    case LOGIN_REQUEST: {
+    case USER_REQUEST: {
       return {
         ...state,
         user: {
@@ -209,7 +211,7 @@ const rootReducer = (state = initialState, action) => {
         },
       };
     }
-    case LOGIN_FAILED: {
+    case USER_FAILED: {
       return {
         ...state,
         user: {
@@ -217,6 +219,12 @@ const rootReducer = (state = initialState, action) => {
           request: false,
           failed: true,
         },
+      };
+    }
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        user: initialState.user,
       };
     }
     default: {

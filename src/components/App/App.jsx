@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {
   LoginPage,
   SignupPage,
@@ -13,12 +14,13 @@ import {
   ResetPasswordPage,
   ProfilePage,
 } from '../../pages/index';
-import { fetchIngredients } from '../../services/actions/index';
+import { fetchIngredients, getUserData } from '../../services/actions/index';
 
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(getUserData());
   }, []);
   return (
     <div className={styles.app}>
@@ -41,9 +43,9 @@ function App() {
         <Route exact path="/reset-password">
           <ResetPasswordPage />
         </Route>
-        <Route exact path="/profile">
+        <ProtectedRoute exact path="/profile">
           <ProfilePage />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </div>
   );

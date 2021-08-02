@@ -1,4 +1,5 @@
 import { BASE_URL } from './constants';
+import { getCookie } from './utils';
 
 export const getIngredients = () => fetch(`${BASE_URL}/ingredients`).then((res) => {
   if (res.ok) {
@@ -46,4 +47,36 @@ export const signup = ({ email, password, name }) => fetch(`${BASE_URL}/auth/reg
     'content-type': 'application/json',
   },
   body: JSON.stringify({ email, password, name }),
+});
+
+export const getUserInfo = () => fetch(`${BASE_URL}/auth/user`, {
+  method: 'GET',
+  headers: {
+    authorization: getCookie('accessToken'),
+  },
+});
+
+export const updateUserInfo = ({ email, password, name }) => fetch(`${BASE_URL}/auth/user`, {
+  method: 'PATCH',
+  headers: {
+    'content-type': 'application/json',
+    authorization: getCookie('accessToken'),
+  },
+  body: JSON.stringify({ email, password, name }),
+});
+
+export const updateAccessToken = ({ token }) => fetch(`${BASE_URL}/auth/token`, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ token }),
+});
+
+export const logout = ({ token }) => fetch(`${BASE_URL}/auth/logout`, {
+  method: 'POST',
+  headers: {
+    'content-type': 'application/json',
+  },
+  body: JSON.stringify({ token }),
 });

@@ -27,10 +27,6 @@ export function setCookie(name, value, props) {
   document.cookie = updatedCookie;
 }
 
-// export const setCookie = (name, value) => {
-//   document.cookie = `${name}=${value}`;
-// };
-
 export function getCookie(name) {
   const matches = document.cookie.match(
     // eslint-disable-next-line no-useless-escape
@@ -38,13 +34,3 @@ export function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
-// export const getCookie = (name) => {
-//   const cookiesArr = document.cookie.split('; ');
-//   const cookie = cookiesArr.find((el) => el.includes(name));
-//   return cookie.split('=')[1];
-// };
-
-export const accessToken = (tokenWithShema) => {
-  console.log(tokenWithShema);
-};

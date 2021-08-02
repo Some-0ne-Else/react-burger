@@ -1,28 +1,29 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   Input,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { signup } from '../../utils/burger-api';
+import { postRegisterForm } from '../../services/actions';
+
 import styles from './Signup.module.css';
 
 function Signup() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSignup = (e) => {
     e.preventDefault();
-    signup({ name, email, password })
-      .then((res) => res.json())
+    dispatch(postRegisterForm({ name, email, password }))
       .then((res) => {
         if (res.success) {
-          localStorage.setItem('refreshToken', res.refreshToken);
           history.replace({ pathname: '/' });
-        } else { Promise.reject(res.message); }
+        } else { console.log(res.message); }
       });
   };
   return (
