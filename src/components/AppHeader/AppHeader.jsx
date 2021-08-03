@@ -19,6 +19,7 @@ function AppHeader() {
               type="primary"
               text="Конструктор"
               to="/"
+              exact
             />
             <NavigationElement
               component={ListIcon}
