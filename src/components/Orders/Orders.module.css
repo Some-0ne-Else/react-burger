@@ -1,16 +1,40 @@
-.main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.orders {
+    margin: 120px auto 0;
+    width: 1280px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    max-width: 600px;
 }
 
-.link{
-    margin-top:50px;
+.menu {
+    width: 320px;
+}
+
+.links {
+    padding: 0 0 0 20px;
+}
+
+.link {
+    text-decoration: none;
+    height: 64px;
+    list-style-type: none;
+}
+
+.navlink {
+    color: #8585ad;
+    text-decoration: none;
+}
+
+.navlink_active {
     color: white;
+}
+
+.logout {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #8585ad;
+}
+
+.wrapper {
+    width: 100%;
 }
