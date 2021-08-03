@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Input,
   PasswordInput,
@@ -13,6 +13,7 @@ import styles from './Signup.module.css';
 function Signup() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -26,6 +27,14 @@ function Signup() {
         } else { console.log(res.message); }
       });
   };
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        to={{ pathname: '/' }}
+      />
+    );
+  }
   return (
     <form className={styles.form}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Регистрация</p>

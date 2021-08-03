@@ -9,7 +9,11 @@ import { resetPassword } from '../../utils/burger-api';
 import styles from './ResetPassword.module.css';
 
 function ResetPassword() {
-  const passwordRequested = useSelector((store) => store.forgotPasswordForm.passwordRequested);
+  const { passwordRequested, isLoggedIn } = useSelector((store) => (
+    {
+      passwordRequested: store.forgotPasswordForm.passwordRequested,
+      isLoggedIn: store.user.isLoggedIn,
+    }));
   const history = useHistory();
   const [password, setPassword] = React.useState('');
   const [token, setToken] = React.useState('');
@@ -29,7 +33,15 @@ function ResetPassword() {
   if (!passwordRequested) {
     return (
       <Redirect
-        to="/forgot-password"
+        to={{ pathname: '/forgot-password' }}
+      />
+    );
+  }
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        to={{ pathname: '/' }}
       />
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import {
   Input,
   Button,
@@ -12,6 +12,7 @@ function ForgotPassword() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { email, failed, errorText } = useSelector((store) => store.forgotPasswordForm);
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
   const inputRef = React.useRef(null);
 
   const onFormChange = (e) => {
@@ -23,6 +24,14 @@ function ForgotPassword() {
       .then((res) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
   };
   React.useEffect(() => inputRef.current.focus(), []);
+
+  if (isLoggedIn) {
+    return (
+      <Redirect
+        to={{ pathname: '/' }}
+      />
+    );
+  }
   return (
     <form className={styles.form}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</p>
