@@ -19,6 +19,7 @@ import {
   USER_REQUEST,
   USER_FAILED,
   LOGOUT_USER,
+  TOGGLE_MODAL,
 
 } from '../actions/index';
 
@@ -38,6 +39,7 @@ const initialState = {
     request: false,
     failed: false,
     errorText: '',
+    passwordRequested: false,
   },
   user: {
     email: '',
@@ -45,6 +47,9 @@ const initialState = {
     isLoggedIn: false,
     request: false,
     failed: false,
+  },
+  modal: {
+    modalOpen: false,
   },
 };
 
@@ -156,6 +161,7 @@ const rootReducer = (state = initialState, action) => {
           ...state.forgotPasswordForm,
           request: false,
           failed: false,
+          passwordRequested: true,
         },
       };
     }
@@ -225,6 +231,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: initialState.user,
+      };
+    }
+    case TOGGLE_MODAL: {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          modalOpen: !state.modal.modalOpen,
+        },
       };
     }
     default: {

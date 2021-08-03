@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import {
   Input,
   Button,
@@ -8,7 +9,7 @@ import { resetPassword } from '../../utils/burger-api';
 import styles from './ResetPassword.module.css';
 
 function ResetPassword() {
-  // eslint-disable-next-line no-unused-vars
+  const passwordRequested = useSelector((store) => store.forgotPasswordForm.passwordRequested);
   const history = useHistory();
   const [password, setPassword] = React.useState('');
   const [token, setToken] = React.useState('');
@@ -24,7 +25,14 @@ function ResetPassword() {
         if (res.success) { history.replace({ pathname: '/login' }); } else { setError(true); setErrorText(res.message); }
       });
   };
-  React.useEffect(() => passwordRef.current.focus(), []);
+
+  if (!passwordRequested) {
+    return (
+      <Redirect
+        to="/forgot-password"
+      />
+    );
+  }
   return (
     <form className={styles.form}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</p>

@@ -33,10 +33,11 @@ export const USER_SUCCESS = 'LOGIN_SUCCESS';
 export const USER_REQUEST = 'LOGIN_REQUEST';
 export const USER_FAILED = 'LOGIN_FAILED';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 export const fetchIngredients = () => (dispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
-  getIngredients()
+  return getIngredients()
     .then((res) => {
       if (res.success) {
         dispatch({
@@ -251,3 +252,7 @@ export const logoutUser = () => (dispatch) => logout({ token: localStorage.getIt
     return res;
   })
   .catch((err) => console.log(err));
+
+export const toggleModal = () => ({
+  type: TOGGLE_MODAL,
+});

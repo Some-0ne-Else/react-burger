@@ -1,14 +1,14 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
-import Signin from '../components/Signin/Signin';
+import NotFound from '../components/NotFound/NotFound';
 
-function LoginPage() {
+function NotFoundPage() {
   return (
     <>
       <AppHeader />
-      <Signin />
+      <NotFound />
     </>
   );
 }
 
-export default LoginPage;
+export default NotFoundPage;

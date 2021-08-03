@@ -12,6 +12,7 @@ export const postOrder = (idList) => fetch(`${BASE_URL}/orders`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
+    authorization: getCookie('accessToken'),
   },
   body: JSON.stringify({ ingredients: idList }),
 })

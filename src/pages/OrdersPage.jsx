@@ -1,14 +1,14 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
-import Signin from '../components/Signin/Signin';
+import Orders from '../components/Orders/Orders';
 
-function LoginPage() {
+function OrdersPage() {
   return (
     <>
       <AppHeader />
-      <Signin />
+      <Orders />
     </>
   );
 }
 
-export default LoginPage;
+export default OrdersPage;

@@ -1,14 +1,14 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
-import Signin from '../components/Signin/Signin';
+import Main from '../components/Main/Main';
 
-function LoginPage() {
+function MainPage() {
   return (
     <>
       <AppHeader />
-      <Signin />
+      <Main />
     </>
   );
 }
 
-export default LoginPage;
+export default MainPage;

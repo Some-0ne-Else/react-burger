@@ -4,3 +4,13 @@
   cursor: pointer;
   align-items: center;
 }
+
+.navigation__link{
+display: flex;
+color:#8585AD;
+text-decoration: none;
+}
+
+.navigation__link_active{
+  color:white;
+}

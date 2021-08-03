@@ -10,8 +10,6 @@ function ProtectedRoute({ children, ...props }) {
   return (
     <Route
       {...props}
-            // Получим текущий маршрут, с которого произойдёт переадресация
-            // для неавторизованного пользователя
       render={({ location }) => (isLoggedIn ? (
         children
       ) : (

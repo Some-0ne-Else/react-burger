@@ -1,16 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getIngredientDetails, toggleModal } from '../../services/actions/index';
 import styles from './Ingredient.module.css';
 
 function Ingredient({
-  id, image, price, name, openModal,
+  id, image, price, name,
 }) {
+  const location = useLocation();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
     item: { id },
@@ -21,13 +26,23 @@ function Ingredient({
   const { counter } = useSelector(
     (store) => ({ counter: store.constructorIngredients.filter((el) => el._id === id).length }),
   );
+  const openModal = (uid) => {
+    dispatch(getIngredientDetails(uid));
+    dispatch(toggleModal());
+  };
   return (
     <div ref={dragRef} className={`${styles.ingredient} mb-10 ${isDrag && styles.ingredient_dragging}`}>
       <img
         src={image}
         alt={name}
         className={`${styles.image} ml-4 mr-4 mb-1`}
-        onClick={() => openModal(id)}
+        onClick={() => {
+          history.push({
+            pathname: `/ingredients/${id}`,
+            state: { main: location },
+          });
+          openModal(id);
+        }}
       />
       {counter ? <Counter count={counter} size="default" /> : null}
       <div className={`${styles.price} mb-1`}>
@@ -48,5 +63,4 @@ Ingredient.propTypes = {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  openModal: PropTypes.func.isRequired,
 };

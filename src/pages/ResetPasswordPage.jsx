@@ -4,10 +4,10 @@ import ResetPassword from '../components/ResetPassword/ResetPassword';
 
 function ResetPasswordPage() {
   return (
-    <main>
+    <>
       <AppHeader />
       <ResetPassword />
-    </main>
+    </>
   );
 }
 

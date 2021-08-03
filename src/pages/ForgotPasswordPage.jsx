@@ -4,10 +4,10 @@ import ForgotPassword from '../components/ForgotPassword/ForgotPassword';
 
 function ForgotPasswordPage() {
   return (
-    <main>
+    <>
       <AppHeader />
       <ForgotPassword />
-    </main>
+    </>
   );
 }
 

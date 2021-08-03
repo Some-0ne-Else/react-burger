@@ -1,14 +1,14 @@
 import React from 'react';
 import AppHeader from '../components/AppHeader/AppHeader';
-import Signin from '../components/Signin/Signin';
+import Feed from '../components/Feed/Feed';
 
-function LoginPage() {
+function FeedPage() {
   return (
     <>
       <AppHeader />
-      <Signin />
+      <Feed />
     </>
   );
 }
 
-export default LoginPage;
+export default FeedPage;

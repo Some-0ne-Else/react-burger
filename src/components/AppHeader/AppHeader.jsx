@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -10,17 +9,6 @@ import styles from './AppHeader.module.css';
 import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
-  const history = useHistory();
-  const handleConstructor = () => {
-    history.push({ pathname: '/' });
-  };
-  const handleList = () => {
-    console.log('List order');
-  };
-  const handlePersonalArea = () => {
-    history.push({ pathname: '/profile' });
-  };
-
   return (
     <header className={`${styles.header}`}>
       <div className={styles.content}>
@@ -30,13 +18,13 @@ function AppHeader() {
               component={BurgerIcon}
               type="primary"
               text="Конструктор"
-              onClick={handleConstructor}
+              to="/"
             />
             <NavigationElement
               component={ListIcon}
               type="primary"
               text="Лента заказов"
-              onClick={handleList}
+              to="/feed"
             />
           </ul>
         </nav>
@@ -49,7 +37,7 @@ function AppHeader() {
               component={ProfileIcon}
               type="primary"
               text="Личный кабинет"
-              onClick={handlePersonalArea}
+              to="/profile"
             />
           </ul>
         </nav>

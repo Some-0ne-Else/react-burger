@@ -4,10 +4,10 @@ import Profile from '../components/Profile/Profile';
 
 function ProfilePage() {
   return (
-    <main>
+    <>
       <AppHeader />
       <Profile />
-    </main>
+    </>
   );
 }
 

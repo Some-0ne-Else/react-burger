@@ -1,35 +1,53 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './App.module.css';
-import AppHeader from '../AppHeader/AppHeader';
-import Main from '../Main/Main';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
 import {
+  MainPage,
   LoginPage,
   SignupPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   ProfilePage,
+  NotFoundPage,
+  IngredientDetailsPage,
+  OrdersPage,
+  FeedPage,
 } from '../../pages/index';
-import { fetchIngredients, getUserData } from '../../services/actions/index';
+import {
+  fetchIngredients, getUserData, clearIngredientDetails, toggleModal,
+} from '../../services/actions/index';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const modalOpen = useSelector((store) => store.modal.modalOpen);
+  const main = location.state && location.state.main;
+
+  const closeModal = () => {
+    dispatch(clearIngredientDetails());
+    dispatch(toggleModal());
+  };
+
   React.useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(getUserData());
   }, []);
   return (
     <div className={styles.app}>
-      <Switch>
+      <Switch location={main || location}>
         <Route exact path="/">
-          <AppHeader />
           <DndProvider backend={HTML5Backend}>
-            <Main />
+            <MainPage />
           </DndProvider>
+        </Route>
+        <Route path="/ingredients/:id">
+          <IngredientDetailsPage />
         </Route>
         <Route exact path="/login">
           <LoginPage />
@@ -46,7 +64,23 @@ function App() {
         <ProtectedRoute exact path="/profile">
           <ProfilePage />
         </ProtectedRoute>
+        <Route exact path="/profile/orders">
+          <OrdersPage />
+        </Route>
+        <Route exact path="/feed">
+          <FeedPage />
+        </Route>
+        <Route>
+          <NotFoundPage />
+        </Route>
       </Switch>
+      {main && modalOpen && (
+      <Route path="/ingredients/:id">
+        <Modal title="Детали ингредиента" onClose={closeModal}>
+          <IngredientDetails />
+        </Modal>
+      </Route>
+      )}
     </div>
   );
 }
