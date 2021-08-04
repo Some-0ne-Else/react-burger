@@ -30,7 +30,7 @@ function ConstructorSummary({ data, openModal }) {
       dispatch(placeOrder(idList));
       // eslint-disable-next-line no-unused-expressions
       !orderRequest && !orderFailed ? openModal() : console.log('error');
-    } else { console.log('No buns or empty ingredients'); } // there should be popup with error
+    } else { console.log('Please add buns in order.'); } // there should be popup with error
   };
   return (
     <div className={`${styles.summary} mr-4`}>

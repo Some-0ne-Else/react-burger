@@ -9,6 +9,7 @@ import styles from './App.module.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
+import AppHeader from '../AppHeader/AppHeader';
 import {
   MainPage,
   LoginPage,
@@ -42,6 +43,7 @@ function App() {
   }, []);
   return (
     <div className={styles.app}>
+      <AppHeader />
       <Switch location={main || location}>
         <Route exact path="/">
           <DndProvider backend={HTML5Backend}>

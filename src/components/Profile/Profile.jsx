@@ -71,7 +71,7 @@ function Profile() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div className={`${styles.input_wrapper} mb-6`}>
           <Input
             placeholder="Имя"
@@ -108,8 +108,8 @@ function Profile() {
         </div>
         {!fieldsDisabled && (
         <div className={styles.button_container}>
+          <Button type="primary" size="large">Сохранить</Button>
           <Button type="secondary" size="large" onClick={(e) => handleCancel(e)}>Отмена</Button>
-          <Button type="primary" size="large" onClick={(e) => handleSubmit(e)}>Сохранить</Button>
         </div>
         )}
       </form>

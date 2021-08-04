@@ -37,7 +37,7 @@ function Signin() {
     );
   }
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => handleLogin(e)}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Вход</p>
       <div className={`${styles.input_wrapper} mb-6`}>
         <Input
@@ -54,7 +54,7 @@ function Signin() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <Button type="primary" size="large" onClick={(e) => handleLogin(e)}>
+      <Button type="primary" size="large">
         Войти
       </Button>
       <div className={`${styles.signup_wrapper} mt-20`}>

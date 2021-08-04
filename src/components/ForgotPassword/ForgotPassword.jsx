@@ -33,7 +33,7 @@ function ForgotPassword() {
     );
   }
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => handleRestore(e)}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</p>
       <div className={`${styles.input_wrapper} mb-6`}>
         <Input
@@ -47,7 +47,7 @@ function ForgotPassword() {
           onChange={(e) => onFormChange(e)}
         />
       </div>
-      <Button type="primary" size="large" onClick={(e) => handleRestore(e)}>
+      <Button type="primary" size="large">
         Восстановить
       </Button>
       <div className={`${styles.signup_wrapper} mt-20`}>

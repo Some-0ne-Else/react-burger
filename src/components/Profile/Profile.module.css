@@ -61,5 +61,6 @@
 .button_container {
     display: flex;
     justify-content: flex-end;
+    flex-direction: row-reverse;
     width: 100%;
 }

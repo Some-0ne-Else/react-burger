@@ -46,7 +46,7 @@ function ResetPassword() {
     );
   }
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={(e) => handleReset(e)}>
       <p className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</p>
       <div className={`${styles.input_wrapper} mb-6`}>
         <Input
@@ -67,7 +67,7 @@ function ResetPassword() {
           errorText={errorText}
         />
       </div>
-      <Button type="primary" size="large" onClick={(e) => handleReset(e)}>
+      <Button type="primary" size="large">
         Сохранить
       </Button>
       <div className={`${styles.signup_wrapper} mt-20`}>

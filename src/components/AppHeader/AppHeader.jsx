@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -29,9 +30,9 @@ function AppHeader() {
             />
           </ul>
         </nav>
-        <div className={styles.logo}>
+        <Link to={{ pathname: '/' }} className={styles.logo}>
           <Logo />
-        </div>
+        </Link>
         <nav className={styles.navigaton}>
           <ul className={styles.navigation}>
             <NavigationElement

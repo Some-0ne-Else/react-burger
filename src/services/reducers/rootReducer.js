@@ -6,6 +6,7 @@ import {
   CLEAR_INGREDIENT_DETAILS,
   ADD_CONSTRUCTOR_INGREDIENT,
   REMOVE_CONSTRUCTOR_INGREDIENT,
+  CLEAR_CONSTRUCTOR_INGREDIENTS,
   PLACE_ORDER_REQUEST,
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
@@ -98,6 +99,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         constructorIngredients:
         [...state.constructorIngredients.filter((el) => el.uid !== action.payload)],
+      };
+    }
+    case CLEAR_CONSTRUCTOR_INGREDIENTS: {
+      return {
+        ...state,
+        constructorIngredients: initialState.constructorIngredients,
       };
     }
     case PLACE_ORDER_REQUEST: {

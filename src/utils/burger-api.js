@@ -17,7 +17,7 @@ export const postOrder = (idList) => fetch(`${BASE_URL}/orders`, {
   body: JSON.stringify({ ingredients: idList }),
 })
   .then((res) => res.json())
-  .catch((err) => console.log('err', err));
+  .catch((err) => console.log(err));
 
 export const restorePassword = ({ email }) => fetch(`${BASE_URL}/password-reset`, {
   method: 'POST',

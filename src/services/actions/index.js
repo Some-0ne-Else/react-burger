@@ -19,6 +19,7 @@ export const GET_INGREDIENT_DETAILS = 'GET_INGREDIENT_DETAILS';
 export const CLEAR_INGREDIENT_DETAILS = 'CLEAR_INGREDIENT_DETAILS';
 export const ADD_CONSTRUCTOR_INGREDIENT = 'ADD_CONSTRUCTOR_INGREDIENT';
 export const REMOVE_CONSTRUCTOR_INGREDIENT = 'REMOVE_CONSTRUCTOR_INGREDIENT';
+export const CLEAR_CONSTRUCTOR_INGREDIENTS = 'CLEAR_CONSTRUCTOR_INGREDIENTS';
 export const PLACE_ORDER = 'PLACE_ORDER';
 export const PLACE_ORDER_REQUEST = 'PLACE_ORDER_REQUEST';
 export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
@@ -85,6 +86,9 @@ export const placeOrder = (idList) => (dispatch) => {
         dispatch({
           type: PLACE_ORDER_SUCCESS,
           payload: res,
+        });
+        dispatch({
+          type: CLEAR_CONSTRUCTOR_INGREDIENTS,
         });
       } else {
         dispatch({
