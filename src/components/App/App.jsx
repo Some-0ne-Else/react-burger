@@ -10,6 +10,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import AppHeader from '../AppHeader/AppHeader';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
 import {
   MainPage,
   LoginPage,
@@ -25,6 +26,7 @@ import {
 import {
   fetchIngredients, getUserData, clearIngredientDetails, toggleModal,
 } from '../../services/actions/index';
+import { getCookie } from '../../utils/utils';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +41,9 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(getUserData());
+    if (getCookie(ACCESS_TOKEN) === null && localStorage.getItem(REFRESH_TOKEN) === null) {
+      dispatch(getUserData());
+    }
   }, []);
   return (
     <div className={styles.app}>

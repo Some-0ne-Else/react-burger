@@ -10,7 +10,7 @@ import {
   logout,
 } from '../../utils/burger-api';
 import { setCookie } from '../../utils/utils';
-import { ACCESS_TOKEN_TTL } from '../../utils/constants';
+import { ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
 
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
@@ -140,8 +140,8 @@ export const postLoginForm = ({ email, password }) => (dispatch) => {
     .then((res) => {
       if (res.success) {
         dispatch({ type: USER_SUCCESS, payload: res.user });
-        setCookie('accessToken', res.accessToken, { expires: ACCESS_TOKEN_TTL });
-        localStorage.setItem('refreshToken', res.refreshToken);
+        setCookie(ACCESS_TOKEN, res.accessToken, { expires: ACCESS_TOKEN_TTL });
+        localStorage.setItem(REFRESH_TOKEN, res.refreshToken);
         return res;
       }
       dispatch({ type: USER_FAILED });
@@ -160,8 +160,8 @@ export const postRegisterForm = ({ email, password, name }) => (dispatch) => {
     .then((res) => {
       if (res.success) {
         dispatch({ type: USER_SUCCESS, payload: res.user });
-        setCookie('accessToken', res.accessToken, { expires: ACCESS_TOKEN_TTL });
-        localStorage.setItem('refreshToken', res.refreshToken);
+        setCookie(ACCESS_TOKEN, res.accessToken, { expires: ACCESS_TOKEN_TTL });
+        localStorage.setItem(REFRESH_TOKEN, res.refreshToken);
         return res;
       }
       dispatch({ type: USER_FAILED });
@@ -182,12 +182,12 @@ export const getUserData = () => (dispatch) => {
         dispatch({ type: USER_SUCCESS, payload: res.user });
         return res;
       }
-      return updateAccessToken({ token: localStorage.getItem('refreshToken') })
+      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
         .then((refreshRes) => refreshRes.json())
         .then((refreshRes) => {
           if (refreshRes.success) {
-            setCookie('accessToken', refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });
-            localStorage.setItem('refreshToken', refreshRes.refreshToken);
+            setCookie(ACCESS_TOKEN, refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });
+            localStorage.setItem(REFRESH_TOKEN, refreshRes.refreshToken);
             return getUserInfo()
               .then((resAfterRefresh) => resAfterRefresh.json())
               // eslint-disable-next-line consistent-return
@@ -217,12 +217,12 @@ export const updateUserData = ({ email, password, name }) => (dispatch) => {
         dispatch({ type: USER_SUCCESS, payload: res.user });
         return res;
       }
-      return updateAccessToken({ token: localStorage.getItem('refreshToken') })
+      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
         .then((refreshRes) => refreshRes.json())
         .then((refreshRes) => {
           if (refreshRes.success) {
-            setCookie('accessToken', refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });
-            localStorage.setItem('refreshToken', refreshRes.refreshToken);
+            setCookie(ACCESS_TOKEN, refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });
+            localStorage.setItem(REFRESH_TOKEN, refreshRes.refreshToken);
             return updateUserInfo({ email, password, name })
               .then((resAfterRefresh) => resAfterRefresh.json())
             // eslint-disable-next-line consistent-return
@@ -243,13 +243,13 @@ export const updateUserData = ({ email, password, name }) => (dispatch) => {
     });
 };
 
-export const logoutUser = () => (dispatch) => logout({ token: localStorage.getItem('refreshToken') })
+export const logoutUser = () => (dispatch) => logout({ token: localStorage.getItem(REFRESH_TOKEN) })
   .then((res) => res.json())
   .then((res) => {
     if (res.success) {
       dispatch({ type: LOGOUT_USER });
-      localStorage.removeItem('refreshToken');
-      setCookie('accessToken', null);
+      localStorage.removeItem(REFRESH_TOKEN);
+      setCookie(ACCESS_TOKEN, null);
       return res;
     }
     Promise.reject(res.message);
