@@ -25,10 +25,13 @@ function NavigationElement({
 export default NavigationElement;
 
 NavigationElement.propTypes = {
-
   component: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
+  exact: PropTypes.bool,
+};
+
+NavigationElement.defaultProps = {
+  exact: false,
 };

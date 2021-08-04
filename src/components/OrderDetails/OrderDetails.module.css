@@ -5,3 +5,17 @@
 }
 .orderdetails__image {
 }
+
+.preloader__circle {
+  display: block;
+  margin: 0 auto 32px;
+  width: 90px;
+  height: 90px;
+  animation: spin 1.25s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

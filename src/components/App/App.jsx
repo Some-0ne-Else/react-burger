@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import {
+  Switch, Route, useLocation, useHistory,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -26,9 +28,9 @@ import {
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
   const modalOpen = useSelector((store) => store.modal.modalOpen);
-  const main = location.state && location.state.main;
-
+  const main = history.action === 'REPLACE' ? location?.state?.main : null;
   const closeModal = () => {
     dispatch(clearIngredientDetails());
     dispatch(toggleModal());

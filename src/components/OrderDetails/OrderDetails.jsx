@@ -2,12 +2,14 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styles from './OrderDetails.module.css';
 import doneImg from '../../images/done.svg';
+import preloaderImg from '../../images/loading.png';
 
 function OrderDetails() {
-  const orderNumber = useSelector((state) => state.order.orderNumber);
+  const { orderNumber, orderRequest } = useSelector((state) => state.order);
   return (
     <div className={styles.orderdetails}>
-      <p className="text text_type_digits-large mb-8">{orderNumber}</p>
+      {orderRequest ? (<img className={styles.preloader__circle} src={preloaderImg} alt="Preloader" />) : (<p className="text text_type_digits-large mb-8">{orderNumber}</p>) }
+
       <p className="text text_type_digits-default mb-15">
         идентификатор заказа
       </p>

@@ -37,7 +37,7 @@ function Ingredient({
         alt={name}
         className={`${styles.image} ml-4 mr-4 mb-1`}
         onClick={() => {
-          history.push({
+          history.replace({
             pathname: `/ingredients/${id}`,
             state: { main: location },
           });

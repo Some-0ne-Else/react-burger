@@ -79,7 +79,7 @@ export const removeConstructorIngredient = (ingredient) => ({
 
 export const placeOrder = (idList) => (dispatch) => {
   dispatch({ type: PLACE_ORDER_REQUEST });
-  postOrder(idList)
+  return postOrder(idList)
     .then((res) => {
       if (res.success) {
         dispatch({
