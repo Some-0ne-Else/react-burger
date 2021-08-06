@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './IngredientsList.module.css';
 import Ingredient from '../Ingredient/Ingredient';
 
-function IngredientsList({ openModal, setCurrentTab }) {
+function IngredientsList({ setCurrentTab }) {
   const ingredients = useSelector((store) => store.ingredients);
   const filterByType = React.useCallback(
     (type) => ingredients.filter((e) => e.type === type),
@@ -54,7 +54,6 @@ function IngredientsList({ openModal, setCurrentTab }) {
             image={el.image}
             price={el.price}
             name={el.name}
-            openModal={openModal}
           />
         ))}
       </div>
@@ -69,7 +68,6 @@ function IngredientsList({ openModal, setCurrentTab }) {
             image={el.image}
             price={el.price}
             name={el.name}
-            openModal={openModal}
           />
         ))}
       </div>
@@ -84,7 +82,6 @@ function IngredientsList({ openModal, setCurrentTab }) {
             image={el.image}
             price={el.price}
             name={el.name}
-            openModal={openModal}
           />
         ))}
       </div>
@@ -95,6 +92,5 @@ function IngredientsList({ openModal, setCurrentTab }) {
 export default IngredientsList;
 
 IngredientsList.propTypes = {
-  openModal: PropTypes.func.isRequired,
   setCurrentTab: PropTypes.func.isRequired,
 };

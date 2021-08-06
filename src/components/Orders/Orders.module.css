@@ -1,0 +1,40 @@
+.orders {
+    margin: 120px auto 0;
+    width: 1280px;
+    display: flex;
+}
+
+.menu {
+    width: 320px;
+}
+
+.links {
+    padding: 0 0 0 20px;
+}
+
+.link {
+    text-decoration: none;
+    height: 64px;
+    list-style-type: none;
+}
+
+.navlink {
+    color: #8585ad;
+    text-decoration: none;
+}
+
+.navlink_active {
+    color: white;
+}
+
+.logout {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #8585ad;
+}
+
+.wrapper {
+    width: 100%;
+}

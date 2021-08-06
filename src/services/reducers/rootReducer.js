@@ -6,10 +6,21 @@ import {
   CLEAR_INGREDIENT_DETAILS,
   ADD_CONSTRUCTOR_INGREDIENT,
   REMOVE_CONSTRUCTOR_INGREDIENT,
+  CLEAR_CONSTRUCTOR_INGREDIENTS,
   PLACE_ORDER_REQUEST,
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
   UPDATE_CONSTRUCTOR_LIST,
+  FORGOT_PASSWORD_FORM_SET_VALUE,
+  FORGOT_PASSWORD_FORM_SUCCESS,
+  FORGOT_PASSWORD_FORM_REQUEST,
+  FORGOT_PASSWORD_FORM_FAILED,
+  FORGOT_PASSWORD_FORM_SET_ERROR,
+  USER_SUCCESS,
+  USER_REQUEST,
+  USER_FAILED,
+  LOGOUT_USER,
+  TOGGLE_MODAL,
 
 } from '../actions/index';
 
@@ -24,7 +35,23 @@ const initialState = {
   },
   ingredientsRequest: false,
   ingredientsFailed: false,
-
+  forgotPasswordForm: {
+    email: '',
+    request: false,
+    failed: false,
+    errorText: '',
+    passwordRequested: false,
+  },
+  user: {
+    email: '',
+    name: '',
+    isLoggedIn: false,
+    request: false,
+    failed: false,
+  },
+  modal: {
+    modalOpen: false,
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -74,6 +101,12 @@ const rootReducer = (state = initialState, action) => {
         [...state.constructorIngredients.filter((el) => el.uid !== action.payload)],
       };
     }
+    case CLEAR_CONSTRUCTOR_INGREDIENTS: {
+      return {
+        ...state,
+        constructorIngredients: initialState.constructorIngredients,
+      };
+    }
     case PLACE_ORDER_REQUEST: {
       return {
         ...state,
@@ -117,6 +150,103 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         constructorIngredients: newArr,
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SET_VALUE: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          [action.field]: action.value,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SUCCESS: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: false,
+          failed: false,
+          passwordRequested: true,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_REQUEST: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: true,
+          failed: false,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_FAILED: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          request: false,
+          failed: true,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_SET_ERROR: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          errorText: action.payload,
+        },
+      };
+    }
+    case USER_SUCCESS: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          request: false,
+          failed: false,
+          isLoggedIn: true,
+          email: action.payload.email,
+          name: action.payload.name,
+        },
+      };
+    }
+    case USER_REQUEST: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          request: true,
+          failed: false,
+        },
+      };
+    }
+    case USER_FAILED: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          request: false,
+          failed: true,
+        },
+      };
+    }
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        user: initialState.user,
+      };
+    }
+    case TOGGLE_MODAL: {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          modalOpen: !state.modal.modalOpen,
+        },
       };
     }
     default: {

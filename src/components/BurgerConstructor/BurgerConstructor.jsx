@@ -38,7 +38,7 @@ function BurgerConstructor() {
           <ConstructorElement
             type="top"
             isLocked
-            text={bun?.name}
+            text={`${bun?.name} (верх)`}
             price={bun?.price}
             thumbnail={bun?.image}
           />
@@ -50,11 +50,10 @@ function BurgerConstructor() {
           <ConstructorElement
             type="bottom"
             isLocked
-            text={bun?.name}
+            text={`${bun?.name} (низ)`}
             price={bun?.price}
             thumbnail={bun?.image}
           />
-
         </div>
         )}
       </div>

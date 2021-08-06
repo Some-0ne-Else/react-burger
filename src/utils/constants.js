@@ -1,4 +1,8 @@
-const INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients';
-const ORDERS_URL = 'https://norma.nomoreparties.space/api/orders';
+const BASE_URL = 'https://norma.nomoreparties.space/api';
+const ACCESS_TOKEN_TTL = 1200; // 20 mins
+const ACCESS_TOKEN = 'accessToken';
+const REFRESH_TOKEN = 'refreshToken';
 
-export { INGREDIENTS_URL, ORDERS_URL };
+export {
+  BASE_URL, ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -9,16 +10,6 @@ import styles from './AppHeader.module.css';
 import NavigationElement from '../NavigationElement/NavigationElement';
 
 function AppHeader() {
-  const handleConstructor = () => {
-    console.log('Constructor');
-  };
-  const handleList = () => {
-    console.log('List order');
-  };
-  const handlePersonalArea = () => {
-    console.log('Personal Area');
-  };
-
   return (
     <header className={`${styles.header}`}>
       <div className={styles.content}>
@@ -28,26 +19,27 @@ function AppHeader() {
               component={BurgerIcon}
               type="primary"
               text="Конструктор"
-              onClick={handleConstructor}
+              to="/"
+              exact
             />
             <NavigationElement
               component={ListIcon}
               type="primary"
               text="Лента заказов"
-              onClick={handleList}
+              to="/feed"
             />
           </ul>
         </nav>
-        <div className={styles.logo}>
+        <Link to={{ pathname: '/' }} className={styles.logo}>
           <Logo />
-        </div>
+        </Link>
         <nav className={styles.navigaton}>
           <ul className={styles.navigation}>
             <NavigationElement
               component={ProfileIcon}
               type="primary"
               text="Личный кабинет"
-              onClick={handlePersonalArea}
+              to="/profile"
             />
           </ul>
         </nav>
