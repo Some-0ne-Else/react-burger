@@ -43,8 +43,7 @@ function App() {
     if (!location.pathname.includes('ingredients')) {
       dispatch(fetchIngredients());
     }
-
-    if (getCookie(ACCESS_TOKEN) === null && localStorage.getItem(REFRESH_TOKEN) === null) {
+    if (getCookie(ACCESS_TOKEN) !== undefined || localStorage.getItem(REFRESH_TOKEN) !== null) {
       dispatch(getUserData());
     }
   }, []);
