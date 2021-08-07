@@ -10,7 +10,9 @@ import {
   logout,
 } from '../../utils/burger-api';
 import { setCookie } from '../../utils/utils';
-import { ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
+import {
+  ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN, LONG_TIME_AGO_IN_THE_GALAXY,
+} from '../../utils/constants';
 
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
@@ -183,7 +185,8 @@ export const getUserData = () => (dispatch) => {
         return res;
       }
       return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
-        .then((refreshRes) => refreshRes.json())
+        // eslint-disable-next-line max-len
+        .then((refreshRes) => { console.log(JSON.stringify({ token: localStorage.getItem(REFRESH_TOKEN) })); return refreshRes.json(); })
         .then((refreshRes) => {
           if (refreshRes.success) {
             setCookie(ACCESS_TOKEN, refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });
@@ -249,7 +252,7 @@ export const logoutUser = () => (dispatch) => logout({ token: localStorage.getIt
     if (res.success) {
       dispatch({ type: LOGOUT_USER });
       localStorage.removeItem(REFRESH_TOKEN);
-      setCookie(ACCESS_TOKEN, null);
+      setCookie(ACCESS_TOKEN, null, { expires: LONG_TIME_AGO_IN_THE_GALAXY });
       return res;
     }
     Promise.reject(res.message);
