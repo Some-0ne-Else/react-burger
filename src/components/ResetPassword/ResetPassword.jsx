@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../utils/burger-api';
+import { resetPasswordRequest } from '../../services/actions';
 import styles from './ResetPassword.module.css';
 
 function ResetPassword() {
@@ -15,6 +16,7 @@ function ResetPassword() {
       isLoggedIn: store.user.isLoggedIn,
     }));
   const history = useHistory();
+  const dispatch = useDispatch();
   const [password, setPassword] = React.useState('');
   const [token, setToken] = React.useState('');
   const [error, setError] = React.useState(false);
@@ -26,7 +28,7 @@ function ResetPassword() {
     resetPassword({ password, token })
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) { history.replace({ pathname: '/login' }); } else { setError(true); setErrorText(res.message); }
+        if (res.success) { history.replace({ pathname: '/login' }); dispatch(resetPasswordRequest()); } else { setError(true); setErrorText(res.message); }
       });
   };
 

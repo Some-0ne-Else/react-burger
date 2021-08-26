@@ -34,7 +34,7 @@ export const resetPassword = ({ password, token }) => fetch(`${BASE_URL}/passwor
   },
   body: JSON.stringify({ password, token }),
 });
-export const login = async ({ email, password }) => fetch(`${BASE_URL}/auth/login`, {
+export const login = ({ email, password }) => fetch(`${BASE_URL}/auth/login`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',

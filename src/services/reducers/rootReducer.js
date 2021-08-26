@@ -16,6 +16,7 @@ import {
   FORGOT_PASSWORD_FORM_REQUEST,
   FORGOT_PASSWORD_FORM_FAILED,
   FORGOT_PASSWORD_FORM_SET_ERROR,
+  FORGOT_PASSWORD_FORM_RESET_REQUEST,
   USER_SUCCESS,
   USER_REQUEST,
   USER_FAILED,
@@ -198,6 +199,15 @@ const rootReducer = (state = initialState, action) => {
         forgotPasswordForm: {
           ...state.forgotPasswordForm,
           errorText: action.payload,
+        },
+      };
+    }
+    case FORGOT_PASSWORD_FORM_RESET_REQUEST: {
+      return {
+        ...state,
+        forgotPasswordForm: {
+          ...state.forgotPasswordForm,
+          passwordRequested: false,
         },
       };
     }

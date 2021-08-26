@@ -32,6 +32,7 @@ export const FORGOT_PASSWORD_FORM_SUCCESS = 'FORGOT_PASSWORD_FORM_SUCCESS';
 export const FORGOT_PASSWORD_FORM_REQUEST = 'FORGOT_PASSWORD_FORM_REQUEST';
 export const FORGOT_PASSWORD_FORM_FAILED = 'FORGOT_PASSWORD_FORM_FAILED';
 export const FORGOT_PASSWORD_FORM_SET_ERROR = 'FORGOT_PASSWORD_FORM_SET_ERROR';
+export const FORGOT_PASSWORD_FORM_RESET_REQUEST = 'FORGOT_PASSWORD_FORM_RESET_REQUEST';
 export const USER_SUCCESS = 'LOGIN_SUCCESS';
 export const USER_REQUEST = 'LOGIN_REQUEST';
 export const USER_FAILED = 'LOGIN_FAILED';
@@ -135,6 +136,9 @@ export const postForgotPasswordForm = (email) => (dispatch) => {
     });
 };
 
+export const resetPasswordRequest = () => ({
+  type: FORGOT_PASSWORD_FORM_RESET_REQUEST,
+});
 export const postLoginForm = ({ email, password }) => (dispatch) => {
   dispatch({ type: USER_REQUEST });
   return login({ email, password })
