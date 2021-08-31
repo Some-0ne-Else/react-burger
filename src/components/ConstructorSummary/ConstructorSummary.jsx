@@ -13,8 +13,8 @@ function ConstructorSummary({ data, openModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { orderRequest, orderFailed, isLoggedIn } = useSelector((store) => ({
-    orderRequest: store.order.orderRequest,
-    orderFailed: store.order.orderFailed,
+    orderRequest: store.app.order.orderRequest,
+    orderFailed: store.app.order.orderFailed,
     isLoggedIn: store.user.isLoggedIn,
   }));
 

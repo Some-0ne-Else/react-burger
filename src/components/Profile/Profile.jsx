@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import {
   Input, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { updateUserData, logoutUser } from '../../services/actions';
+import { updateUserData, logoutUser } from '../../services/actions/userActions';
 import styles from './Profile.module.css';
 
 function Profile() {

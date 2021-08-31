@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../services/actions';
+import { logoutUser } from '../../services/actions/userActions';
 import styles from './Orders.module.css';
 
 function Orders() {

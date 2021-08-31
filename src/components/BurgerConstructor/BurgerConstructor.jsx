@@ -11,7 +11,7 @@ import { addConstructorIngredient } from '../../services/actions';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.constructorIngredients);
+  const data = useSelector((store) => store.app.constructorIngredients);
   const bun = data.find((b) => (b.type === 'bun'));
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredient',

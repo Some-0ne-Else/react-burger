@@ -23,8 +23,10 @@ import {
   FeedPage,
 } from '../../pages/index';
 import {
-  fetchIngredients, getUserData, clearIngredientDetails, toggleModal,
+  fetchIngredients, clearIngredientDetails,
 } from '../../services/actions/index';
+import { getUserData } from '../../services/actions/userActions';
+import { toggleModal } from '../../services/actions/modalActions';
 import { getCookie } from '../../utils/utils';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
 
