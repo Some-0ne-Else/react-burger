@@ -67,7 +67,7 @@ export const getUserData = () => (dispatch) => {
       }
       return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
         // eslint-disable-next-line max-len
-        .then((refreshRes) => { console.log(JSON.stringify({ token: localStorage.getItem(REFRESH_TOKEN) })); return refreshRes.json(); })
+        .then((refreshRes) => refreshRes.json())
         .then((refreshRes) => {
           if (refreshRes.success) {
             setCookie(ACCESS_TOKEN, refreshRes.accessToken, { expires: ACCESS_TOKEN_TTL });

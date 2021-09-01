@@ -49,6 +49,7 @@ export default Modal;
 Modal.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 Modal.defaultProps = {
   title: '',

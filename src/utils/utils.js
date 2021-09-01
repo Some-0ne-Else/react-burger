@@ -1,6 +1,10 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/prefer-default-export
+import {
+  isToday, isYesterday, differenceInCalendarDays, parseISO, format,
+} from 'date-fns';
+
 export function setCookie(name, value, props) {
   props = props || {};
   let exp = props.expires;
@@ -33,3 +37,20 @@ export function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
+export const prepareDate = (date) => {
+  const currentDate = new Date();
+  const parsedDate = parseISO(date);
+  switch (true) {
+    case isToday(parsedDate): {
+      return `Сегодня, ${format(parsedDate, 'kk:mm')} i-GMT+3`;
+    }
+    case isYesterday(parsedDate): {
+      return `Вчера,  ${format(parsedDate, 'kk:mm')} i-GMT+3`;
+    }
+    default: {
+      // eslint-disable-next-line max-len
+      return `${differenceInCalendarDays(currentDate, parsedDate)} дня назад,  ${format(parsedDate, 'kk:mm')} i-GMT+3`;
+    }
+  }
+};

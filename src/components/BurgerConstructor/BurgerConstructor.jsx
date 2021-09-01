@@ -32,7 +32,10 @@ function BurgerConstructor() {
   };
   return (
     <section className={styles.constructor}>
-      <div ref={dropTarget} className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}>
+      <div
+        ref={dropTarget}
+        className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}
+      >
         {bun && (
         <div className={styles.constructor__item_top}>
           <ConstructorElement

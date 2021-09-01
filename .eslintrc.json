@@ -23,6 +23,7 @@
         "no-console": "off",
         "no-underscore-dangle": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "max-len": ["error", { "code": 130 }]
     }
 }
