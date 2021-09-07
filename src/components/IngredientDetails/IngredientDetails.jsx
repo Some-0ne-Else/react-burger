@@ -7,7 +7,7 @@ import styles from './IngredientDetails.module.css';
 function IngredientDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const currentIngredient = useSelector((store) => store.currentIngredient);
+  const currentIngredient = useSelector((store) => store.app.currentIngredient);
 
   React.useEffect(() => {
     dispatch(fetchIngredients())

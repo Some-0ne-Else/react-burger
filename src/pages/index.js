@@ -8,6 +8,7 @@ import NotFoundPage from './NotFoundPage';
 import IngredientDetailsPage from './IngredientDetailsPage';
 import OrdersPage from './OrdersPage';
 import FeedPage from './FeedPage';
+import FeedDetailsPage from './FeedDetailsPage';
 
 export {
   MainPage,
@@ -20,4 +21,5 @@ export {
   IngredientDetailsPage,
   OrdersPage,
   FeedPage,
+  FeedDetailsPage,
 };

@@ -45,7 +45,7 @@ function Ingredient({
           openModal(id);
         }}
       />
-      {counter ? <Counter count={counter} size="default" /> : null}
+      {counter && <Counter count={counter} size="default" /> }
       <div className={`${styles.price} mb-1`}>
         <p className={` ${styles.price__digits} text text_type_digits-default`}>
           {price}

@@ -11,7 +11,6 @@ function Feed() {
   // const { total, totalToday } = useSelector((store) => store.ws.messages[store.ws.messages.length - 1] || store.ws.messages);
   const readyOrders = orders?.filter((order) => order.status === 'done').splice(0, 10);
   const processingOrders = orders?.filter((order) => order.status !== 'done').splice(0, 10);
-  console.log(orders);
   React.useEffect(() => {
     dispatch({ type: WS_CONNECTION_START });
   }, []);
@@ -28,6 +27,7 @@ function Feed() {
             {orders?.map((order) => (
               <FeedItem
                 key={order._id}
+                id={order._id}
                 createdAt={order.createdAt}
                 number={order.number}
                 name={order.name}

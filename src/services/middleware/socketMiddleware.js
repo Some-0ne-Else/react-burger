@@ -10,7 +10,6 @@ const socketMiddleware = (wsUrl, wsActions) => (store) => {
     const {
       wsInit, wsSendMessage, onOpen, onClose, onError, onMessage,
     } = wsActions;
-    // const { user } = getState().user;
     if (type === wsInit) {
       socket = new WebSocket(`${wsUrl}?token=${getCookie(ACCESS_TOKEN)}`);
     }

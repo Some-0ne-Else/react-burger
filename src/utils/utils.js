@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/prefer-default-export
 import {
-  isToday, isYesterday, differenceInCalendarDays, parseISO, format,
+  isToday, isYesterday, isValid, differenceInCalendarDays, parseISO, format,
 } from 'date-fns';
 
 export function setCookie(name, value, props) {
@@ -39,6 +39,7 @@ export function getCookie(name) {
 }
 
 export const prepareDate = (date) => {
+  if (!isValid(parseISO(date))) { return null; }
   const currentDate = new Date();
   const parsedDate = parseISO(date);
   switch (true) {
@@ -49,8 +50,26 @@ export const prepareDate = (date) => {
       return `Вчера,  ${format(parsedDate, 'kk:mm')} i-GMT+3`;
     }
     default: {
-      // eslint-disable-next-line max-len
       return `${differenceInCalendarDays(currentDate, parsedDate)} дня назад,  ${format(parsedDate, 'kk:mm')} i-GMT+3`;
     }
   }
 };
+
+export const parseStatus = (status) => {
+  switch (status) {
+    case 'done': {
+      return 'Выполнен';
+    }
+    case 'pending': {
+      return 'Готовится';
+    }
+    default: {
+      console.log(status);
+      return 'Создан';
+    }
+  }
+};
+
+export const getUniqValues = (array) => Array.from(new Set(array.map(JSON.stringify))).map(JSON.parse);
+
+export const countById = (array, id) => array.filter((item) => item._id === id).length;

@@ -8,6 +8,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './App.module.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import FeedDetails from '../FeedDetails/FeedDetails';
 import Modal from '../Modal/Modal';
 import AppHeader from '../AppHeader/AppHeader';
 import {
@@ -21,6 +22,7 @@ import {
   IngredientDetailsPage,
   OrdersPage,
   FeedPage,
+  FeedDetailsPage,
 } from '../../pages/index';
 import {
   fetchIngredients, clearIngredientDetails,
@@ -82,16 +84,26 @@ function App() {
         <Route exact path="/feed">
           <FeedPage />
         </Route>
+        <Route exact path="/feed/:id">
+          <FeedDetailsPage />
+        </Route>
         <Route>
           <NotFoundPage />
         </Route>
       </Switch>
       {main && modalOpen && (
-      <Route path="/ingredients/:id">
-        <Modal title="Детали ингредиента" onClose={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      </Route>
+      <>
+        <Route path="/ingredients/:id">
+          <Modal title="Детали ингредиента" onClose={closeModal}>
+            <IngredientDetails />
+          </Modal>
+        </Route>
+        <Route exact path="/feed/:id">
+          <Modal title="" onClose={closeModal}>
+            <FeedDetails />
+          </Modal>
+        </Route>
+      </>
       )}
     </div>
   );
