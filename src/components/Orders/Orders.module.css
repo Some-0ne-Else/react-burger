@@ -27,6 +27,10 @@
     color: white;
 }
 
+.description {
+    width: 320px;
+}
+
 .logout {
     background-color: transparent;
     outline: none;
@@ -37,4 +41,25 @@
 
 .wrapper {
     width: 100%;
+}
+
+.feed_container {
+    width: 858px;
+    height: 868px;
+    overflow-y: auto;
+}
+
+.feed_container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.feed_container::-webkit-scrollbar-track {
+    width: 8px;
+    background: #2f2f37;
+}
+
+.feed_container::-webkit-scrollbar-thumb {
+    background: #8585ad;
+    border: 3px solid #8585ad;
+    box-sizing: border-box;
 }

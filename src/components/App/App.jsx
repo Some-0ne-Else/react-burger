@@ -81,6 +81,9 @@ function App() {
         <Route exact path="/profile/orders">
           <OrdersPage />
         </Route>
+        <Route exact path="/profile/orders/:id">
+          <FeedDetailsPage />
+        </Route>
         <Route exact path="/feed">
           <FeedPage />
         </Route>
@@ -99,6 +102,11 @@ function App() {
           </Modal>
         </Route>
         <Route exact path="/feed/:id">
+          <Modal title="" onClose={closeModal}>
+            <FeedDetails />
+          </Modal>
+        </Route>
+        <Route exact path="/profile/orders/:id">
           <Modal title="" onClose={closeModal}>
             <FeedDetails />
           </Modal>

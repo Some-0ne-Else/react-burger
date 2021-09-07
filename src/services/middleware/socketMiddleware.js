@@ -11,7 +11,7 @@ const socketMiddleware = (wsUrl, wsActions) => (store) => {
       wsInit, wsSendMessage, onOpen, onClose, onError, onMessage,
     } = wsActions;
     if (type === wsInit) {
-      socket = new WebSocket(`${wsUrl}?token=${getCookie(ACCESS_TOKEN)}`);
+      socket = new WebSocket(`${wsUrl}?token=${getCookie(ACCESS_TOKEN)?.slice(7)}`);
     }
     if (socket) {
       socket.onopen = (event) => {

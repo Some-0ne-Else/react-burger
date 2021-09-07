@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { WS_CONNECTION_START } from '../../services/actions/wsActions';
+import { WS_CONNECTION_START_ORDERS_ALL } from '../../services/actions/wsActions';
 import FeedItem from '../FeedItem/FeedItem';
 import styles from './Feed.module.css';
 
@@ -8,11 +8,10 @@ function Feed() {
   const dispatch = useDispatch();
   const { orders, total, totalToday } = useSelector((store) => store.ws.messages[store.ws.messages.length - 1]
   || store.ws.messages);
-  // const { total, totalToday } = useSelector((store) => store.ws.messages[store.ws.messages.length - 1] || store.ws.messages);
   const readyOrders = orders?.filter((order) => order.status === 'done').splice(0, 10);
   const processingOrders = orders?.filter((order) => order.status !== 'done').splice(0, 10);
   React.useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START });
+    dispatch({ type: WS_CONNECTION_START_ORDERS_ALL });
   }, []);
 
   return (
@@ -22,7 +21,6 @@ function Feed() {
       </p>
       <div className={styles.container}>
         <div className={styles.feed_block}>
-
           <div className={styles.feed_container}>
             {orders?.map((order) => (
               <FeedItem

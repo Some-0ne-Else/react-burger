@@ -12,6 +12,7 @@ function FeedItem({
   id, createdAt, number, name, ingredients,
 }) {
   const location = useLocation();
+  console.log(location);
   const history = useHistory();
   const dispatch = useDispatch();
   const ingredientsList = useSelector((store) => store.app.ingredients);
@@ -24,10 +25,10 @@ function FeedItem({
   };
   return (
     <div
-      className={`${styles.feed_item} mb-4`}
+      className={`${styles.feed_item} mb-4 mr-2`}
       onClick={() => {
         history.replace({
-          pathname: `/feed/${id}`,
+          pathname: `${location.pathname}/${id}`,
           state: { main: location },
         });
         openModal(id);

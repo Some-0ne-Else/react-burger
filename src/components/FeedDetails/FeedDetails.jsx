@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
-import { WS_CONNECTION_START } from '../../services/actions/wsActions';
+import { WS_CONNECTION_START_ORDERS_ALL } from '../../services/actions/wsActions';
 import styles from './FeedDetails.module.css';
 import {
   prepareDate, parseStatus, getUniqValues, countById,
@@ -27,10 +27,9 @@ function FeedDetails() {
       (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
     ) || [], [ingredients],
   );
-  console.log(renderedIngredients);
   const total = renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0);
   React.useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START });
+    dispatch({ type: WS_CONNECTION_START_ORDERS_ALL });
   }, []);
 
   return wsConnected && messageCounter ? (
