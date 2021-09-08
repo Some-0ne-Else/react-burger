@@ -35,16 +35,12 @@ const wsReducer = (state = initialState, action) => {
     case WS_GET_MESSAGE_ORDERS_ALL:
       return {
         ...state,
-        messages: state.messages.length
-          ? [...state.messages, { ...action.payload, timestamp: new Date().getTime() / 1000 }]
-          : [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
+        messages: [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
       };
     case WS_GET_MESSAGE_CURRENT_USER:
       return {
         ...state,
-        currentUserMessages: state.currentUserMessages.length
-          ? [...state.currentUserMessages, { ...action.payload, timestamp: new Date().getTime() / 1000 }]
-          : [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
+        currentUserMessages: [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
       };
     default:
       return state;

@@ -45,10 +45,10 @@ function Ingredient({
           openModal(id);
         }}
       />
-      {counter && <Counter count={counter} size="default" /> }
+      {counter ? <Counter count={counter} size="default" /> : null }
       <div className={`${styles.price} mb-1`}>
         <p className={` ${styles.price__digits} text text_type_digits-default`}>
-          {price}
+          {`${price}`}
         </p>
         <CurrencyIcon type="primary" />
       </div>

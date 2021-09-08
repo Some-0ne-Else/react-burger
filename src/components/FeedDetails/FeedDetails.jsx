@@ -22,17 +22,17 @@ function FeedDetails() {
   );
 
   const ingredientsList = useSelector((store) => store.app.ingredients);
-  const renderedIngredients = React.useMemo(
-    () => ingredients?.map(
-      (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
-    ) || [], [ingredients],
+  const renderedIngredients = ingredientsList.length ? ingredients?.map(
+    (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
+  ) : [];
+  const total = React.useMemo(
+    () => renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0), [renderedIngredients],
   );
-  const total = renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0);
   React.useEffect(() => {
     dispatch({ type: WS_CONNECTION_START_ORDERS_ALL });
   }, []);
 
-  return wsConnected && messageCounter ? (
+  return wsConnected && messageCounter && renderedIngredients.length ? (
     <div className={`${styles.feed_item} mb-4`}>
       <div className={`${styles.number_wrapper} mt-6`}>
         <p className="text text_type_digits-default">{`#${number}`}</p>

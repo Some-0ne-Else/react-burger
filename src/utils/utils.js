@@ -63,9 +63,11 @@ export const parseStatus = (status) => {
     case 'pending': {
       return 'Готовится';
     }
-    default: {
-      console.log(status);
+    case 'created': {
       return 'Создан';
+    }
+    default: {
+      return '';
     }
   }
 };

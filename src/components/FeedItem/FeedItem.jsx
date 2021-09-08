@@ -4,22 +4,24 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { toggleModal } from '../../services/actions/modalActions';
-import { prepareDate } from '../../utils/utils';
+import { prepareDate, parseStatus } from '../../utils/utils';
 import { INGREDIENTS_TO_SHOW } from '../../utils/constants';
 import styles from './FeedItem.module.css';
 
 function FeedItem({
-  id, createdAt, number, name, ingredients,
+  id, createdAt, number, name, status, ingredients,
 }) {
   const location = useLocation();
-  console.log(location);
   const history = useHistory();
   const dispatch = useDispatch();
   const ingredientsList = useSelector((store) => store.app.ingredients);
-  const renderedIngredients = ingredients?.map(
+
+  const renderedIngredients = ingredientsList.length ? ingredients?.map(
     (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
+  ) : [];
+  const total = React.useMemo(
+    () => renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0), [renderedIngredients],
   );
-  const total = renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0);
   const openModal = () => {
     dispatch(toggleModal());
   };
@@ -38,6 +40,7 @@ function FeedItem({
         <p className="text text_type_digits-default ml-6">{`#${number}`}</p>
         <p className="text text_type_main-default text_color_inactive mr-6">{prepareDate(createdAt)}</p>
       </div>
+      {status && (<p className={`${styles.status} text text_type_main-default ml-6 mt-2`}>{parseStatus(status)}</p>)}
       <p className="text text_type_main-medium mt-6 ml-6">{name}</p>
       <div className={`${styles.components} mt-6 mr-6 ml-6 mb-6`}>
         <div className={styles.components_wrapper}>
@@ -79,6 +82,7 @@ FeedItem.propTypes = {
   createdAt: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 export default FeedItem;

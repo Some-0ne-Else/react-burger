@@ -29,6 +29,7 @@ function Feed() {
                 createdAt={order.createdAt}
                 number={order.number}
                 name={order.name}
+                status=""
                 ingredients={order.ingredients}
               />
             ))}
