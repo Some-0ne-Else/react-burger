@@ -11,7 +11,7 @@ import { addConstructorIngredient } from '../../services/actions';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.constructorIngredients);
+  const data = useSelector((store) => store.app.constructorIngredients);
   const bun = data.find((b) => (b.type === 'bun'));
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredient',
@@ -32,7 +32,10 @@ function BurgerConstructor() {
   };
   return (
     <section className={styles.constructor}>
-      <div ref={dropTarget} className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}>
+      <div
+        ref={dropTarget}
+        className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}
+      >
         {bun && (
         <div className={styles.constructor__item_top}>
           <ConstructorElement

@@ -7,7 +7,8 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getIngredientDetails, toggleModal } from '../../services/actions/index';
+import { getIngredientDetails } from '../../services/actions/index';
+import { toggleModal } from '../../services/actions/modalActions';
 import styles from './Ingredient.module.css';
 
 function Ingredient({
@@ -24,7 +25,7 @@ function Ingredient({
     }),
   });
   const { counter } = useSelector(
-    (store) => ({ counter: store.constructorIngredients.filter((el) => el._id === id).length }),
+    (store) => ({ counter: store.app.constructorIngredients.filter((el) => el._id === id).length }),
   );
   const openModal = (uid) => {
     dispatch(getIngredientDetails(uid));
@@ -44,10 +45,10 @@ function Ingredient({
           openModal(id);
         }}
       />
-      {counter ? <Counter count={counter} size="default" /> : null}
+      {counter ? <Counter count={counter} size="default" /> : null }
       <div className={`${styles.price} mb-1`}>
         <p className={` ${styles.price__digits} text text_type_digits-default`}>
-          {price}
+          {`${price}`}
         </p>
         <CurrencyIcon type="primary" />
       </div>

@@ -5,7 +5,7 @@ import styles from './IngredientsList.module.css';
 import Ingredient from '../Ingredient/Ingredient';
 
 function IngredientsList({ setCurrentTab }) {
-  const ingredients = useSelector((store) => store.ingredients);
+  const ingredients = useSelector((store) => store.app.ingredients);
   const filterByType = React.useCallback(
     (type) => ingredients.filter((e) => e.type === type),
     [ingredients],

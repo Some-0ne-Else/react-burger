@@ -5,7 +5,7 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { setForgotPasswordFormValue, postForgotPasswordForm } from '../../services/actions';
+import { setForgotPasswordFormValue, postForgotPasswordForm } from '../../services/actions/formActions';
 import styles from './ForgotPassword.module.css';
 
 function ForgotPassword() {

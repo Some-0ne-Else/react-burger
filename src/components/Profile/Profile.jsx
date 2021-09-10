@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
 import {
   Input, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { updateUserData, logoutUser } from '../../services/actions';
+import PersonalAreaMenu from '../PersonalAreaMenu/PersonalAreaMenu';
+import { updateUserData } from '../../services/actions/userActions';
 import styles from './Profile.module.css';
 
 function Profile() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { email, name } = useSelector((store) => store.user);
   const [fieldsDisabled, setFieldsDisabled] = React.useState(true);
   const [nameValue, setNameValue] = React.useState(name);
@@ -20,11 +19,6 @@ function Profile() {
     setFieldsDisabled(!fieldsDisabled);
     setEmailValue(email);
     setNameValue(name);
-  };
-
-  const handleLogout = () => {
-    dispatch(logoutUser())
-      .then((res) => (res.success ? history.replace({ pathname: '/login' }) : console.log(res.message)));
   };
 
   const handleSubmit = (e) => {
@@ -44,30 +38,8 @@ function Profile() {
   return (
     <div className={styles.profile}>
       <div className={`${styles.menu} mr-15`}>
-        <ul className={`${styles.links} mb-20`}>
-          <li className={styles.link}>
-            <NavLink
-              to="/profile"
-              className={`${styles.navlink} text text_type_main-medium`}
-              activeClassName={`${styles.navlink_active}`}
-            >
-              Профиль
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <NavLink
-              to="/profile/orders"
-              className={`${styles.navlink} text text_type_main-medium`}
-              activeClassName={`${styles.navlink_active}`}
-            >
-              История заказов
-            </NavLink>
-          </li>
-          <li className={styles.link}>
-            <button type="button" onClick={handleLogout} className={`${styles.logout} text text_type_main-medium`}>Выход</button>
-          </li>
-        </ul>
-        <p className="text text_type_main-default text_color_inactive">
+        <PersonalAreaMenu />
+        <p className={`${styles.description} text text_type_main-default text_color_inactive`}>
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>

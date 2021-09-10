@@ -6,7 +6,7 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { postRegisterForm } from '../../services/actions';
+import { postRegisterForm } from '../../services/actions/userActions';
 
 import styles from './Signup.module.css';
 

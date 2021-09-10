@@ -8,6 +8,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './App.module.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import FeedDetails from '../FeedDetails/FeedDetails';
 import Modal from '../Modal/Modal';
 import AppHeader from '../AppHeader/AppHeader';
 import {
@@ -21,10 +22,13 @@ import {
   IngredientDetailsPage,
   OrdersPage,
   FeedPage,
+  FeedDetailsPage,
 } from '../../pages/index';
 import {
-  fetchIngredients, getUserData, clearIngredientDetails, toggleModal,
+  fetchIngredients, clearIngredientDetails,
 } from '../../services/actions/index';
+import { getUserData } from '../../services/actions/userActions';
+import { toggleModal } from '../../services/actions/modalActions';
 import { getCookie } from '../../utils/utils';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
 
@@ -35,8 +39,11 @@ function App() {
   const modalOpen = useSelector((store) => store.modal.modalOpen);
   const main = history.action === 'REPLACE' ? location?.state?.main : null;
   const closeModal = () => {
-    dispatch(clearIngredientDetails());
+    if (location.pathname.includes('ingredients')) {
+      dispatch(clearIngredientDetails());
+    }
     dispatch(toggleModal());
+    history.push({ pathname: `${location.state.main.pathname}` });
   };
 
   React.useEffect(() => {
@@ -77,19 +84,37 @@ function App() {
         <Route exact path="/profile/orders">
           <OrdersPage />
         </Route>
+        <Route exact path="/profile/orders/:id">
+          <FeedDetailsPage />
+        </Route>
         <Route exact path="/feed">
           <FeedPage />
+        </Route>
+        <Route exact path="/feed/:id">
+          <FeedDetailsPage />
         </Route>
         <Route>
           <NotFoundPage />
         </Route>
       </Switch>
       {main && modalOpen && (
-      <Route path="/ingredients/:id">
-        <Modal title="Детали ингредиента" onClose={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      </Route>
+      <>
+        <Route path="/ingredients/:id">
+          <Modal title="Детали ингредиента" onClose={closeModal}>
+            <IngredientDetails />
+          </Modal>
+        </Route>
+        <Route exact path="/feed/:id">
+          <Modal title="" onClose={closeModal}>
+            <FeedDetails />
+          </Modal>
+        </Route>
+        <Route exact path="/profile/orders/:id">
+          <Modal title="" onClose={closeModal}>
+            <FeedDetails />
+          </Modal>
+        </Route>
+      </>
       )}
     </div>
   );

@@ -3,15 +3,13 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { REFRESH_TOKEN } from '../../utils/constants';
 
 function ProtectedRoute({ children, ...props }) {
   const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
-  const isRefreshExist = localStorage.getItem(REFRESH_TOKEN);
   return (
     <Route
       {...props}
-      render={({ location }) => (isLoggedIn && isRefreshExist ? (
+      render={({ location }) => (isLoggedIn ? (
         children
       ) : (
         <Redirect

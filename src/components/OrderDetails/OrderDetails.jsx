@@ -5,10 +5,12 @@ import doneImg from '../../images/done.svg';
 import preloaderImg from '../../images/loading.png';
 
 function OrderDetails() {
-  const { orderNumber, orderRequest } = useSelector((state) => state.order);
+  const { orderNumber, orderRequest } = useSelector((state) => state.app.order);
   return (
     <div className={styles.orderdetails}>
-      {orderRequest ? (<img className={styles.preloader__circle} src={preloaderImg} alt="Preloader" />) : (<p className="text text_type_digits-large mb-8">{orderNumber}</p>) }
+      {orderRequest
+        ? (<img className={styles.preloader__circle} src={preloaderImg} alt="Preloader" />)
+        : (<p className="text text_type_digits-large mb-8">{orderNumber}</p>) }
 
       <p className="text text_type_digits-default mb-15">
         идентификатор заказа

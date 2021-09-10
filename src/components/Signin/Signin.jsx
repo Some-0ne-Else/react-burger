@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Link, useHistory, Redirect, useLocation,
+  Link, Redirect, useLocation,
 } from 'react-router-dom';
 import {
   Input,
@@ -9,24 +9,17 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './Signin.module.css';
-import { postLoginForm } from '../../services/actions';
+import { postLoginForm } from '../../services/actions/userActions';
 
-// eslint-disable-next-line react/prop-types
 function Signin() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory();
   const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(postLoginForm({ email, password }))
-      .then((res) => {
-        if (res.success) {
-          history.replace({ pathname: '/' });
-        } else { console.log(res.message); }
-      });
+    dispatch(postLoginForm({ email, password }));
   };
 
   if (isLoggedIn) {

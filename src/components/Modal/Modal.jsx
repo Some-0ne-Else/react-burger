@@ -25,9 +25,11 @@ function Modal({ title, onClose, children }) {
     <>
       <div className={styles.modal}>
         <div className={`${styles.modal__container} mr-10 mt-10 ml-10`}>
+          {title && (
           <p className={`${styles.modal__title} text text_type_main-large`}>
             {title}
           </p>
+          )}
           <button
             type="button"
             onClick={onClose}
@@ -35,8 +37,8 @@ function Modal({ title, onClose, children }) {
           >
             <CloseIcon type="primary" />
           </button>
+          {children}
         </div>
-        {children}
       </div>
       <ModalOverlay onClose={onClose} />
     </>,
@@ -49,6 +51,7 @@ export default Modal;
 Modal.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 Modal.defaultProps = {
   title: '',
