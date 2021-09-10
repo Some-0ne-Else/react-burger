@@ -39,8 +39,11 @@ function App() {
   const modalOpen = useSelector((store) => store.modal.modalOpen);
   const main = history.action === 'REPLACE' ? location?.state?.main : null;
   const closeModal = () => {
-    dispatch(clearIngredientDetails());
+    if (location.pathname.includes('ingredients')) {
+      dispatch(clearIngredientDetails());
+    }
     dispatch(toggleModal());
+    history.push({ pathname: `${location.state.main.pathname}` });
   };
 
   React.useEffect(() => {
