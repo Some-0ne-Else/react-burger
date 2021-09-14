@@ -1,0 +1,10 @@
+{
+    "testFiles": [
+        "app/service-available.spec.js",
+        "app/ingredient-popup.spec.js",
+        "app/routing.spec.js",
+        "app/login.spec.js",
+        "app/constructor.spec.js",
+        "app/send-order.spec.js"
+      ]
+}

@@ -1,11 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest/globals": true
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:jest/recommended",
+        "plugin:cypress/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,7 +18,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest",
+        "cypress"
     ],
     "rules": {
         "jsx-a11y/no-static-element-interactions": "off",
@@ -24,6 +29,7 @@
         "no-underscore-dangle": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "linebreak-style": "off",
-        "max-len": ["error", { "code": 130 }]
+        "max-len": ["error", { "code": 130 }],
+        "jest/expect-expect" : "off"
     }
 }
