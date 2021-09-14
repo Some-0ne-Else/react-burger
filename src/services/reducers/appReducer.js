@@ -52,10 +52,10 @@ const appReducer = (state = initialState, action) => {
     case ADD_CONSTRUCTOR_INGREDIENT: {
       const ingredient = state.ingredients.find((el) => el._id === action.payload);
       const newIngredient = { ...ingredient };
-      newIngredient.uid = Math.ceil(Math.random() * 1000000); // not best practice
+      newIngredient.uid = `${ingredient._id}${state.constructorIngredients.filter((el) => el._id === ingredient._id).length + 1}`;
       if (ingredient.type === 'bun') {
         const secondBun = { ...ingredient };
-        secondBun.uid = Math.ceil(Math.random() * 1000000);
+        secondBun.uid = `${ingredient._id}${state.constructorIngredients.filter((el) => el._id === ingredient._id).length + 2}`;
         return {
           ...state,
           constructorIngredients: [...state.constructorIngredients.filter((el) => el.type !== 'bun'), newIngredient, secondBun],
@@ -112,12 +112,12 @@ const appReducer = (state = initialState, action) => {
         arr.splice(fromIndex, 1);
         arr.splice(toIndex, 0, element);
       };
-      const destanationIndex = state.constructorIngredients
+      const destinationIndex = state.constructorIngredients
         .findIndex((el) => el.uid === action.payload.uid);
       const originalIndex = state.constructorIngredients
         .findIndex((el) => el.uid === action.payload.draggedId);
       const newArr = [...state.constructorIngredients];
-      arrayMove(newArr, originalIndex, destanationIndex);
+      arrayMove(newArr, originalIndex, destinationIndex);
 
       return {
         ...state,

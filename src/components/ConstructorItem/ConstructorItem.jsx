@@ -50,7 +50,7 @@ function ConstructorItem({
 export default ConstructorItem;
 
 ConstructorItem.propTypes = {
-  uid: PropTypes.number.isRequired,
+  uid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
