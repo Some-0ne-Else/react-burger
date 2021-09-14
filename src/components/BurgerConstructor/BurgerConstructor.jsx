@@ -34,6 +34,7 @@ function BurgerConstructor() {
     <section className={styles.constructor}>
       <div
         ref={dropTarget}
+        data-test-id="dropTarget"
         className={`${styles.constructor__wrapper} mt-25 mb-10 ${isHover && styles.constructor__wrapper_hint}`}
       >
         {bun && (
