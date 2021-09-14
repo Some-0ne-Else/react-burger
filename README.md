@@ -1,4 +1,4 @@
-# Проект Космическая бургерная
+# Космическая бургерная
 ![Main](https://user-images.githubusercontent.com/61430193/133239328-3805edb0-82dd-4f37-91d7-2bce9b48c8ec.png)
 
 [![Работа интерфейса](https://user-images.githubusercontent.com/61430193/133240355-17947597-00da-4c4f-ad67-49e43f301d0c.png)](https://youtu.be/SxRVt2HnI_0)
