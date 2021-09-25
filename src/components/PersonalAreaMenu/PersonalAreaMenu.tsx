@@ -2,14 +2,16 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../services/actions/userActions';
+import { AppDispatch } from '../../types/index';
 import styles from './PersonalAreaMenu.module.css';
 
 function PersonalAreaMenu() {
-  const dispatch = useDispatch();
+  const dispatch:AppDispatch = useDispatch();
   const history = useHistory();
   const handleLogout = () => {
     dispatch(logoutUser())
-      .then((res) => (res.success ? history.replace({ pathname: '/login' }) : console.log(res.message)));
+      .then((res: { success: boolean; message: string; }) => (
+        res.success ? history.replace({ pathname: '/login' }) : console.log(res.message)));
   };
   return (
     <ul className={`${styles.links} mb-20`}>

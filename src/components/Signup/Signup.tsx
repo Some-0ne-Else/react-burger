@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,21 +7,21 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postRegisterForm } from '../../services/actions/userActions';
-
+import { RootState, AppDispatch } from '../../types/index';
 import styles from './Signup.module.css';
 
-function Signup() {
+const Signup:FC = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
+  const dispatch:AppDispatch = useDispatch();
+  const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const handleSignup = (e) => {
+  const handleSignup = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(postRegisterForm({ name, email, password }))
-      .then((res) => {
+      .then((res: { success: boolean; message: string; }) => {
         if (res.success) {
           history.replace({ pathname: '/' });
         } else { console.log(res.message); }
@@ -74,6 +74,6 @@ function Signup() {
       </div>
     </form>
   );
-}
+};
 
 export default Signup;

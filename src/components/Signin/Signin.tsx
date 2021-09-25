@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Link, Redirect, useLocation,
@@ -8,16 +8,17 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './Signin.module.css';
 import { postLoginForm } from '../../services/actions/userActions';
+import { RootState, ILocation, AppDispatch } from '../../types/index';
+import styles from './Signin.module.css';
 
-function Signin() {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const handleLogin = (e) => {
+const Signin:FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const location = useLocation<ILocation>();
+  const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+  const handleLogin = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(postLoginForm({ email, password }));
   };
@@ -68,6 +69,6 @@ function Signin() {
       </div>
     </form>
   );
-}
+};
 
 export default Signin;

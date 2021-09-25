@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { toggleModal } from '../../services/actions/modalActions';
 import { prepareDate, parseStatus } from '../../utils/utils';
 import { INGREDIENTS_TO_SHOW } from '../../utils/constants';
+import { RootState, AppDispatch } from '../../types/index';
+import { IOrder } from '../../types/data';
 import styles from './FeedItem.module.css';
 
-function FeedItem({
-  id, createdAt, number, name, status, ingredients,
-}) {
+const FeedItem:FC<IOrder> = ({
+  _id, createdAt, number, name, status, ingredients,
+}) => {
   const location = useLocation();
   const history = useHistory();
-  const dispatch = useDispatch();
-  const ingredientsList = useSelector((store) => store.app.ingredients);
+  const dispatch:AppDispatch = useDispatch();
+  const ingredientsList = useSelector((store:RootState) => store.app.ingredients);
 
   const renderedIngredients = ingredientsList.length ? ingredients?.map(
-    (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
+    (orderIngredientId) => ingredientsList.find((ingredient: { _id: string; }) => ingredient._id === orderIngredientId),
   ) : [];
   const total = React.useMemo(
     () => renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0), [renderedIngredients],
@@ -30,10 +31,10 @@ function FeedItem({
       className={`${styles.feed_item} mb-4 mr-2`}
       onClick={() => {
         history.replace({
-          pathname: `${location.pathname}/${id}`,
+          pathname: `${location.pathname}/${_id}`,
           state: { main: location },
         });
-        openModal(id);
+        openModal();
       }}
     >
       <div className={`${styles.number_wrapper} mt-6`}>
@@ -44,13 +45,13 @@ function FeedItem({
       <p className="text text_type_main-medium mt-6 ml-6">{name}</p>
       <div className={`${styles.components} mt-6 mr-6 ml-6 mb-6`}>
         <div className={styles.components_wrapper}>
-          {renderedIngredients.slice(0, INGREDIENTS_TO_SHOW).map((ingredient, index) => (
+          {renderedIngredients.slice(0, INGREDIENTS_TO_SHOW).map((ingredient, index:number) => (
             <div
               key={index.toString()}
               className={styles.image_container}
               style={{
                 transform: `translateX(${-20 * index}px)`,
-                zIndex: `${100 - index}`,
+                zIndex: 100 - index,
               }}
             >
               {renderedIngredients.length > INGREDIENTS_TO_SHOW && index === 5
@@ -76,13 +77,5 @@ function FeedItem({
       </div>
     </div>
   );
-}
-FeedItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-  status: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 export default FeedItem;

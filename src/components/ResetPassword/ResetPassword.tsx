@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import {
@@ -9,18 +9,17 @@ import { resetPassword } from '../../utils/burger-api';
 import { RootState } from '../../types/index';
 import styles from './ResetPassword.module.css';
 
-function ResetPassword() {
+const ResetPassword:FC = () => {
   const { passwordRequested, isLoggedIn } = useSelector((store:RootState) => (
     {
       passwordRequested: store.forgotPasswordForm.passwordRequested,
       isLoggedIn: store.user.isLoggedIn,
     }));
   const history = useHistory();
-  const [password, setPassword] = React.useState('');
-  const [token, setToken] = React.useState('');
-  const [error, setError] = React.useState(false);
-  const [errorText, setErrorText] = React.useState('');
-  const passwordRef = React.useRef(null);
+  const [password, setPassword] = React.useState<string>('');
+  const [token, setToken] = React.useState<string>('');
+  const [error, setError] = React.useState<boolean>(false);
+  const [errorText, setErrorText] = React.useState<string>('');
 
   const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +52,6 @@ function ResetPassword() {
         <Input
           type="password"
           placeholder="Введите новый пароль"
-          ref={passwordRef}
           value={password}
           onChange={(e) => { setPassword(e.target.value); setError(false); }}
         />
@@ -81,6 +79,6 @@ function ResetPassword() {
       </div>
     </form>
   );
-}
+};
 
 export default ResetPassword;

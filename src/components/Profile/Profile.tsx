@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Input, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import PersonalAreaMenu from '../PersonalAreaMenu/PersonalAreaMenu';
 import { updateUserData } from '../../services/actions/userActions';
+import { RootState, AppDispatch } from '../../types/index';
 import styles from './Profile.module.css';
 
-function Profile() {
-  const dispatch = useDispatch();
-  const { email, name } = useSelector((store) => store.user);
-  const [fieldsDisabled, setFieldsDisabled] = React.useState(true);
-  const [nameValue, setNameValue] = React.useState(name);
-  const [emailValue, setEmailValue] = React.useState(email);
-  const [passwordValue, setPasswordValue] = React.useState('');
+const Profile:FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { email, name } = useSelector((store:RootState) => store.user);
+  const [fieldsDisabled, setFieldsDisabled] = React.useState<boolean>(true);
+  const [nameValue, setNameValue] = React.useState<string>(name);
+  const [emailValue, setEmailValue] = React.useState<string>(email);
+  const [passwordValue, setPasswordValue] = React.useState<string>('');
 
   const toggleFieldsDisabled = () => {
     setFieldsDisabled(!fieldsDisabled);
@@ -21,16 +22,16 @@ function Profile() {
     setNameValue(name);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUserData({ name: nameValue, email: emailValue, password: passwordValue }))
-      .then((res) => {
+      .then((res: { success: boolean; message: string; }) => {
         if (res.success) {
           setFieldsDisabled(true);
         } else { console.log(res.message); }
       });
   };
-  const handleCancel = (e) => {
+  const handleCancel = (e:React.SyntheticEvent) => {
     e.preventDefault();
     setFieldsDisabled(true);
   };
@@ -87,6 +88,6 @@ function Profile() {
       </form>
     </div>
   );
-}
+};
 
 export default Profile;
