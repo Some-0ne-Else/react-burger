@@ -6,10 +6,11 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetPassword } from '../../utils/burger-api';
+import { RootState } from '../../types/index';
 import styles from './ResetPassword.module.css';
 
 function ResetPassword() {
-  const { passwordRequested, isLoggedIn } = useSelector((store) => (
+  const { passwordRequested, isLoggedIn } = useSelector((store:RootState) => (
     {
       passwordRequested: store.forgotPasswordForm.passwordRequested,
       isLoggedIn: store.user.isLoggedIn,
@@ -21,7 +22,7 @@ function ResetPassword() {
   const [errorText, setErrorText] = React.useState('');
   const passwordRef = React.useRef(null);
 
-  const handleReset = (e) => {
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     resetPassword({ password, token })
       .then((res) => res.json())
