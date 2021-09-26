@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import styles from './IngredientsList.module.css';
 import Ingredient from '../Ingredient/Ingredient';
+import { IIngredientListProps, IIngredient } from '../../types/data';
+import { RootState } from '../../types/index';
+import styles from './IngredientsList.module.css';
 
-function IngredientsList({ setCurrentTab }) {
-  const ingredients = useSelector((store) => store.app.ingredients);
+const IngredientsList:FC<IIngredientListProps> = ({ setCurrentTab }) => {
+  const ingredients = useSelector((store: RootState) => store.app.ingredients);
   const filterByType = React.useCallback(
-    (type) => ingredients.filter((e) => e.type === type),
+    (type:string):IIngredient[] => ingredients.filter((e:IIngredient) => e.type === type),
     [ingredients],
   );
   const buns = React.useMemo(() => filterByType('bun'), [filterByType]);
   const sauce = React.useMemo(() => filterByType('sauce'), [filterByType]);
   const main = React.useMemo(() => filterByType('main'), [filterByType]);
-  const bunsRef = React.useRef(null);
-  const saucesRef = React.useRef(null);
-  const mainsRef = React.useRef(null);
-  const containerRef = React.useRef(null);
+  const bunsRef = React.useRef<HTMLParagraphElement>(null);
+  const saucesRef = React.useRef<HTMLParagraphElement>(null);
+  const mainsRef = React.useRef<HTMLParagraphElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   /* IQ > 160 Recommended for reading */
   const handleScroll = () => {
-    const containerPosition = containerRef.current.getBoundingClientRect().top;
-    const bunsHeaderPosition = bunsRef.current.getBoundingClientRect().top;
-    const sauceHeaderPosition = saucesRef.current.getBoundingClientRect().top;
-    const mainsHeaderPosition = mainsRef.current.getBoundingClientRect().top;
+    const containerPosition = containerRef.current!.getBoundingClientRect().top;
+    const bunsHeaderPosition = bunsRef.current!.getBoundingClientRect().top;
+    const sauceHeaderPosition = saucesRef.current!.getBoundingClientRect().top;
+    const mainsHeaderPosition = mainsRef.current!.getBoundingClientRect().top;
     const bunsDiff = Math.abs(containerPosition - bunsHeaderPosition);
     const sauceDiff = Math.abs(containerPosition - sauceHeaderPosition);
     const mainsDiff = Math.abs(containerPosition - mainsHeaderPosition);
@@ -50,10 +51,18 @@ function IngredientsList({ setCurrentTab }) {
         {buns.map((el) => (
           <Ingredient
             key={el._id}
-            id={el._id}
+            _id={el._id}
             image={el.image}
             price={el.price}
             name={el.name}
+            type={el.type}
+            proteins={el.proteins}
+            fat={el.proteins}
+            carbohydrates={el.carbohydrates}
+            calories={el.calories}
+            image_mobile={el.image_mobile}
+            image_large={el.image_large}
+            __v={el.__v}
           />
         ))}
       </div>
@@ -64,10 +73,18 @@ function IngredientsList({ setCurrentTab }) {
         {sauce.map((el) => (
           <Ingredient
             key={el._id}
-            id={el._id}
+            _id={el._id}
             image={el.image}
             price={el.price}
             name={el.name}
+            type={el.type}
+            proteins={el.proteins}
+            fat={el.proteins}
+            carbohydrates={el.carbohydrates}
+            calories={el.calories}
+            image_mobile={el.image_mobile}
+            image_large={el.image_large}
+            __v={el.__v}
           />
         ))}
       </div>
@@ -78,19 +95,23 @@ function IngredientsList({ setCurrentTab }) {
         {main.map((el) => (
           <Ingredient
             key={el._id}
-            id={el._id}
+            _id={el._id}
             image={el.image}
             price={el.price}
             name={el.name}
+            type={el.type}
+            proteins={el.proteins}
+            fat={el.proteins}
+            carbohydrates={el.carbohydrates}
+            calories={el.calories}
+            image_mobile={el.image_mobile}
+            image_large={el.image_large}
+            __v={el.__v}
           />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default IngredientsList;
-
-IngredientsList.propTypes = {
-  setCurrentTab: PropTypes.func.isRequired,
-};

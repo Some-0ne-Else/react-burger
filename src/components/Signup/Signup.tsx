@@ -14,9 +14,9 @@ const Signup:FC = () => {
   const history = useHistory();
   const dispatch:AppDispatch = useDispatch();
   const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [name, setName] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
 
   const handleSignup = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

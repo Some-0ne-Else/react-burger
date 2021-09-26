@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import styles from './OrderDetails.module.css';
 import doneImg from '../../images/done.svg';
 import preloaderImg from '../../images/loading.png';
+import { RootState } from '../../types/index';
+import styles from './OrderDetails.module.css';
 
-function OrderDetails() {
-  const { orderNumber, orderRequest } = useSelector((state) => state.app.order);
+const OrderDetails:FC = () => {
+  const { orderNumber, orderRequest } = useSelector((state:RootState) => state.app.order);
   return (
     <div className={styles.orderdetails}>
       {orderRequest
@@ -28,6 +29,6 @@ function OrderDetails() {
       </p>
     </div>
   );
-}
+};
 
 export default OrderDetails;

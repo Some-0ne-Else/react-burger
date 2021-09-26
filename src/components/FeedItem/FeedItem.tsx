@@ -6,7 +6,7 @@ import { toggleModal } from '../../services/actions/modalActions';
 import { prepareDate, parseStatus } from '../../utils/utils';
 import { INGREDIENTS_TO_SHOW } from '../../utils/constants';
 import { RootState, AppDispatch } from '../../types/index';
-import { IOrder } from '../../types/data';
+import { IOrder, IIngredient } from '../../types/data';
 import styles from './FeedItem.module.css';
 
 const FeedItem:FC<IOrder> = ({
@@ -18,10 +18,10 @@ const FeedItem:FC<IOrder> = ({
   const ingredientsList = useSelector((store:RootState) => store.app.ingredients);
 
   const renderedIngredients = ingredientsList.length ? ingredients?.map(
-    (orderIngredientId) => ingredientsList.find((ingredient: { _id: string; }) => ingredient._id === orderIngredientId),
+    (orderIngredientId) => ingredientsList.find((ingredient: IIngredient) => ingredient._id === orderIngredientId),
   ) : [];
-  const total = React.useMemo(
-    () => renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0), [renderedIngredients],
+  const total:number = React.useMemo(
+    () => renderedIngredients?.reduce((acc:number, ingredient:IIngredient) => acc + ingredient.price, 0), [renderedIngredients],
   );
   const openModal = () => {
     dispatch(toggleModal());

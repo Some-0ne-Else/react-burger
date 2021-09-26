@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { WS_CONNECTION_START_CURRENT_USER } from '../../services/actions/wsActions';
 import FeedItem from '../FeedItem/FeedItem';
@@ -7,7 +7,7 @@ import { RootState, AppDispatch } from '../../types/index';
 import { IOrder } from '../../types/data';
 import styles from './Orders.module.css';
 
-function Orders() {
+const Orders: FC = () => {
   const dispatch:AppDispatch = useDispatch();
   const { orders } = useSelector((store:RootState) => store.ws.currentUserMessages[store.ws.currentUserMessages.length - 1]
   || store.ws.currentUserMessages);
@@ -40,6 +40,6 @@ function Orders() {
       </div>
     </div>
   );
-}
+};
 
 export default Orders;

@@ -2,21 +2,23 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './BurgerConstructor.module.css';
 import ConstructorList from '../ConstructorList/ConstructorList';
 import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
 import { addConstructorIngredient } from '../../services/actions';
+import { IConstructorIngredient } from '../../types/data';
+import { RootState } from '../../types/index';
+import styles from './BurgerConstructor.module.css';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const data = useSelector((store) => store.app.constructorIngredients);
-  const bun = data.find((b) => (b.type === 'bun'));
+  const data = useSelector((store:RootState) => store.app.constructorIngredients);
+  const bun = data.find((b:IConstructorIngredient) => (b.type === 'bun'));
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredient',
-    drop(itemId) {
-      dispatch(addConstructorIngredient(itemId.id));
+    drop(itemId:{_id:string}) {
+      dispatch(addConstructorIngredient(itemId._id));
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
@@ -31,7 +33,7 @@ function BurgerConstructor() {
     setModalOpened(true);
   };
   return (
-    <section className={styles.constructor}>
+    <section className={styles['burger-constructor']}>
       <div
         ref={dropTarget}
         data-test-id="dropTarget"
@@ -63,7 +65,7 @@ function BurgerConstructor() {
       </div>
       <ConstructorSummary data={data} openModal={openModal} />
       {isModalOpened && (
-        <Modal onClose={closeModal}>
+        <Modal title="" onClose={closeModal}>
           <OrderDetails />
         </Modal>
       )}

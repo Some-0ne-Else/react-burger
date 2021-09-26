@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIngredients, getIngredientDetails } from '../../services/actions';
+import { RootState, AppDispatch } from '../../types/index';
 import styles from './IngredientDetails.module.css';
 
-function IngredientDetails() {
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const currentIngredient = useSelector((store) => store.app.currentIngredient);
+const IngredientDetails:FC = () => {
+  const { id } = useParams<{id: string}>();
+  const dispatch:AppDispatch = useDispatch();
+  const currentIngredient = useSelector((store: RootState) => store.app.currentIngredient);
 
   React.useEffect(() => {
     dispatch(fetchIngredients())
@@ -70,5 +71,5 @@ function IngredientDetails() {
       </div>
     </div>
   );
-}
+};
 export default IngredientDetails;
