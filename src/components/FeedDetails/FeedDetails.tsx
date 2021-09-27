@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
 import { WS_CONNECTION_START_ORDERS_ALL } from '../../services/actions/wsActions';
-import styles from './FeedDetails.module.css';
 import {
   prepareDate, parseStatus, getUniqValues, countById,
 } from '../../utils/utils';
 import Preloader from '../Preloader/Preloader';
+import { RootState, AppDispatch } from '../../types/index';
+import { IOrder, IIngredient } from '../../types/data';
+import styles from './FeedDetails.module.css';
 
-function FeedDetails() {
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const wsConnected = useSelector((store) => store.ws.wsConnected);
-  const messageCounter = useSelector((store) => store.ws.messages.length);
+const FeedDetails:FC = () => {
+  const { id } = useParams<{id: string}>();
+  const dispatch:AppDispatch = useDispatch();
+  const wsConnected = useSelector((store:RootState) => store.ws.wsConnected);
+  const messageCounter = useSelector((store:RootState) => store.ws.messages.length);
   const {
     createdAt, number, name, ingredients, status,
   } = useSelector(
-    (store) => store.ws.messages[store.ws.messages.length - 1]?.orders.find((order) => order._id === id)
+    (store:RootState) => store.ws.messages[store.ws.messages.length - 1]?.orders.find((order:IOrder) => order._id === id)
       || store.ws.messages,
   );
 
-  const ingredientsList = useSelector((store) => store.app.ingredients);
+  const ingredientsList = useSelector((store:RootState) => store.app.ingredients);
   const renderedIngredients = ingredientsList.length ? ingredients?.map(
-    (orderIngredientId) => ingredientsList.find((ingredient) => ingredient._id === orderIngredientId),
+    (orderIngredientId:string) => ingredientsList.find((ingredient:IIngredient) => ingredient._id === orderIngredientId),
   ) : [];
   const total = React.useMemo(
-    () => renderedIngredients?.reduce((acc, ingredient) => acc + ingredient.price, 0), [renderedIngredients],
+    () => renderedIngredients?.reduce((acc:number, ingredient:IIngredient) => acc + ingredient.price, 0), [renderedIngredients],
   );
   React.useEffect(() => {
     dispatch({ type: WS_CONNECTION_START_ORDERS_ALL });
@@ -69,6 +71,6 @@ function FeedDetails() {
       </div>
     </div>
   ) : <Preloader />;
-}
+};
 
 export default FeedDetails;

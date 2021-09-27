@@ -26,7 +26,7 @@ export interface IIngredient {
   __v: number;
 }
 
-export interface IConstructorIngredient extends IIngredient{
+export interface IConstructorIngredient extends IIngredient {
   uid: string;
 }
 
@@ -48,6 +48,30 @@ export interface IModal {
   onClose: () => void;
 }
 
-export interface IIngredientListProps{
-  setCurrentTab: React.Dispatch<React.SetStateAction<string>>
+export interface IIngredientListProps {
+  setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface IConstructorSummaryProps {
+  data: IConstructorIngredient[];
+  openModal: () => void;
+}
+
+export interface IConstructorListProps{
+  data : IConstructorIngredient[];
+}
+
+export interface ILocation {
+  [x: string]: any; // bad practice.
+  from: {
+    pathname: string;
+  };
+  state?: { main?:string };
+}
+
+export interface IAuthParams{
+  token?: string;
+ email?: string;
+ password?: string;
+ name?: string;
 }

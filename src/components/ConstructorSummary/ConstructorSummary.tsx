@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { placeOrder } from '../../services/actions';
+import { RootState } from '../../types/index';
+import { IConstructorSummaryProps } from '../../types/data';
 import styles from './ConstructorSummary.module.css';
 
-function ConstructorSummary({ data, openModal }) {
+const ConstructorSummary:FC<IConstructorSummaryProps> = ({ data, openModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { orderRequest, orderFailed, isLoggedIn } = useSelector((store) => ({
+  const { orderRequest, orderFailed, isLoggedIn } = useSelector((store:RootState) => ({
     orderRequest: store.app.order.orderRequest,
     orderFailed: store.app.order.orderFailed,
     isLoggedIn: store.user.isLoggedIn,
   }));
 
   const total = React.useMemo(
-    () => data.reduce((acc, el) => el.price + acc, 0),
+    () => data.reduce((acc:number, el) => el.price + acc, 0),
     [data],
   );
   // eslint-disable-next-line consistent-return
@@ -43,18 +44,6 @@ function ConstructorSummary({ data, openModal }) {
       </Button>
     </div>
   );
-}
+};
 
 export default ConstructorSummary;
-
-ConstructorSummary.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  openModal: PropTypes.func.isRequired,
-};

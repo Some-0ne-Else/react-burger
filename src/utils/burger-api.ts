@@ -1,5 +1,6 @@
 import { BASE_URL, ACCESS_TOKEN } from './constants';
 import { getCookie } from './utils';
+import { IAuthParams } from '../types/data';
 
 export const getIngredients = () => fetch(`${BASE_URL}/ingredients`).then((res) => {
   if (res.ok) {
@@ -8,18 +9,18 @@ export const getIngredients = () => fetch(`${BASE_URL}/ingredients`).then((res) 
   throw new Error(`Error ${res.status}`);
 });
 
-export const postOrder = (idList) => fetch(`${BASE_URL}/orders`, {
+export const postOrder = (idList:string[]) => fetch(`${BASE_URL}/orders`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
-    authorization: getCookie(ACCESS_TOKEN),
+    authorization: getCookie(ACCESS_TOKEN) || '',
   },
   body: JSON.stringify({ ingredients: idList }),
 })
   .then((res) => res.json())
   .catch((err) => console.log(err));
 
-export const restorePassword = ({ email }) => fetch(`${BASE_URL}/password-reset`, {
+export const restorePassword = ({ email }:IAuthParams) => fetch(`${BASE_URL}/password-reset`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -27,14 +28,14 @@ export const restorePassword = ({ email }) => fetch(`${BASE_URL}/password-reset`
   body: JSON.stringify({ email }),
 });
 
-export const resetPassword = ({ password, token }) => fetch(`${BASE_URL}/password-reset/reset`, {
+export const resetPassword = ({ password, token }:IAuthParams) => fetch(`${BASE_URL}/password-reset/reset`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
   },
   body: JSON.stringify({ password, token }),
 });
-export const login = async ({ email, password }) => fetch(`${BASE_URL}/auth/login`, {
+export const login = async ({ email, password }:IAuthParams) => fetch(`${BASE_URL}/auth/login`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -42,7 +43,7 @@ export const login = async ({ email, password }) => fetch(`${BASE_URL}/auth/logi
   body: JSON.stringify({ email, password }),
 });
 
-export const signup = ({ email, password, name }) => fetch(`${BASE_URL}/auth/register`, {
+export const signup = ({ email, password, name }:IAuthParams) => fetch(`${BASE_URL}/auth/register`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -53,20 +54,20 @@ export const signup = ({ email, password, name }) => fetch(`${BASE_URL}/auth/reg
 export const getUserInfo = () => fetch(`${BASE_URL}/auth/user`, {
   method: 'GET',
   headers: {
-    authorization: getCookie(ACCESS_TOKEN),
+    authorization: getCookie(ACCESS_TOKEN) || '',
   },
 });
 
-export const updateUserInfo = ({ email, password, name }) => fetch(`${BASE_URL}/auth/user`, {
+export const updateUserInfo = ({ email, password, name }:IAuthParams) => fetch(`${BASE_URL}/auth/user`, {
   method: 'PATCH',
   headers: {
     'content-type': 'application/json',
-    authorization: getCookie(ACCESS_TOKEN),
+    authorization: getCookie(ACCESS_TOKEN) || '',
   },
   body: JSON.stringify({ email, password, name }),
 });
 
-export const updateAccessToken = ({ token }) => fetch(`${BASE_URL}/auth/token`, {
+export const updateAccessToken = ({ token }:IAuthParams) => fetch(`${BASE_URL}/auth/token`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -74,7 +75,7 @@ export const updateAccessToken = ({ token }) => fetch(`${BASE_URL}/auth/token`, 
   body: JSON.stringify({ token }),
 });
 
-export const logout = ({ token }) => fetch(`${BASE_URL}/auth/logout`, {
+export const logout = ({ token }:IAuthParams) => fetch(`${BASE_URL}/auth/logout`, {
   method: 'POST',
   headers: {
     'content-type': 'application/json',

@@ -13,7 +13,7 @@ import styles from './BurgerConstructor.module.css';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const data = useSelector((store:RootState) => store.app.constructorIngredients);
+  const data: IConstructorIngredient[] = useSelector((store:RootState) => store.app.constructorIngredients);
   const bun = data.find((b:IConstructorIngredient) => (b.type === 'bun'));
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredient',

@@ -1,0 +1,9 @@
+export const BASE_URL:string = 'https://norma.nomoreparties.space/api';
+export const WS_ALL_ORDERS_URL:string = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_CURRENT_USER_URL:string = 'wss://norma.nomoreparties.space/orders';
+export const ACCESS_TOKEN_TTL:number = 1200; // 20 mins
+export const ACCESS_TOKEN:string = 'accessToken';
+export const REFRESH_TOKEN:string = 'refreshToken';
+export const LONG_TIME_AGO_IN_THE_GALAXY:string = 'Thu, 01 Jan 1970 00:00:01 GMT';
+export const INGREDIENTS_TO_SHOW:number = 6; // on feed and orders card
+export const SYMBOLS_TO_CUT:number = 7; // Used to slice 7 symbols from access token value. which means "Bearer "

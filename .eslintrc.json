@@ -51,7 +51,7 @@
         "no-underscore-dangle": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "linebreak-style": "off",
-        "max-len": ["error", { "code": 130 }],
+        "max-len": ["error", { "code": 140 }],
         "jest/expect-expect" : "off"
     }
 }

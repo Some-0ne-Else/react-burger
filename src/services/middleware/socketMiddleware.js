@@ -1,5 +1,5 @@
 import { getCookie } from '../../utils/utils';
-import { ACCESS_TOKEN } from '../../utils/constants';
+import { ACCESS_TOKEN, SYMBOLS_TO_CUT } from '../../utils/constants';
 
 const socketMiddleware = (wsUrl, wsActions) => (store) => {
   let socket = null;
@@ -11,7 +11,7 @@ const socketMiddleware = (wsUrl, wsActions) => (store) => {
       wsInit, wsSendMessage, onOpen, onClose, onError, onMessage,
     } = wsActions;
     if (type === wsInit) {
-      socket = new WebSocket(`${wsUrl}?token=${getCookie(ACCESS_TOKEN)?.slice(7)}`);
+      socket = new WebSocket(`${wsUrl}?token=${getCookie(ACCESS_TOKEN)?.slice(SYMBOLS_TO_CUT)}`);
     }
     if (socket) {
       socket.onopen = (event) => {

@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { WS_CONNECTION_START_ORDERS_ALL } from '../../services/actions/wsActions';
 import FeedItem from '../FeedItem/FeedItem';
+import { RootState, AppDispatch } from '../../types/index';
+import { IOrder } from '../../types/data';
 import styles from './Feed.module.css';
 
-function Feed() {
-  const dispatch = useDispatch();
-  const { orders, total, totalToday } = useSelector((store) => store.ws.messages[store.ws.messages.length - 1]
+const Feed:FC = () => {
+  const dispatch:AppDispatch = useDispatch();
+  const { orders, total, totalToday } = useSelector((store:RootState) => store.ws.messages[store.ws.messages.length - 1]
   || store.ws.messages);
-  const readyOrders = orders?.filter((order) => order.status === 'done').splice(0, 10);
-  const processingOrders = orders?.filter((order) => order.status !== 'done').splice(0, 10);
+  const readyOrders:IOrder[] = orders?.filter((order:IOrder) => order.status === 'done').splice(0, 10);
+  const processingOrders:IOrder[] = orders?.filter((order:IOrder) => order.status !== 'done').splice(0, 10);
   React.useEffect(() => {
     dispatch({ type: WS_CONNECTION_START_ORDERS_ALL });
   }, []);
@@ -22,10 +24,10 @@ function Feed() {
       <div className={styles.container}>
         <div className={styles.feed_block}>
           <div className={styles.feed_container}>
-            {orders?.map((order) => (
+            {orders?.map((order:IOrder) => (
               <FeedItem
                 key={order._id}
-                id={order._id}
+                _id={order._id}
                 createdAt={order.createdAt}
                 number={order.number}
                 name={order.name}
@@ -40,12 +42,12 @@ function Feed() {
             <p className="text text_type_main-medium mb-6">Готовы:</p>
             <p className="text text_type_main-medium mb-6 ml-9">В работе:</p>
             <div className={styles.orders_list}>
-              {readyOrders?.map((order) => (
+              {readyOrders?.map((order:IOrder) => (
                 <p key={order._id} className="text text_type_digits-default mb-2">{order.number}</p>
               ))}
             </div>
             <div className={`${styles.orders_list} ml-9`}>
-              {processingOrders?.map((order) => (
+              {processingOrders?.map((order:IOrder) => (
                 <p key={order._id} className="text text_type_digits-default text_color_inactive mb-2">{order.number}</p>
               ))}
             </div>
@@ -62,6 +64,6 @@ function Feed() {
       </div>
     </main>
   );
-}
+};
 
 export default Feed;

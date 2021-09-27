@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
@@ -6,12 +6,13 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './ConstructorItem.module.css';
 import { removeConstructorIngredient, updateConstructorList } from '../../services/actions';
+import { IConstructorIngredient } from '../../types/data';
+import styles from './ConstructorItem.module.css';
 
-function ConstructorItem({
+const ConstructorItem:FC<IConstructorIngredient> = ({
   uid, name, price, image,
-}) {
+}) => {
   const dispatch = useDispatch();
   const [{ isDrag }, dragRef] = useDrag({
     type: 'item',
@@ -25,7 +26,7 @@ function ConstructorItem({
   const [, dropTarget] = useDrop({
     accept: 'item',
     canDrop: () => false,
-    hover({ uid: draggedId }) {
+    hover({ uid: draggedId }:{uid: string}) {
       if (draggedId !== uid) {
         dispatch(updateConstructorList(draggedId, uid));
       }
@@ -45,7 +46,7 @@ function ConstructorItem({
       />
     </div>
   );
-}
+};
 
 export default ConstructorItem;
 

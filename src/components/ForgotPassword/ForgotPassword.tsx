@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import {
@@ -6,24 +6,25 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { setForgotPasswordFormValue, postForgotPasswordForm } from '../../services/actions/formActions';
+import { RootState, AppDispatch } from '../../types/index';
 import styles from './ForgotPassword.module.css';
 
-function ForgotPassword() {
-  const dispatch = useDispatch();
+const ForgotPassword:FC = () => {
+  const dispatch:AppDispatch = useDispatch();
   const history = useHistory();
-  const { email, failed, errorText } = useSelector((store) => store.forgotPasswordForm);
-  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
-  const inputRef = React.useRef(null);
+  const { email, failed, errorText } = useSelector((store:RootState) => store.forgotPasswordForm);
+  const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const onFormChange = (e) => {
+  const onFormChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setForgotPasswordFormValue(e.target.name, e.target.value));
   };
-  const handleRestore = (e) => {
+  const handleRestore = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(postForgotPasswordForm(email))
-      .then((res) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
+      .then((res: { success: boolean; }) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
   };
-  React.useEffect(() => inputRef.current.focus(), []);
+  React.useEffect(() => inputRef.current!.focus(), []);
 
   if (isLoggedIn) {
     return (
@@ -60,6 +61,6 @@ function ForgotPassword() {
       </div>
     </form>
   );
-}
+};
 
 export default ForgotPassword;

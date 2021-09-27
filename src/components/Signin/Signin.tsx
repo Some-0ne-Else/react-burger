@@ -9,7 +9,8 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postLoginForm } from '../../services/actions/userActions';
-import { RootState, ILocation, AppDispatch } from '../../types/index';
+import { RootState, AppDispatch } from '../../types/index';
+import { ILocation } from '../../types/data';
 import styles from './Signin.module.css';
 
 const Signin:FC = () => {

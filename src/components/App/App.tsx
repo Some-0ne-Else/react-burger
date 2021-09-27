@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Switch, Route, useLocation, useHistory,
 } from 'react-router-dom';
@@ -31,13 +31,16 @@ import { getUserData } from '../../services/actions/userActions';
 import { toggleModal } from '../../services/actions/modalActions';
 import { getCookie } from '../../utils/utils';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../utils/constants';
+import { RootState, AppDispatch } from '../../types/index';
+import { ILocation } from '../../types/data';
 
-function App() {
-  const dispatch = useDispatch();
-  const location = useLocation();
+const App:FC = () => {
+  const dispatch:AppDispatch = useDispatch();
+  const location = useLocation<ILocation>();
   const history = useHistory();
-  const modalOpen = useSelector((store) => store.modal.modalOpen);
+  const modalOpen = useSelector((store:RootState) => store.modal.modalOpen);
   const main = history.action === 'REPLACE' ? location?.state?.main : null;
+  console.log(location?.state);
   const closeModal = () => {
     dispatch(clearIngredientDetails());
     dispatch(toggleModal());
@@ -115,6 +118,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;

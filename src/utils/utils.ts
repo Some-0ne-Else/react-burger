@@ -1,11 +1,11 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/prefer-default-export
 import {
   isToday, isYesterday, isValid, differenceInCalendarDays, parseISO, format,
 } from 'date-fns';
+import { IIngredient } from '../types/data';
 
-export function setCookie(name, value, props) {
+export function setCookie(name:string, value:string, props:any) {
   props = props || {};
   let exp = props.expires;
   if (exp && typeof exp === 'number') {
@@ -30,7 +30,7 @@ export function setCookie(name, value, props) {
   document.cookie = updatedCookie;
 }
 
-export function getCookie(name) {
+export function getCookie(name:string) {
   const matches = document.cookie.match(
     // eslint-disable-next-line no-useless-escape
     new RegExp(`(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`),
@@ -38,7 +38,7 @@ export function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export const prepareDate = (date) => {
+export const prepareDate = (date:string) => {
   if (!isValid(parseISO(date))) { return null; }
   const currentDate = new Date();
   const parsedDate = parseISO(date);
@@ -55,7 +55,7 @@ export const prepareDate = (date) => {
   }
 };
 
-export const parseStatus = (status) => {
+export const parseStatus = (status:string) => {
   switch (status) {
     case 'done': {
       return 'Выполнен';
@@ -72,6 +72,6 @@ export const parseStatus = (status) => {
   }
 };
 
-export const getUniqValues = (array) => Array.from(new Set(array.map(JSON.stringify))).map(JSON.parse);
-
-export const countById = (array, id) => array.filter((item) => item._id === id).length;
+export const getUniqValues = (array:IIngredient[]): IIngredient[] => Array.from(new Set(array.map((el) => JSON.stringify(el))))
+  .map((el) => JSON.parse(el));
+export const countById = (array:IIngredient[], id:string) => array.filter((item) => item._id === id).length;

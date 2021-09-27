@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerIngredients.module.css';
 import IngredientsList from '../IngredientsList/IngredientsList';
 
-function BurgerIngredients() {
-  const [currentTab, setCurrentTab] = React.useState('buns');
-  const setTab = (tab) => {
+const BurgerIngredients:FC = () => {
+  const [currentTab, setCurrentTab] = React.useState<string>('buns');
+  const setTab = (tab:string) => {
     setCurrentTab(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -32,6 +32,6 @@ function BurgerIngredients() {
       <IngredientsList setCurrentTab={setCurrentTab} />
     </section>
   );
-}
+};
 
 export default BurgerIngredients;
