@@ -2,10 +2,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import { RootState } from '../../types/index';
 
-function ProtectedRoute({ children, ...props }) {
-  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
+function ProtectedRoute({ children, ...props }:{[x:string]: any, children: React.ReactNode}) {
+  const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
   return (
     <Route
       {...props}
@@ -24,8 +24,3 @@ function ProtectedRoute({ children, ...props }) {
 }
 
 export default ProtectedRoute;
-
-ProtectedRoute.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  children: PropTypes.object.isRequired,
-};
