@@ -58,8 +58,8 @@ export interface IConstructorSummaryProps {
   openModal: () => void;
 }
 
-export interface IConstructorListProps{
-  data : IConstructorIngredient[];
+export interface IConstructorListProps {
+  data: IConstructorIngredient[];
 }
 
 export interface ILocation {
@@ -67,33 +67,58 @@ export interface ILocation {
   from: {
     pathname: string;
   };
-  state?: { main?:string };
+  state?: { main?: string };
 }
 
-export interface IAuthParams{
+export interface IAuthParams {
   token?: string;
- email?: string;
- password?: string;
- name?: string;
+  email?: string;
+  password?: string;
+  name?: string;
 }
 
-export type TformInitialState = {
-  email:string;
+export type TFormInitialState = {
+  email: string;
+  request: boolean;
+  failed: boolean;
+  errorText: string;
+  passwordRequested: boolean;
+};
+
+export type TAppInitialState = {
+  ingredients: Array<IIngredient>;
+  constructorIngredients: Array<IConstructorIngredient>;
+  currentIngredient: IIngredient | {};
+  order: {
+    orderNumber: number;
+    orderRequest: boolean;
+    orderFailed: boolean;
+  };
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+};
+
+export type TModalInitialState = {
+  modalOpen: boolean;
+}
+
+export type TUserInitialState = {
+  email: string,
+  name: string,
+  isLoggedIn: boolean,
   request: boolean,
   failed: boolean,
-  errorText: string,
-  passwordRequested: boolean,
-  }
+};
 
-export type TappInitialState = {
-    ingredients: IIngredient[],
-    constructorIngredients: IConstructorIngredient[],
-    currentIngredient: {},
-    order: {
-      orderNumber: number,
-      orderRequest: boolean,
-      orderFailed: boolean,
-    },
-    ingredientsRequest: boolean,
-    ingredientsFailed: boolean,
-  }
+export interface IMessage {
+  orders: IOrder[],
+  total: number,
+  totalToday: number,
+  timestamp: number,
+}
+
+export type TWsInitialState = {
+  wsConnected: boolean,
+  messages: IMessage[],
+  currentUserMessages: IMessage[],
+}

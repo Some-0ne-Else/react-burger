@@ -4,15 +4,17 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE_ORDERS_ALL,
   WS_GET_MESSAGE_CURRENT_USER,
+  TWsActions,
 } from '../actions/wsActions';
+import { TWsInitialState } from '../../types/data';
 
-const initialState = {
+const initialState:TWsInitialState = {
   wsConnected: false,
   messages: [],
   currentUserMessages: [],
 };
 
-const wsReducer = (state = initialState, action) => {
+const wsReducer = (state = initialState, action:TWsActions) => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {

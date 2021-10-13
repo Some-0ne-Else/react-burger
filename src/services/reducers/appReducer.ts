@@ -1,4 +1,4 @@
-import { IConstructorIngredient, IIngredient, TappInitialState } from '../../types/data';
+import { IConstructorIngredient, IIngredient, TAppInitialState } from '../../types/data';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -15,7 +15,7 @@ import {
   TAppActions,
 } from '../actions/appActions';
 
-const initialState:TappInitialState = {
+const initialState:TAppInitialState = {
   ingredients: [],
   constructorIngredients: [],
   currentIngredient: {},

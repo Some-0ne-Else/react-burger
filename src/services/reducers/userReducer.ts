@@ -3,17 +3,19 @@ import {
   USER_REQUEST,
   USER_FAILED,
   LOGOUT_USER,
-
+  TUserActions,
 } from '../actions/userActions';
+import { TUserInitialState } from '../../types/data';
 
-const initialState = {
+const initialState:TUserInitialState = {
   email: '',
   name: '',
   isLoggedIn: false,
   request: false,
   failed: false,
 };
-const userReducer = (state = initialState, action) => {
+
+const userReducer = (state = initialState, action:TUserActions) => {
   switch (action.type) {
     case USER_SUCCESS: {
       return {

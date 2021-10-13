@@ -1,4 +1,4 @@
-import { AppDispatch } from '../../types/index';
+import { AppDispatch, AppThunk } from '../../types/index';
 import { IIngredient } from '../../types/data';
 import {
   getIngredients,
@@ -127,7 +127,7 @@ export const placeOrderFailed = ():IPlaceOrderFailed => ({
   type: PLACE_ORDER_FAILED,
 });
 
-export const fetchIngredients = () => (dispatch:AppDispatch) => {
+export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: GET_INGREDIENTS_REQUEST });
   return getIngredients()
     .then((res) => {
@@ -147,7 +147,7 @@ export const fetchIngredients = () => (dispatch:AppDispatch) => {
     });
 };
 
-export const placeOrder = (idList:string[]) => (dispatch:AppDispatch) => {
+export const placeOrder: AppThunk = (idList:string[]) => (dispatch:AppDispatch) => {
   dispatch({ type: PLACE_ORDER_REQUEST });
   return postOrder(idList)
     .then((res) => {

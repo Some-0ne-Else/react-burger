@@ -11,6 +11,7 @@ import styles from './ForgotPassword.module.css';
 
 const ForgotPassword:FC = () => {
   const dispatch:AppDispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
   const { email, failed, errorText } = useSelector((store:RootState) => store.forgotPasswordForm);
   const isLoggedIn = useSelector((store:RootState) => store.user.isLoggedIn);
@@ -21,8 +22,8 @@ const ForgotPassword:FC = () => {
   };
   const handleRestore = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(postForgotPasswordForm(email))
-      .then((res: { success: boolean; }) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
+    dispatch(postForgotPasswordForm(email));
+    // .then((res: { success: boolean; }) => { if (res.success) { history.replace({ pathname: '/reset-password' }); } });
   };
   React.useEffect(() => inputRef.current!.focus(), []);
 

@@ -1,4 +1,4 @@
-import { AppDispatch } from '../../types/index';
+import { AppDispatch, AppThunk } from '../../types/index';
 import { IAuthParams } from '../../types/data';
 import {
   login,
@@ -13,12 +13,33 @@ import {
   ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN, LONG_TIME_AGO_IN_THE_GALAXY,
 } from '../../utils/constants';
 
-export const USER_SUCCESS = 'LOGIN_SUCCESS' as const;
-export const USER_REQUEST = 'LOGIN_REQUEST' as const;
-export const USER_FAILED = 'LOGIN_FAILED' as const;
+export const USER_SUCCESS = 'USER_SUCCESS' as const;
+export const USER_REQUEST = 'USER_REQUEST' as const;
+export const USER_FAILED = 'USER_FAILED' as const;
 export const LOGOUT_USER = 'LOGOUT_USER' as const;
 
-export const postLoginForm = ({ email, password }:IAuthParams) => (dispatch:AppDispatch) => {
+export interface IUserSuccess {
+  readonly type: typeof USER_SUCCESS
+  readonly payload: { email:string, name:string }
+}
+
+export interface IUserRequest {
+  readonly type: typeof USER_REQUEST
+}
+export interface IUserFailed {
+  readonly type: typeof USER_FAILED
+}
+export interface ILogoutUser {
+  readonly type: typeof LOGOUT_USER
+}
+
+export type TUserActions =
+| IUserSuccess
+| IUserRequest
+| IUserFailed
+| ILogoutUser;
+
+export const postLoginForm: AppThunk = ({ email, password }:IAuthParams) => (dispatch: AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return login({ email, password })
     .then((res) => res.json())
@@ -38,7 +59,7 @@ export const postLoginForm = ({ email, password }:IAuthParams) => (dispatch:AppD
     });
 };
 
-export const postRegisterForm = ({ email, password, name }:IAuthParams) => (dispatch:AppDispatch) => {
+export const postRegisterForm: AppThunk = ({ email, password, name }:IAuthParams) => (dispatch: AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return signup({ email, password, name })
     .then((res) => res.json())
@@ -58,7 +79,7 @@ export const postRegisterForm = ({ email, password, name }:IAuthParams) => (disp
     });
 };
 
-export const getUserData = () => (dispatch:AppDispatch) => {
+export const getUserData: AppThunk = () => (dispatch: AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return getUserInfo()
     .then((res) => res.json())
@@ -94,7 +115,7 @@ export const getUserData = () => (dispatch:AppDispatch) => {
     });
 };
 
-export const updateUserData = ({ email, password, name }:IAuthParams) => (dispatch:AppDispatch) => {
+export const updateUserData: AppThunk = ({ email, password, name }: IAuthParams) => (dispatch: AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return updateUserInfo({ email, password, name })
     .then((res) => res.json())
@@ -129,7 +150,7 @@ export const updateUserData = ({ email, password, name }:IAuthParams) => (dispat
     });
 };
 
-export const logoutUser = () => (dispatch:AppDispatch) => logout({ token: localStorage.getItem(REFRESH_TOKEN)! })
+export const logoutUser: AppThunk = () => (dispatch:AppDispatch) => logout({ token: localStorage.getItem(REFRESH_TOKEN)! })
   .then((res) => res.json())
   .then((res) => {
     if (res.success) {

@@ -1,4 +1,4 @@
-import { TformInitialState } from '../../types/data';
+import { TFormInitialState } from '../../types/data';
 import {
   FORGOT_PASSWORD_FORM_SET_VALUE,
   FORGOT_PASSWORD_FORM_SUCCESS,
@@ -8,7 +8,7 @@ import {
   TFormActions,
 } from '../actions/formActions';
 
-const initialState:TformInitialState = {
+const initialState:TFormInitialState = {
   email: '',
   request: false,
   failed: false,

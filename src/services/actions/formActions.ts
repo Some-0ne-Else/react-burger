@@ -1,8 +1,5 @@
-import { AppDispatch } from '../../types/index';
-import {
-
-  restorePassword,
-} from '../../utils/burger-api';
+import { AppDispatch, AppThunk } from '../../types/index';
+import { restorePassword } from '../../utils/burger-api';
 
 export const FORGOT_PASSWORD_FORM_SET_VALUE = 'FORGOT_PASSWORD_FORM_SET_VALUE' as const;
 export const FORGOT_PASSWORD_FORM_SUCCESS = 'FORGOT_PASSWORD_FORM_SUCCESS' as const;
@@ -45,7 +42,7 @@ export const setForgotPasswordFormValue = (field:string, value:string):IsetForgo
   value,
 });
 
-export const postForgotPasswordForm = (email:string) => (dispatch:AppDispatch) => {
+export const postForgotPasswordForm: AppThunk = (email:string) => (dispatch: AppDispatch) => {
   dispatch({ type: FORGOT_PASSWORD_FORM_REQUEST });
   return restorePassword({ email })
     .then((res) => res.json())

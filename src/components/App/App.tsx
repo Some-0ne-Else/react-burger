@@ -35,7 +35,7 @@ import { RootState, AppDispatch } from '../../types/index';
 import { ILocation } from '../../types/data';
 
 const App:FC = () => {
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const location = useLocation<ILocation>();
   const history = useHistory();
   const modalOpen = useSelector((store:RootState) => store.modal.modalOpen);

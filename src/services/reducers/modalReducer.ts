@@ -1,12 +1,14 @@
 import {
   TOGGLE_MODAL,
-
+  TModalActions,
 } from '../actions/modalActions';
+import { TModalInitialState } from '../../types/data';
 
-const initialState = {
+const initialState:TModalInitialState = {
   modalOpen: false,
 };
-const modalReducer = (state = initialState, action) => {
+
+const modalReducer = (state = initialState, action:TModalActions) => {
   switch (action.type) {
     case TOGGLE_MODAL: {
       return {

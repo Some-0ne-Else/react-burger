@@ -14,9 +14,17 @@ import {
   WS_SEND_MESSAGE,
 } from '../services/actions/wsActions';
 
-const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-  : compose;
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+// const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+//   : compose;
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const wsActionsAll = {
   wsInit: WS_CONNECTION_START_ORDERS_ALL,

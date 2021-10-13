@@ -1,9 +1,11 @@
 export const TOGGLE_MODAL = 'TOGGLE_MODAL' as const;
 
-interface ItoggleModal{
+interface ItoggleModal {
   readonly type: typeof TOGGLE_MODAL
 }
 
-export const toggleModal = ():ItoggleModal => ({
+export type TModalActions = ItoggleModal
+
+export const toggleModal = ():TModalActions => ({
   type: TOGGLE_MODAL,
 });
