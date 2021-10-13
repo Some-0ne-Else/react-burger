@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIngredients, getIngredientDetails } from '../../services/actions';
+import { fetchIngredients, getIngredientDetails } from '../../services/actions/appActions';
 import { RootState, AppDispatch } from '../../types/index';
 import styles from './IngredientDetails.module.css';
 

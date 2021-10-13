@@ -1,3 +1,5 @@
+import { AppDispatch } from '../../types/index';
+import { IAuthParams } from '../../types/data';
 import {
   login,
   signup,
@@ -11,12 +13,12 @@ import {
   ACCESS_TOKEN_TTL, ACCESS_TOKEN, REFRESH_TOKEN, LONG_TIME_AGO_IN_THE_GALAXY,
 } from '../../utils/constants';
 
-export const USER_SUCCESS = 'LOGIN_SUCCESS';
-export const USER_REQUEST = 'LOGIN_REQUEST';
-export const USER_FAILED = 'LOGIN_FAILED';
-export const LOGOUT_USER = 'LOGOUT_USER';
+export const USER_SUCCESS = 'LOGIN_SUCCESS' as const;
+export const USER_REQUEST = 'LOGIN_REQUEST' as const;
+export const USER_FAILED = 'LOGIN_FAILED' as const;
+export const LOGOUT_USER = 'LOGOUT_USER' as const;
 
-export const postLoginForm = ({ email, password }) => (dispatch) => {
+export const postLoginForm = ({ email, password }:IAuthParams) => (dispatch:AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return login({ email, password })
     .then((res) => res.json())
@@ -36,7 +38,7 @@ export const postLoginForm = ({ email, password }) => (dispatch) => {
     });
 };
 
-export const postRegisterForm = ({ email, password, name }) => (dispatch) => {
+export const postRegisterForm = ({ email, password, name }:IAuthParams) => (dispatch:AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return signup({ email, password, name })
     .then((res) => res.json())
@@ -56,7 +58,7 @@ export const postRegisterForm = ({ email, password, name }) => (dispatch) => {
     });
 };
 
-export const getUserData = () => (dispatch) => {
+export const getUserData = () => (dispatch:AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return getUserInfo()
     .then((res) => res.json())
@@ -65,7 +67,7 @@ export const getUserData = () => (dispatch) => {
         dispatch({ type: USER_SUCCESS, payload: res.user });
         return res;
       }
-      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
+      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN)! }) // fix
         // eslint-disable-next-line max-len
         .then((refreshRes) => refreshRes.json())
         .then((refreshRes) => {
@@ -92,7 +94,7 @@ export const getUserData = () => (dispatch) => {
     });
 };
 
-export const updateUserData = ({ email, password, name }) => (dispatch) => {
+export const updateUserData = ({ email, password, name }:IAuthParams) => (dispatch:AppDispatch) => {
   dispatch({ type: USER_REQUEST });
   return updateUserInfo({ email, password, name })
     .then((res) => res.json())
@@ -101,7 +103,7 @@ export const updateUserData = ({ email, password, name }) => (dispatch) => {
         dispatch({ type: USER_SUCCESS, payload: res.user });
         return res;
       }
-      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN) })
+      return updateAccessToken({ token: localStorage.getItem(REFRESH_TOKEN)! }) // fix
         .then((refreshRes) => refreshRes.json())
         .then((refreshRes) => {
           if (refreshRes.success) {
@@ -127,13 +129,13 @@ export const updateUserData = ({ email, password, name }) => (dispatch) => {
     });
 };
 
-export const logoutUser = () => (dispatch) => logout({ token: localStorage.getItem(REFRESH_TOKEN) })
+export const logoutUser = () => (dispatch:AppDispatch) => logout({ token: localStorage.getItem(REFRESH_TOKEN)! })
   .then((res) => res.json())
   .then((res) => {
     if (res.success) {
       dispatch({ type: LOGOUT_USER });
       localStorage.removeItem(REFRESH_TOKEN);
-      setCookie(ACCESS_TOKEN, null, { expires: LONG_TIME_AGO_IN_THE_GALAXY });
+      setCookie(ACCESS_TOKEN, '', { expires: LONG_TIME_AGO_IN_THE_GALAXY });
       return res;
     }
     Promise.reject(res.message);

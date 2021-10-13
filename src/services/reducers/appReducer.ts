@@ -1,3 +1,4 @@
+import { IConstructorIngredient, IIngredient, TappInitialState } from '../../types/data';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -11,9 +12,10 @@ import {
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
   UPDATE_CONSTRUCTOR_LIST,
-} from '../actions/index';
+  TAppActions,
+} from '../actions/appActions';
 
-const initialState = {
+const initialState:TappInitialState = {
   ingredients: [],
   constructorIngredients: [],
   currentIngredient: {},
@@ -26,7 +28,7 @@ const initialState = {
   ingredientsFailed: false,
 };
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action:TAppActions) => {
   switch (action.type) {
     case GET_INGREDIENTS_SUCCESS: {
       return { ...state, ingredients: action.payload, ingredientsRequest: false };
@@ -50,8 +52,8 @@ const appReducer = (state = initialState, action) => {
       };
     }
     case ADD_CONSTRUCTOR_INGREDIENT: {
-      const ingredient = state.ingredients.find((el) => el._id === action.payload);
-      const newIngredient = { ...ingredient };
+      const ingredient:IIngredient = state.ingredients.find((el) => el._id === action.payload)!;
+      const newIngredient:IIngredient = { ...ingredient };
       newIngredient.uid = `${ingredient._id}${state.constructorIngredients.filter((el) => el._id === ingredient._id).length + 1}`;
       if (ingredient.type === 'bun') {
         const secondBun = { ...ingredient };
@@ -107,7 +109,7 @@ const appReducer = (state = initialState, action) => {
       };
     }
     case UPDATE_CONSTRUCTOR_LIST: {
-      const arrayMove = (arr, fromIndex, toIndex) => {
+      const arrayMove = (arr:IConstructorIngredient[], fromIndex:number, toIndex:number) => {
         const element = arr[fromIndex];
         arr.splice(fromIndex, 1);
         arr.splice(toIndex, 0, element);

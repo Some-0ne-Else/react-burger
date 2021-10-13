@@ -10,6 +10,7 @@ export interface IOrder {
 }
 
 export interface IIngredient {
+  uid?: string;
   _id: string;
   name: string;
   type: string;
@@ -75,3 +76,24 @@ export interface IAuthParams{
  password?: string;
  name?: string;
 }
+
+export type TformInitialState = {
+  email:string;
+  request: boolean,
+  failed: boolean,
+  errorText: string,
+  passwordRequested: boolean,
+  }
+
+export type TappInitialState = {
+    ingredients: IIngredient[],
+    constructorIngredients: IConstructorIngredient[],
+    currentIngredient: {},
+    order: {
+      orderNumber: number,
+      orderRequest: boolean,
+      orderFailed: boolean,
+    },
+    ingredientsRequest: boolean,
+    ingredientsFailed: boolean,
+  }

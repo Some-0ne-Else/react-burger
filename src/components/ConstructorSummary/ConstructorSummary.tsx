@@ -5,7 +5,7 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { placeOrder } from '../../services/actions';
+import { placeOrder } from '../../services/actions/appActions';
 import { RootState } from '../../types/index';
 import { IConstructorSummaryProps } from '../../types/data';
 import styles from './ConstructorSummary.module.css';

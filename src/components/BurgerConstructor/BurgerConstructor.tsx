@@ -6,7 +6,7 @@ import ConstructorList from '../ConstructorList/ConstructorList';
 import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
-import { addConstructorIngredient } from '../../services/actions';
+import { addConstructorIngredient } from '../../services/actions/appActions';
 import { IConstructorIngredient } from '../../types/data';
 import { RootState } from '../../types/index';
 import styles from './BurgerConstructor.module.css';

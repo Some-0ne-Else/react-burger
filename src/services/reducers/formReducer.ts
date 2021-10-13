@@ -1,12 +1,14 @@
+import { TformInitialState } from '../../types/data';
 import {
   FORGOT_PASSWORD_FORM_SET_VALUE,
   FORGOT_PASSWORD_FORM_SUCCESS,
   FORGOT_PASSWORD_FORM_REQUEST,
   FORGOT_PASSWORD_FORM_FAILED,
   FORGOT_PASSWORD_FORM_SET_ERROR,
+  TFormActions,
 } from '../actions/formActions';
 
-const initialState = {
+const initialState:TformInitialState = {
   email: '',
   request: false,
   failed: false,
@@ -14,7 +16,7 @@ const initialState = {
   passwordRequested: false,
 };
 
-const formReducer = (state = initialState, action) => {
+const formReducer = (state = initialState, action:TFormActions) => {
   switch (action.type) {
     case FORGOT_PASSWORD_FORM_SET_VALUE: {
       return {

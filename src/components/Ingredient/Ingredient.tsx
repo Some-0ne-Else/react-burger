@@ -6,7 +6,7 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getIngredientDetails } from '../../services/actions/index';
+import { getIngredientDetails } from '../../services/actions/appActions';
 import { toggleModal } from '../../services/actions/modalActions';
 import { RootState, AppDispatch } from '../../types/index';
 import { IIngredient, IConstructorIngredient } from '../../types/data';

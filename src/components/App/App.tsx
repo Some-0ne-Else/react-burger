@@ -26,7 +26,7 @@ import {
 } from '../../pages/index';
 import {
   fetchIngredients, clearIngredientDetails,
-} from '../../services/actions/index';
+} from '../../services/actions/appActions';
 import { getUserData } from '../../services/actions/userActions';
 import { toggleModal } from '../../services/actions/modalActions';
 import { getCookie } from '../../utils/utils';

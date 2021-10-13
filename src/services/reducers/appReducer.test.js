@@ -1,5 +1,5 @@
 import reducer from './appReducer';
-import * as types from '../actions/index';
+import * as types from '../actions/appActions';
 
 describe('App reducer', () => {
   it('should return the initial state', () => {

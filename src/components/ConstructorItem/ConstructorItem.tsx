@@ -6,7 +6,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { removeConstructorIngredient, updateConstructorList } from '../../services/actions';
+import { removeConstructorIngredient, updateConstructorList } from '../../services/actions/appActions';
 import { IConstructorIngredient } from '../../types/data';
 import styles from './ConstructorItem.module.css';
 
