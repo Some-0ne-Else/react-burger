@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIngredients, getIngredientDetails } from '../../services/actions/appActions';
+import { fetchAllAndGetIngredientDetails } from '../../services/actions/appActions';
 import { RootState, AppDispatch } from '../../types/index';
+import { IIngredient } from '../../types/data';
 import styles from './IngredientDetails.module.css';
 
 const IngredientDetails:FC = () => {
   const { id } = useParams<{id: string}>();
   const dispatch:AppDispatch = useDispatch();
-  const currentIngredient = useSelector((store: RootState) => store.app.currentIngredient);
+  const currentIngredient:IIngredient = useSelector((store: RootState) => store.app.currentIngredient);
 
   React.useEffect(() => {
-    dispatch(fetchIngredients())
-      .then(() => dispatch(getIngredientDetails(id)));
+    dispatch(fetchAllAndGetIngredientDetails(id));
   }, []);
 
   return (

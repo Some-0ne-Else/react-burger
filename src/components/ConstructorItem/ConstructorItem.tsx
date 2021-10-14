@@ -7,10 +7,10 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { removeConstructorIngredient, updateConstructorList } from '../../services/actions/appActions';
-import { IConstructorIngredient } from '../../types/data';
+import { IIngredient } from '../../types/data';
 import styles from './ConstructorItem.module.css';
 
-const ConstructorItem:FC<IConstructorIngredient> = ({
+const ConstructorItem:FC<IIngredient> = ({
   uid, name, price, image,
 }) => {
   const dispatch = useDispatch();
@@ -28,12 +28,12 @@ const ConstructorItem:FC<IConstructorIngredient> = ({
     canDrop: () => false,
     hover({ uid: draggedId }:{uid: string}) {
       if (draggedId !== uid) {
-        dispatch(updateConstructorList(draggedId, uid));
+        dispatch(updateConstructorList(draggedId, uid!));
       }
     },
   });
   const handleRemove = () => {
-    dispatch(removeConstructorIngredient(uid));
+    dispatch(removeConstructorIngredient(uid!));
   };
   return (
     <div ref={(node) => dragRef(dropTarget(node))} className={`${styles.item} ${isDrag && styles.item_dragging}`}>

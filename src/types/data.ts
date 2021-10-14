@@ -27,10 +27,6 @@ export interface IIngredient {
   __v: number;
 }
 
-export interface IConstructorIngredient extends IIngredient {
-  uid: string;
-}
-
 export interface INavigationElement {
   component: any; // ReactNode TS2604
   type: string;
@@ -54,12 +50,12 @@ export interface IIngredientListProps {
 }
 
 export interface IConstructorSummaryProps {
-  data: IConstructorIngredient[];
+  data: IIngredient[];
   openModal: () => void;
 }
 
 export interface IConstructorListProps {
-  data: IConstructorIngredient[];
+  data: IIngredient[];
 }
 
 export interface ILocation {
@@ -87,8 +83,8 @@ export type TFormInitialState = {
 
 export type TAppInitialState = {
   ingredients: Array<IIngredient>;
-  constructorIngredients: Array<IConstructorIngredient>;
-  currentIngredient: IIngredient | {};
+  constructorIngredients: Array<IIngredient>;
+  currentIngredient: IIngredient;
   order: {
     orderNumber: number;
     orderRequest: boolean;

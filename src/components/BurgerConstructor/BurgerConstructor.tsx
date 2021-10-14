@@ -7,14 +7,14 @@ import ConstructorSummary from '../ConstructorSummary/ConstructorSummary';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
 import { addConstructorIngredient } from '../../services/actions/appActions';
-import { IConstructorIngredient } from '../../types/data';
+import { IIngredient } from '../../types/data';
 import { RootState } from '../../types/index';
 import styles from './BurgerConstructor.module.css';
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const data: IConstructorIngredient[] = useSelector((store: RootState) => store.app.constructorIngredients);
-  const bun = data.find((b:IConstructorIngredient) => (b.type === 'bun'));
+  const data: IIngredient[] = useSelector((store: RootState) => store.app.constructorIngredients);
+  const bun = data.find((b:IIngredient) => (b.type === 'bun'));
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredient',
     drop(itemId:{_id:string}) {

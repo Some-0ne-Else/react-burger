@@ -147,6 +147,27 @@ export const fetchIngredients: AppThunk = () => (dispatch: AppDispatch) => {
     });
 };
 
+export const fetchAllAndGetIngredientDetails: AppThunk = (id:string) => (dispatch: AppDispatch) => {
+  dispatch({ type: GET_INGREDIENTS_REQUEST });
+  return getIngredients()
+    .then((res) => {
+      if (res.success) {
+        dispatch(getIngredientsSuccess(res.data));
+        dispatch(getIngredientDetails(id));
+      } else {
+        dispatch({
+          type: GET_INGREDIENTS_FAILED,
+        });
+        throw new Error('Error in response');
+      }
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_INGREDIENTS_FAILED,
+      }); console.log(err);
+    });
+};
+
 export const placeOrder: AppThunk = (idList:string[]) => (dispatch:AppDispatch) => {
   dispatch({ type: PLACE_ORDER_REQUEST });
   return postOrder(idList)

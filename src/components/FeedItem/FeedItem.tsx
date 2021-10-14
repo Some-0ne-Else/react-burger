@@ -15,10 +15,10 @@ const FeedItem:FC<IOrder> = ({
   const location = useLocation();
   const history = useHistory();
   const dispatch:AppDispatch = useDispatch();
-  const ingredientsList = useSelector((store:RootState) => store.app.ingredients);
+  const ingredientsList = useSelector((store: RootState) => store.app.ingredients);
 
   const renderedIngredients = ingredientsList.length ? ingredients?.map(
-    (orderIngredientId) => ingredientsList.find((ingredient: IIngredient) => ingredient._id === orderIngredientId),
+    (orderIngredientId) => ingredientsList.find((ingredient: IIngredient) => ingredient._id === orderIngredientId)!,
   ) : [];
   const total:number = React.useMemo(
     () => renderedIngredients?.reduce((acc:number, ingredient:IIngredient) => acc + ingredient.price, 0), [renderedIngredients],

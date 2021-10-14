@@ -9,7 +9,7 @@ import {
 import { getIngredientDetails } from '../../services/actions/appActions';
 import { toggleModal } from '../../services/actions/modalActions';
 import { RootState, AppDispatch } from '../../types/index';
-import { IIngredient, IConstructorIngredient } from '../../types/data';
+import { IIngredient } from '../../types/data';
 import styles from './Ingredient.module.css';
 
 const Ingredient:FC<IIngredient> = ({
@@ -27,7 +27,7 @@ const Ingredient:FC<IIngredient> = ({
   });
   const { counter } = useSelector(
     (store:RootState) => (
-      { counter: store.app.constructorIngredients.filter((el:IConstructorIngredient) => el._id === _id).length }),
+      { counter: store.app.constructorIngredients.filter((el:IIngredient) => el._id === _id).length }),
   );
   const openModal = (uid:string) => {
     dispatch(getIngredientDetails(uid));

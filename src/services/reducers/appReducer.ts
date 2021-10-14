@@ -1,4 +1,4 @@
-import { IConstructorIngredient, IIngredient, TAppInitialState } from '../../types/data';
+import { IIngredient, TAppInitialState } from '../../types/data';
 import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_REQUEST,
@@ -18,7 +18,22 @@ import {
 const initialState:TAppInitialState = {
   ingredients: [],
   constructorIngredients: [],
-  currentIngredient: {},
+  currentIngredient: {
+    _id: '',
+    name: '',
+    type: '',
+    proteins: 0,
+    fat: 0,
+    carbohydrates: 0,
+    calories: 0,
+    price: 0,
+    image: '',
+    // eslint-disable-next-line camelcase
+    image_mobile: '',
+    // eslint-disable-next-line camelcase
+    image_large: '',
+    __v: 0,
+  },
   order: {
     orderNumber: 0,
     orderRequest: false,
@@ -42,13 +57,13 @@ const appReducer = (state = initialState, action:TAppActions) => {
     case GET_INGREDIENT_DETAILS: {
       return {
         ...state,
-        currentIngredient: state.ingredients.find((el) => el._id === action.payload),
+        currentIngredient: state.ingredients.find((el) => el._id === action.payload)!,
       };
     }
     case CLEAR_INGREDIENT_DETAILS: {
       return {
         ...state,
-        currentIngredient: {},
+        currentIngredient: initialState.currentIngredient,
       };
     }
     case ADD_CONSTRUCTOR_INGREDIENT: {
@@ -109,7 +124,7 @@ const appReducer = (state = initialState, action:TAppActions) => {
       };
     }
     case UPDATE_CONSTRUCTOR_LIST: {
-      const arrayMove = (arr:IConstructorIngredient[], fromIndex:number, toIndex:number) => {
+      const arrayMove = (arr:IIngredient[], fromIndex:number, toIndex:number) => {
         const element = arr[fromIndex];
         arr.splice(fromIndex, 1);
         arr.splice(toIndex, 0, element);
