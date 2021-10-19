@@ -8,7 +8,7 @@ import {
   TFormActions,
 } from '../actions/formActions';
 
-const initialState:TFormInitialState = {
+export const initialState:TFormInitialState = {
   email: '',
   request: false,
   failed: false,

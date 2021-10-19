@@ -20,12 +20,8 @@ const Signup:FC = () => {
 
   const handleSignup = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(postRegisterForm({ name, email, password }))
-      .then((res: { success: boolean; message: string; }) => {
-        if (res.success) {
-          history.replace({ pathname: '/' });
-        } else { console.log(res.message); }
-      });
+    dispatch(postRegisterForm({ name, email, password }));
+    history.replace({ pathname: '/' });
   };
 
   if (isLoggedIn) {

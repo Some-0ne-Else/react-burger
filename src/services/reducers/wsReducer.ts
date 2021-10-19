@@ -8,7 +8,7 @@ import {
 } from '../actions/wsActions';
 import { TWsInitialState } from '../../types/data';
 
-const initialState:TWsInitialState = {
+export const initialState:TWsInitialState = {
   wsConnected: false,
   messages: [],
   currentUserMessages: [],
@@ -37,12 +37,12 @@ const wsReducer = (state = initialState, action:TWsActions) => {
     case WS_GET_MESSAGE_ORDERS_ALL:
       return {
         ...state,
-        messages: [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
+        messages: [{ ...action.payload }],
       };
     case WS_GET_MESSAGE_CURRENT_USER:
       return {
         ...state,
-        currentUserMessages: [{ ...action.payload, timestamp: new Date().getTime() / 1000 }],
+        currentUserMessages: [{ ...action.payload }],
       };
     default:
       return state;

@@ -9,9 +9,8 @@ function PersonalAreaMenu() {
   const dispatch:AppDispatch = useDispatch();
   const history = useHistory();
   const handleLogout = () => {
-    dispatch(logoutUser())
-      .then((res: { success: boolean; message: string; }) => (
-        res.success ? history.replace({ pathname: '/login' }) : console.log(res.message)));
+    dispatch(logoutUser());
+    history.replace({ pathname: '/login' });
   };
   return (
     <ul className={`${styles.links} mb-20`}>

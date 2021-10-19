@@ -44,6 +44,8 @@ const wsActionsCurrentUser = {
   onMessage: WS_GET_MESSAGE_CURRENT_USER,
 };
 
+export type TWsActions = typeof wsActionsAll | typeof wsActionsCurrentUser;
+
 const enhancer = composeEnhancers(applyMiddleware(thunk,
   socketMiddleware(WS_CURRENT_USER_URL, wsActionsCurrentUser),
   socketMiddleware(WS_ALL_ORDERS_URL, wsActionsAll)));

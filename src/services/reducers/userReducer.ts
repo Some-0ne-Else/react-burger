@@ -7,7 +7,7 @@ import {
 } from '../actions/userActions';
 import { TUserInitialState } from '../../types/data';
 
-const initialState:TUserInitialState = {
+export const initialState:TUserInitialState = {
   email: '',
   name: '',
   isLoggedIn: false,

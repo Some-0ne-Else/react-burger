@@ -4,7 +4,7 @@ import {
 } from '../actions/modalActions';
 import { TModalInitialState } from '../../types/data';
 
-const initialState:TModalInitialState = {
+export const initialState:TModalInitialState = {
   modalOpen: false,
 };
 

@@ -24,12 +24,8 @@ const Profile:FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(updateUserData({ name: nameValue, email: emailValue, password: passwordValue }))
-      .then((res: { success: boolean; message: string; }) => {
-        if (res.success) {
-          setFieldsDisabled(true);
-        } else { console.log(res.message); }
-      });
+    dispatch(updateUserData({ name: nameValue, email: emailValue, password: passwordValue }));
+    setFieldsDisabled(true);
   };
   const handleCancel = (e:React.SyntheticEvent) => {
     e.preventDefault();

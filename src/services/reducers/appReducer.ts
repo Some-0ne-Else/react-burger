@@ -15,7 +15,7 @@ import {
   TAppActions,
 } from '../actions/appActions';
 
-const initialState:TAppInitialState = {
+export const initialState:TAppInitialState = {
   ingredients: [],
   constructorIngredients: [],
   currentIngredient: {
